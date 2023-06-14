@@ -1,0 +1,39 @@
+<div class="container py-5">
+    <div class="row" *ngIf="datosHabitacion">
+
+        <div class="col-lg-6">
+            <img class="col-12" [src]="datosHabitacion.img_habitacion_base_64" alt="img" style="border: 1px solid black;">
+        </div>
+        
+        <div class="col-lg-6">
+            <div class="row">
+                <h1 class="titulo pt-sm-5 py-lg-0">
+                    {{ datosHabitacion.categoria }}
+                </h1>
+
+                <h2>
+                    {{ datosHabitacion.precio }} €
+                </h2>
+            </div>
+            <div class="row">
+                <p>
+                    Quedan <b>{{ datosHabitacion.habitaciones_disponibles }}</b> habitaciones disponibles.
+                </p>
+                <p>
+                    {{ datosHabitacion.descripcion }}
+                </p>
+            </div>
+            <div class="row">
+                <div *ngIf="datosHabitacion.habitaciones_disponibles > 0; else noHayMasHabitaciones">
+                    <div class="btn btn-primary col-6">Reservar</div>
+                </div>
+                
+                <ng-template #noHayMasHabitaciones>
+                    <div class="btn btn-secondary col-6">Reservar</div>
+                </ng-template>
+            </div>
+        </div>
+
+    </div>
+</div>
+

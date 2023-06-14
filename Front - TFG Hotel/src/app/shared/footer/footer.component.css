@@ -1,0 +1,13 @@
+footer{
+    background-color: rgb(78, 78, 78);
+    color: rgb(236, 236, 236);
+}
+
+a{
+    color: aqua;
+}
+
+.info-contacto{
+    font-size: 0.8rem;
+    text-align: center;
+}

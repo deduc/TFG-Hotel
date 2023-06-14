@@ -1,0 +1,82 @@
+<div class="container-fluid mb-3">
+
+    <section class="row py-5 d-flex justify-content-center bg-light">
+        <div class="col-12 text-center">
+            <h1>Prueba nuestros últimos servicios</h1>
+            
+            <p class="text-muted">
+                <span>
+                    No dejes que pare la diversión con una lista de los lugares más emblemáticos de
+                </span>
+                <br>
+                <span>
+                    <b><i>{{ tituloHotel }}</i></b>
+                </span>
+            </p>
+        </div>
+
+    </section>
+
+    <!-- * contenedor-cartas -->
+    <section class="row mt-5 mb-5 
+        d-lg-flex justify-content-lg-center 
+        d-md-flex justify-content-md-start">
+        <div class="col-lg-4 col-md-6 col-sm-12 my-3" *ngFor="let item of listaDatosCard">
+            <div class="card">
+                <img class="card-img-top p-2 card-image" [src]="item.imgSrc">
+                
+                <div class="card-body">
+                    <h1 class="card-title">{{ item.cardTitleContent }}</h1>
+                    <p class="card-text">{{ item.cardTextContent }}</p>  
+                </div>
+                
+                <button class="btn btn-primary m-3">TODO: Reservar</button>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<section class="bg-dark text-white text-center padding-top-bottom">
+        <div class="titulo-evento-especial-container">
+            <div class="row">
+                <h1 class="mt-5">{{ datosCardEventoEspecial.cardTitleContent }}</h1>
+            </div>
+            
+            <div class="row">
+                <div class="d-flex justify-content-center">
+                    <p class="col-lg-7 pb-4">
+                        {{ datosCardEventoEspecial.cardTextContent }}
+                    </p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <h1>06/07/2023</h1>
+            </div>
+        </div>
+        
+        <div class="row">
+            <img class="col-12 evento-especial-img" [src]="datosCardEventoEspecial.imgSrc" alt="Imagen evento especial">
+        </div>
+
+        <!-- <form class="mt-5 row px-3">
+            <h1 class="text-white">Reserva tu entrada</h1>
+            
+            <div class="form-group col-lg-7 col-md-10 col-sm-12">
+                <label class="mt-lg-2" for="nombre">Nombre</label>
+                <input type="text" class="form-control" id="nombre" placeholder="Nombre">
+            </div>
+
+            <div class="form-group col-lg-7 col-md-10 col-sm-12">
+                <label class="mt-lg-2" for="apellidos">Apellidos</label>
+                <input type="text" class="form-control" id="apellidos" placeholder="Apellidos">
+            </div>
+
+            <div class="form-group col-lg-7 col-md-10 col-sm-12">
+                <label class="mt-lg-2" for="email">Correo electrónico</label>
+                <input type="email" class="form-control" id="email" placeholder="Correo electrónico">
+            </div>
+        </form> -->
+        <button class="btn btn-danger mt-3">TODO: Reserva tu entrada</button>
+    </section>

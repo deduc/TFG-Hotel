@@ -1,0 +1,107 @@
+<div class="user-register-component-container">
+        
+    <shared-button-go-home></shared-button-go-home>
+
+    <!-- {{datosRegistroUsuario | json}} -->
+        
+    <div class="container-fluid col-lg-12 mt-lg-5 pt-lg-5
+                margin-top-for-large-screen">
+
+        <h1 class="text-center text-white text-capitalize">
+            registrarte como usuario
+        </h1>
+        
+        <form class="container">
+            
+            <div class="row">
+                <div class="form-group col-sm-12 col-md-6 col-lg-6 mt-lg-3 mt-md-2 mt-sm-2">
+                    <label for="nombre">
+                        <span>Nombre</span>
+                    </label>
+                    <input  type="text" class="form-control sombra-caja" placeholder="Nombre" name="nombre"
+                            [(ngModel)]="datosRegistroUsuario.nombre">
+                </div>
+
+                <div class="form-group col-sm-12 col-md-6 col-lg-6 mt-lg-3 mt-md-2 mt-sm-2">
+                    <label for="nombre">
+                        <span>Apellidos</span>
+                    </label>
+                    <input  type="text" class="form-control sombra-caja" placeholder="Apellidos" name="apellidos"
+                            [(ngModel)]="datosRegistroUsuario.apellidos">
+                </div>
+        
+                <div class="form-group col-sm-12 col-md-6 col-lg-6 mt-lg-3 mt-md-2 mt-sm-2">
+                    <label for="apellidos">
+                        <span>Nombre de usuario</span>
+                    </label>
+                    <input  type="text" class="form-control sombra-caja" placeholder="Nombre de usuario" name="username"
+                            [(ngModel)]="datosRegistroUsuario.username">
+                </div>
+        
+                <div class="form-group col-sm-12 col-md-6 col-lg-6 mt-lg-3 mt-md-2 mt-sm-2">
+                    <label for="dni">
+                        <span>DNI/NIE</span>
+                    </label>
+                    <input  type="text" class="form-control sombra-caja" placeholder="DNI o NIE" name="dni"
+                            [(ngModel)]="datosRegistroUsuario.dni">
+                </div>
+            
+                <div class="form-group col-sm-12 col-md-12 col-lg-12 mt-lg-3 mt-md-2 mt-sm-2">
+                    <label for="email">
+                        <span>Correo electrónico</span>
+                    </label>
+                    <input  type="email" class="form-control sombra-caja" placeholder="Correo electrónico" name="email"
+                            [(ngModel)]="datosRegistroUsuario.email">
+                </div>
+                
+                <div class="form-group col-sm-12 col-md-6 col-lg-6 mt-lg-3 mt-md-2 mt-sm-2">
+                    <label for="password">
+                        <span>Contraseña</span>
+                    </label>
+                    <input  type="password" class="form-control sombra-caja" placeholder="Contraseña" name="password"
+                            [(ngModel)]="datosRegistroUsuario.password">
+                </div>
+        
+                <div class="form-group col-sm-12 col-md-6 col-lg-6 mt-lg-3 mt-md-2 mt-sm-2">
+                    <label for="repeatedPassword">
+                        <span>Repetir contraseña</span>
+                    </label>
+                    <input  type="password" class="form-control sombra-caja" placeholder="Repetir contraseña" name="repeatedPassword"
+                            [(ngModel)]="datosRegistroUsuario.repeatedPassword">
+                </div>
+            </div>
+        
+            <div    type="submit" value="Crear usuario" class="btn btn-primary mt-5 col-12 sombra-caja" 
+                    (click)="validarFormulario()">
+                <span>Crear usuario</span>
+            </div>   
+            
+            <div  class="col-12 enlace-login" routerLink="/login">
+                <a class="border-bottom-white text-white">¿Ya tienes cuenta?</a>
+            </div>
+
+        </form>
+    </div>
+
+        <!-- fin div.container -->
+
+
+    <!-- fin div.contenedor-registro -->
+</div>
+
+
+<div class="contenedor-registro-completado col-sm-10 col-lg-6" *ngIf="formularioRegistroCompletado">
+    <div class="row text-center pb-5">
+        <h1>Usuario '{{ datosRegistroUsuario.username }}' registrado con éxito</h1>
+        <p>¿Quieres iniciar sesión?</p>
+    </div>
+
+    <div class="row d-flex justify-content-between pt-2">
+        <div class="col-4 text-center">
+            <button class="btn btn-success col-6" (click)="iniciarSesion()">SÍ</button>
+        </div>
+        <div class="col-4 text-center">
+            <button class="btn btn-danger col-6" routerLink="/home">NO</button>
+        </div>
+    </div>
+</div>

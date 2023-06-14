@@ -1,0 +1,18 @@
+<div class="container-fluid">
+    <div class="row contenedor-carrusel text-center row">
+    
+        <button class="boton-carrusel btn btn-secondary col-1 text-center" id="botonAvanzar"
+            (click)="avanzarImagen()">
+            >
+        </button>
+        
+        <button class="boton-carrusel btn btn-secondary col-1 text-center" id="botonRetroceder"
+            (click)="retrocederImagen()">
+            <
+        </button>
+        
+        <img    class="imagen-carrusel col-12"
+                src="{{listaImagenesCarrusel[indiceListaImagenesCarrusel]}}"
+                >
+    </div>
+</div>

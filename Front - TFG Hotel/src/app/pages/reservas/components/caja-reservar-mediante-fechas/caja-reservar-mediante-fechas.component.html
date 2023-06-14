@@ -1,0 +1,66 @@
+<div class="container pb-5">
+    <section class="book_room my-border-radius">
+        <div class="text-white">
+            <div class="d-flex justify-content-start">
+                <h1>Elige tu periodo de vacaciones</h1>
+            </div>
+            <p>Busca las habitaciones disponibles entre las fechas que desees disfrutar.</p>
+        </div>
+        
+        <div class="container">
+            <div class="form-control" method="post">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-6">
+                        <div class="col-12 m-2">
+                            <span>Inicio</span>
+                            
+                            <div class="contenedor-label">
+                                <label for="fechaInicio" class="d-flex align-items-center gap-3">
+                                    <input class="form-control" placeholder="dd/mm/yyyy" type="date" name="fechaInicio" [(ngModel)]="objFechas.fechaInicio">
+                                </label>
+                            </div>
+                        </div>
+                    
+                        <div class="col-12 m-2">
+                            <span>Fin</span>
+                            
+                            <div class="contenedor-label">
+                                <label for="fechaFin" class="d-flex align-items-center gap-3">
+                                    <input class="form-control" placeholder="dd/mm/yyyy" type="date" name="fechaFin" [(ngModel)]="objFechas.fechaFin">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-sm-12 col-md-12 col-lg-6 mt-sm-3 mt-md-3 d-flex justify-content-center align-items-center">
+                        <button class="btn btn-primary" (click)="enviarFormulario()">Visualizar habitaciones disponibles</button>
+                    </div>
+    
+                    <!-- fin div.row -->
+                </div>
+                <!-- fin div.form-control -->
+            </div>
+            <!-- fin div.container aka contenedor del formulario -->
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="row d-flex justify-content-center text-center pt-3">
+            <div class="bg-success col-lg-10 col-12 py-2 text-white my-border-radius d-flex flex-column align-items-center"
+                *ngIf="formularioCorrecto == 1;">
+                <span>Formulario correctamente introducido.</span>
+                <button class="boton-cerrar-caja col-1" (click)="cerrarCaja()">X</button>
+            </div>
+        </div>
+
+        <div class="row d-flex justify-content-center text-center pt-3">
+            <div class="bg-danger col-lg-10 col-12 py-2 text-white my-border-radius d-flex flex-column align-items-center"
+                *ngIf="formularioCorrecto > 1;">
+                <span *ngIf="formularioCorrecto == 2">ERROR: Fecha mal introducida. La fecha de inicio no puede ser menor ni igual a la fecha actual '{{fechaHoy}}'.</span>
+                <span *ngIf="formularioCorrecto == 3">ERROR: Fecha mal introducida. La fecha de fin '{{ objFechas.fechaFin }}' no puede ser menor a la fecha de inicio '{{ objFechas.fechaInicio }}'.</span>
+                <span *ngIf="formularioCorrecto == 4">ERROR: No has introducido datos correctos en el formulario.</span>
+                <button class="boton-cerrar-caja col-1" (click)="cerrarCaja()">X</button>
+            </div>
+        </div>
+    </section>
+</div>

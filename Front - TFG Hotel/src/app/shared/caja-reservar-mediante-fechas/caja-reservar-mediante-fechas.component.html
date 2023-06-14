@@ -1,0 +1,45 @@
+<div class="container pb-5">
+    <section class="book_room">
+        <div class="text-white">
+            <h1>Elige tu periodo de vacaciones</h1>
+            <p>Busca las habitaciones disponibles entre las fechas que desees disfrutar.</p>
+        </div>
+        
+        <div class="container">
+            <form class="form-control" method="post">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-6">
+                        <div class="col-12 m-2">
+                            <span>Inicio</span>
+                            
+                            <div class="contenedor-label">
+                                <label for="fechaInicio" class="d-flex align-items-center gap-3">
+                                    <input class="form-control" placeholder="dd/mm/yyyy" type="date" name="fechaInicio">
+                                </label>
+                            </div>
+                        </div>
+                    
+                        <div class="col-12 m-2">
+                            <span>Fin</span>
+                            
+                            <div class="contenedor-label">
+                                <label for="fechaFin" class="d-flex align-items-center gap-3">
+                                    <input class="form-control" placeholder="dd/mm/yyyy" type="date" name="fechaFin">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-sm-12 col-md-12 col-lg-6 mt-sm-3 mt-md-3 d-flex justify-content-center align-items-center">
+                        <button class="btn btn-primary"
+                                routerLink="/habitaciones">Visualizar habitaciones disponibles</button>
+                    </div>
+    
+                    <!-- fin div.row -->
+                </div>
+            </form>
+
+            <!-- fin div.container -->
+        </div>
+    </section>
+</div>

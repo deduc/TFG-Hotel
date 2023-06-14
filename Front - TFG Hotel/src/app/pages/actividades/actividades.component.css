@@ -1,0 +1,28 @@
+.card{
+    transition: 0.5s;
+}
+
+.card-image{
+    height: 45vh;
+    transition: 1s;
+}
+
+.padding-top-bottom{
+    padding-top: 20vw;
+    padding-bottom: 15vw;
+}
+
+.evento-especial-img{
+    max-height: 80vh;
+
+}
+
+form{
+    display: flex;
+    justify-content: center;
+}
+
+form label{
+    display: flex;
+    justify-content: flex-start;
+}

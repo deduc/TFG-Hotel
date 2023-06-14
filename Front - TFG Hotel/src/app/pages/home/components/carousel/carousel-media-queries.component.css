@@ -1,0 +1,31 @@
+/* pc */
+@media (min-width: 991px) {
+    .imagen-carrusel{
+        height: 80vh;
+    }
+    
+}
+
+/* tablets */
+@media (max-width: 991px) {
+    .imagen-carrusel{
+        height: 70vh;
+    }
+    
+}
+
+/* tablets 2 */
+@media (max-width: 700px) {
+    .imagen-carrusel{
+        height: 60vh;
+    }
+    
+}
+
+/* moviles */
+@media (max-width: 480px) {
+    .imagen-carrusel{
+        height: 50vh;
+    }
+    
+}

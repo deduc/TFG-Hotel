@@ -1,0 +1,11 @@
+.link-home{
+    display: flex;
+    flex-direction: row;
+}
+
+.link-home * {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}

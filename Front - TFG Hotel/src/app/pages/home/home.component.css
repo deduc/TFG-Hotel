@@ -1,0 +1,10 @@
+.imagen-habitacion{
+    height: 15vw;
+    width: 20vw;
+}
+
+.contenedor-imagenes{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}

@@ -1,0 +1,71 @@
+<section class="py-5 text-center container">
+    <div class="row py-lg-3">
+        <div class="col-lg-8 col-sm-12 mx-auto">
+            <h1>Permite que la habitación te elija a ti</h1>
+            
+            <p class="text-muted">
+                Duerme en la habitación de tus sueños. Date el placer de dormir el dormitorio que se ajuste
+                a tu estilo de vida. Puedes tocar las nubes, dormir bajo el agua, tener la arena de la playa 
+                en la puerta.
+            </p>
+
+            <p class="text-muted">
+                ¡ El límite es tu imaginación !
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="container-fluid pb-5 d-flex justify-content-center">
+    <div class="col-10">
+        <select class="form-select" #filtroHabitaciones id="select"
+            (change)="onSelected(filtroHabitaciones.value)">
+
+            <option selected disabled="disabled" value="" class="text-center">--- Filtra tu habitación ---</option>
+            <option value="individual">Habitacion Individual</option>
+            <option value="parejas">Habitacion para Parejas</option>
+            <option value="lujo">Habitacion de Lujo</option>
+
+        </select>
+        
+        <div class="btn btn-primary col-12" (click)="reiniciarFiltro()">Reiniciar Filtro</div>
+    </div>
+
+</section>
+
+<main class="py-5 bg-light d-flex justify-content-center">
+        <div class="row container-fluid" 
+            *ngIf="listaHabitacionCards.length != 0">
+        
+            <div class="col-lg-4 col-md-6 col-sm-12" 
+                *ngFor="let item of listaHabitacionCards">
+
+                <!-- * este codigo es para una sola tarjeta -->
+                <div class="card p-2 my-3">
+                    <img class="card-imagen" [src]="item.imgSrc" [id]="item.imgID" alt="IMAGEN CARD">
+                    
+                    <h1 class="card-title mt-2 text-center">{{ item.titulo }}</h1>
+                    
+                    <div class="card-body">
+                        <p class="card-text">{{ item.descripcion }}</p>
+                    </div>
+
+                    <a  type="button" class="btn btn-light"
+                        [routerLink]="item.enlace" routerLinkActive="router-link-active">
+                        Ver
+                    </a>
+                    <a  type="button" class="btn btn-primary"
+                        *ngIf="usuarioLoggeado"
+                        (click)="reservarHabitacion()">
+                        Reservar
+                    </a>
+                    
+                    <!-- fin div.card -->
+                </div>
+
+                <!-- fin div.ngfor -->
+            </div>
+        
+            <!-- fin div.row -->
+        </div>
+</main>

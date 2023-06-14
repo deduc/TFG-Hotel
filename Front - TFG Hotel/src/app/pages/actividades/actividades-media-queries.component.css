@@ -1,0 +1,33 @@
+/* pc */
+@media (max-width: 1250px) {
+    .card-image{
+        height: 38vh;
+    }
+}
+
+@media (max-width: 1150px) {
+    .card-image{
+        height: 32vh;
+    }
+}
+
+
+/* tablets */
+@media (max-width: 993px) {
+    .card-image{
+        height: 30vh;
+    }
+}
+
+@media (max-width: 900px) {
+    .card-image{
+        height: 25vh;
+    }
+}
+
+/* moviles */
+@media (max-width: 993px) {
+    .card-image{
+        height: 50vh;
+    }
+}

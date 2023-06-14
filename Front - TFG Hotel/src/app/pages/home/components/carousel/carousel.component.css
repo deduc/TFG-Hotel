@@ -1,0 +1,39 @@
+.contenedor-carrusel{
+    margin-top: 1vw;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.boton-carrusel{
+    width: 4vw;
+    position: absolute;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.boton-carrusel:hover{
+    background-color: rgb(184, 184, 184);
+    color: white;
+}
+
+.boton-carrusel:active{
+    background-color: black;
+    color: white;
+
+}
+
+.imagen-carrusel{
+    height: 80vh;
+}
+
+.boton-carrusel#botonAvanzar{
+    right: 5%;
+}
+
+.boton-carrusel#botonRetroceder{
+    left: 5%;
+}

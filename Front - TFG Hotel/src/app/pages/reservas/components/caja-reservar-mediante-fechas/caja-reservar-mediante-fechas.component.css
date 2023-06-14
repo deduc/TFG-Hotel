@@ -1,0 +1,20 @@
+.book_room {
+    background-color: #000000c7;
+    padding: 30px 35px;
+}
+
+
+.contenedor-label{
+    padding: 0.5rem;
+    border: 1px solid black;
+}
+
+.my-border-radius{
+    border-radius: 10px;
+}
+
+.boton-cerrar-caja{
+    background: none;
+    border: 1px solid white;
+    color: white;
+}

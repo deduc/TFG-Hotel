@@ -1,0 +1,47 @@
+<section class="mt-5">
+    <pages-reservas-caja-reservar-mediante-fechas></pages-reservas-caja-reservar-mediante-fechas>
+</section>
+
+<!-- <div class="container">
+    {{ objFechas.fechaInicio }}
+    <br>
+    {{ objFechas.fechaFin }}
+</div> -->
+
+<h1>
+    TODO: CONECTAR EL FRONT CON LA API, OBTENER LAS HABITACIONES COMO EN /habitaciones Y MOSTRAR TOS LOS DATOS DE LOS OBJETOS DEL ARRAY
+</h1>
+
+
+<main class="py-5 bg-light d-flex justify-content-center">
+    <div class="row container-fluid" *ngIf="listaTiposDeHabitaciones.length != 0">
+    
+        <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let item of listaTiposDeHabitaciones">
+
+            <!-- * este codigo es para una sola tarjeta -->
+            <div class="card p-2 my-3">
+                <img class="card-imagen" [src]="item.imgHabitacionBase64" [id]="item.imgID" alt="IMAGEN CARD">
+                
+                <h1 class="card-title mt-2 text-center">{{ item.categoria }}</h1>
+                
+                <div class="card-body">
+                    <p class="card-text">{{ item.descripcion }}</p>
+                </div>
+
+                <a  type="button" class="btn btn-light" [routerLink]="item.enlace_url">
+                    Ver
+                </a>
+                
+                <a  type="button" class="btn btn-primary">
+                    Reservar
+                </a>
+                
+                <!-- fin div.card -->
+            </div>
+
+            <!-- fin div.ngfor -->
+        </div>
+    
+        <!-- fin div.row -->
+    </div>
+</main>

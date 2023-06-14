@@ -1,0 +1,90 @@
+.navbar-toggler{
+    width: 100%;
+}
+
+.navbar-brand{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.navbar-mat-icons-container{
+    margin-top: 1vw;
+    margin-bottom: -1vw;
+}
+
+.nav-link:hover{
+    background-color: lightgray;
+}
+
+.titulo-hotel{
+    font-size: 4vw;
+    font-weight: bolder;
+}
+
+.enlace-home{
+    border: 1px solid rgba(211, 211, 211, 0.5);
+}
+
+.contenedor-home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+ul{
+    list-style-type: none;
+}
+
+.texto-cerrar-sesion{
+    text-decoration: none;
+}
+
+
+.circle-border:hover{
+    cursor: pointer;
+    background-color: lightgray;
+}
+
+@media (max-width: 992px) {
+    .mostrar-titulo-hotel{
+        display: none;
+    }
+}
+
+@media (min-width: 992px) {
+    .navbar-nav button{
+        margin-right: 5px;
+    }
+
+    shared-button-login{
+        height: 0px;
+    }
+
+    shared-button-register{
+        height: 0px;
+    }
+
+    .contenedor-botones-login-register{
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+
+        list-style-type: none;
+    }
+    
+    .contenedor-icono-usuario{
+        width: 2.3rem;
+        height: 2.3rem;
+    }
+
+    .circle-border{
+        border: 1px solid lightgray;
+        border-radius: 100%;
+    
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;    
+    }
+}
