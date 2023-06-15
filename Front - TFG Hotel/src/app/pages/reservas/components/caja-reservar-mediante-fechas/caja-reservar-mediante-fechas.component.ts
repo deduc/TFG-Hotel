@@ -9,7 +9,7 @@ import { FechaInicioFinInterface } from '../../../../core/interfaces/fecha-inici
 })
 export class CajaReservarMedianteFechasComponent {
     public reservasService:ReservasService;
-    public formularioCorrecto: number = 0;
+    public errorFormulario: number = 0;
     public fechaHoy: Date = new Date();
 
     public objFechas: FechaInicioFinInterface = {
@@ -41,7 +41,7 @@ export class CajaReservarMedianteFechasComponent {
                 fechaFin.setMilliseconds(0);
 
             /**
-             * comprobar estados. Cuando this.formularioCorrecto sea 1, 
+             * comprobar estados. Cuando this.errorFormulario sea 1, 
              * invoco al metodo setObjFechasData(obj) de mi objeto reservasService
              * y en el html muestro un mensaje de éxito.
              * 
@@ -49,27 +49,28 @@ export class CajaReservarMedianteFechasComponent {
              */
             if(fechaInicio >= this.fechaHoy){
                 if(fechaInicio <= fechaFin){
-                    this.formularioCorrecto = 1;
+                    this.errorFormulario = 1;
+                    
                     // Envío al servicio las fechas del formulario que ha rellenado el usuario
                     this.reservasService.setObjFechasData(this.objFechas);
                 }
                 else{
-                    this.formularioCorrecto = 3;
+                    this.errorFormulario = 3;
                 }
             }
             else{
-                this.formularioCorrecto = 2;
+                this.errorFormulario = 2;
             }
         }
         else{
-            this.formularioCorrecto = 4;
+            this.errorFormulario = 4;
         }
 
         // fin metodo
     }
 
     public cerrarCaja(){
-        this.formularioCorrecto = 0;
+        this.errorFormulario = 0;
     }
 
     // fin clase

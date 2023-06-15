@@ -47,7 +47,7 @@
     <section class="container">
         <div class="row d-flex justify-content-center text-center pt-3">
             <div class="bg-success col-lg-10 col-12 py-2 text-white my-border-radius d-flex flex-column align-items-center"
-                *ngIf="formularioCorrecto == 1;">
+                *ngIf="errorFormulario == 1;">
                 <span>Formulario correctamente introducido.</span>
                 <button class="boton-cerrar-caja col-1" (click)="cerrarCaja()">X</button>
             </div>
@@ -55,10 +55,10 @@
 
         <div class="row d-flex justify-content-center text-center pt-3">
             <div class="bg-danger col-lg-10 col-12 py-2 text-white my-border-radius d-flex flex-column align-items-center"
-                *ngIf="formularioCorrecto > 1;">
-                <span *ngIf="formularioCorrecto == 2">ERROR: Fecha mal introducida. La fecha de inicio no puede ser menor ni igual a la fecha actual '{{fechaHoy}}'.</span>
-                <span *ngIf="formularioCorrecto == 3">ERROR: Fecha mal introducida. La fecha de fin '{{ objFechas.fechaFin }}' no puede ser menor a la fecha de inicio '{{ objFechas.fechaInicio }}'.</span>
-                <span *ngIf="formularioCorrecto == 4">ERROR: No has introducido datos correctos en el formulario.</span>
+                *ngIf="errorFormulario > 1;">
+                <span *ngIf="errorFormulario == 2">ERROR: Fecha mal introducida. La fecha de inicio no puede ser menor ni igual a la fecha actual '{{fechaHoy}}'.</span>
+                <span *ngIf="errorFormulario == 3">ERROR: Fecha mal introducida. La fecha de fin '{{ objFechas.fechaFin }}' no puede ser menor a la fecha de inicio '{{ objFechas.fechaInicio }}'.</span>
+                <span *ngIf="errorFormulario == 4">ERROR: No has introducido datos correctos en el formulario.</span>
                 <button class="boton-cerrar-caja col-1" (click)="cerrarCaja()">X</button>
             </div>
         </div>

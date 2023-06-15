@@ -50,44 +50,6 @@ namespace TFGHotel.Services.Habitaciones
             }
         }
 
-
-
-
-
-
-
-        // ---------------------------------------
-        /*TODO: CORREGIR TODO ESTO
-        public List<HabitacionesDto> Gethabitaciones(DateTime fechaInicio, DateTime fechaFin)
-        {
-
-            // obtengo una lista de las reservas activas
-            List<RESERVAS> reservasList = this._context.Reservas.Where(x => x.RESERVA_ACTIVA == 1 && x.FECHA_INICIO >= DateTime.Now).ToList();
-
-            List<int> idHabitacionesReservadas = reservasList
-                .Where(x => (x.FECHA_INICIO <= fechaInicio && x.FECHA_FIN >= fechaInicio)
-                        || (x.FECHA_INICIO <= fechaFin && x.FECHA_FIN >= fechaFin))
-                .Select(s => s.ID_HABITACION).ToList();
-
-
-            List<HABITACIONES> Habitaciones = this._context.Habitaciones.Where(x => !idHabitacionesReservadas.Contains(x.ID_HABITACION));
-
-            // retorno esta lista de objetos RESERVA convertida a una lista de objetos ReservaDTO
-            return Habitaciones.Select(s => new HabitacionesDto()
-            {
-                Id_Habitacion = s.ID_HABITACION,
-                Id_Cliente = s.ID_CLIENTE,
-                //Nombre_Cliente = s.Nombre_Cliente,
-                Fecha_Inicio = s.FECHA_INICIO,
-                Fecha_Fin = s.FECHA_FIN,
-                // TODO: obtener los servicios y habitaciones que estan a nombre del cliente
-                //Precio_Total = 0
-            }).ToList();
-        }
-        */
-
-
-
         // fin clase
     }
 

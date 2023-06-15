@@ -1,26 +1,21 @@
-SELECT * FROM TIPOS_DE_CAMAS;
-SELECT * FROM TIPOS_DE_HABITACIONES;
-SELECT * FROM HABITACIONES;
-SELECT * FROM CLIENTES;
-SELECT * FROM RESERVAS_DE_HABITACIONES;
-SELECT * FROM TIPOS_DE_SERVICIOS;
-SELECT * FROM RESERVAS_DE_SERVICIOS;
-SELECT * FROM USUARIOS;
+--SELECT * FROM TIPOS_DE_CAMAS;
+--SELECT * FROM TIPOS_DE_HABITACIONES;
+--SELECT * FROM HABITACIONES;
+--SELECT * FROM CLIENTES;
+--SELECT * FROM RESERVAS_DE_HABITACIONES;
+--SELECT * FROM TIPOS_DE_SERVICIOS;
+--SELECT * FROM RESERVAS_DE_SERVICIOS;
+--SELECT * FROM USUARIOS;
 
+/*
 -- no borrar por ahora hasta que la API se trague valores null
 insert into usuarios (USERNAME, EMAIL, DNI, NOMBRE, APELLIDOS, PASS, ADMINISTRADOR, USUARIO_ACTIVO) 
 values('elpepe', 'el@pepe.dick', '98981266A', 'el', 'pepe', 'elpepeelpepeelpepe', 1, 1);
+*/
 
-
--- Obtener cuántas habitaciones hay para cada tipo de habitaciones en particular
-SELECT ID_TIPO_DE_HABITACION, COUNT(ID_TIPO_DE_HABITACION) as "Cantidad de habitaciones totales"
-FROM HABITACIONES
-GROUP BY ID_TIPO_DE_HABITACION;
-
-
--- Obtener qué habitaciones, y de qué tipo, hay disponibles entre las 2 fechas asignadas en 2 variables de tipo DATE
-DECLARE @FECHA_INICIO_RESERVA DATE = '16/07/2023'
-DECLARE @FECHA_FIN_RESERVA DATE = '06/08/2023'
+-- Obtener qué habitaciones, y de qué tipo, hay disponibles entre 2 fechas variables
+DECLARE @FECHA_INICIO_RESERVA DATE = '16/07/2024'
+DECLARE @FECHA_FIN_RESERVA DATE = '06/08/2024'
 
 SELECT	*
 FROM	HABITACIONES

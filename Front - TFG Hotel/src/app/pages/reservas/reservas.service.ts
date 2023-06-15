@@ -62,10 +62,9 @@ export class ReservasService {
         
         // Envío el objFechas a los atributos de otras clases que estén suscritas a este atributo.
         this.objFechas.next(objFechas);
-        console.log(this.objFechas);
+        console.log("Objeto fechas recibido:" + this.objFechas);
         
-        // TODO:
-        // this.setListaHabitacionesDisponiblesEntreFechas(objFechas);
+        this.setListaHabitacionesDisponiblesEntreFechas(objFechas);
     }
 
     public setListaHabitacionesDisponiblesEntreFechas(objFechas: FechaInicioFinInterface){

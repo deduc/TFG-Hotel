@@ -86,7 +86,7 @@ export class BackendService {
      * entre las fechas indicadas en el objeto recibido por parámetro
      */
     public async obtenerListaHabitacionesDisponiblesEntreFechas(objFechas: FechaInicioFinInterface) {
-        let url: string = `${API_LINK}/${API_LINK_HABITACIONES}/${API_GET_HABITACIONES_DISPONIBLES}`;
+        let url: string = "https://localhost:7149/api/habitaciones-disponibles/listar-habitaciones-disponibles-entre-fechas";
 
         this.httpClient
         .post(url, objFechas, { observe: 'response' })
@@ -94,6 +94,10 @@ export class BackendService {
             (response: HttpResponse<any>) => {
                 if (response.status >= 200 && response.status < 400) {
                     console.log("Has obtenido respuestas, lol. BackendService");
+                    console.log(response.body);
+                    
+                    return response.body;
+                    
 
                 } else {
                     console.error(response.status);

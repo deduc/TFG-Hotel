@@ -2,7 +2,7 @@
 {
     public class FechaInicioFinDTO
     {
-        public DateOnly FechaInicio { get; set; }
-        public DateOnly FechaFin { get; set; }
+        public DateTime FechaInicio { get; set; }
+        public DateTime FechaFin { get; set; }
     }
 }

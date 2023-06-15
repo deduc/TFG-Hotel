@@ -6,7 +6,7 @@ using TFGHotel.Services.Usuarios;
 using TFGHotel.Services.Clientes;
 using TFGHotel.Services.ReservasDeServicios;
 using TFGHotel.Services.Habitaciones;
-
+using TFGHotel.Services.HabitacionesDisponibles;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -23,6 +23,7 @@ builder.Services.AddScoped<IClientesService, ClientesService>();
 builder.Services.AddScoped<IReservasDeHabitacionesService, ReservasDeHabitacionesService>();
 builder.Services.AddScoped<IReservasDeServicios, ReservasDeServicios>();
 builder.Services.AddScoped<ITiposDeHabitacionesService, TiposDeHabitacionesService>();
+builder.Services.AddScoped<IHabitacionesDisponiblesService, HabitacionesDisponiblesService>();
 // ---------------------------------------------------------------------------------
 
 // Añado el contexto (objeto base de datos con todas sus tablas)
