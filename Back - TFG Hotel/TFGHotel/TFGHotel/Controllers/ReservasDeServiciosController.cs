@@ -25,11 +25,21 @@ namespace TFGHotel.Controllers
 
         [HttpPost]
         [Route("crear-reservas-de-servicios")]
-        public ActionResult<string> AddNewReservasDeServicios(ReservasDeServicios_DTO reservasDeServiciosDTO)
+        public async Task<ActionResult<string>> AddNewReservasDeServicios(ReservasDeServicios_DTO reservasDeServiciosDTO)
         {
-            string returnValue = "Reserva de servicio añadida correctamente.";
+            string returnValue;
+            bool semaforo;
 
-            this._reservasDeServiciosService.AddNewReservasDeServicios(reservasDeServiciosDTO);
+            returnValue = await this._reservasDeServiciosService.AddNewReservasDeServicios(reservasDeServiciosDTO);
+
+            if (returnValue.Length == 0) 
+            {
+                returnValue = "Reserva de servicio añadida correctamente.";
+            }
+            else
+            {
+                returnValue = "ERROR: no se ha podido añadir una reserva de servicio. Es posible que los datos introducidos estén mal." + "\n" + returnValue;
+            }
 
             return returnValue;
         }

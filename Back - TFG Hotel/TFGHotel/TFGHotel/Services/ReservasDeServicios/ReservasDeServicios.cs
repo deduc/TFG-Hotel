@@ -18,24 +18,58 @@ namespace TFGHotel.Services.ReservasDeServicios
             return this._context.Reservas_De_Servicios.ToList();
         }
 
-        public async Task AddNewReservasDeServicios(ReservasDeServicios_DTO reservasDeServiciosDTO)
+        public async Task<string> AddNewReservasDeServicios(ReservasDeServicios_DTO reservasDeServiciosDTO)
         {
-            RESERVAS_DE_SERVICIOS objMapeado = this.DoCreateObjectByDTO(reservasDeServiciosDTO);
-            await _context.Reservas_De_Servicios.AddAsync(objMapeado);
-            await _context.SaveChangesAsync();
+            /*
+             * Comprobar que el ID del cliente y del servicio existen
+             * Si existen:
+             *      crear objeto RESERVAS_DE_SERVICIOS
+             *      añadir fila de forma asincrona
+             *      guardar cambios de forma asincrona
+             * Si no:
+             *      mensaje de error
+             */
+            string returnValue;
+            bool semaforo = this.ComprobarIdClienteIdServicio(reservasDeServiciosDTO);
+
+            if(semaforo == true)
+            {
+                RESERVAS_DE_SERVICIOS reserva = new()
+                {
+                    //Id_Reserva_Servicio = reservasDeServiciosDTO.Id_Reserva_Servicio,
+                    //ID_RESERVA = reservasDeServiciosDTO.Id_Reserva,
+                    ID_CLIENTE = reservasDeServiciosDTO.Id_Cliente,
+                    ID_SERVICIO = reservasDeServiciosDTO.Id_Servicio,
+                };
+
+                await _context.Reservas_De_Servicios.AddAsync(reserva);
+                await _context.SaveChangesAsync();
+
+                returnValue = "Reserva de servicio creada correctamente.";
+            }
+            else
+            {
+                returnValue = "ERROR: No existe un cliente con id " + reservasDeServiciosDTO.Id_Cliente + " y/o un servicio con id " + reservasDeServiciosDTO.Id_Servicio;
+            }
+
+            return returnValue;
         }
 
-        private RESERVAS_DE_SERVICIOS DoCreateObjectByDTO(ReservasDeServicios_DTO reservasDeServiciosDTO)
+        private bool ComprobarIdClienteIdServicio(ReservasDeServicios_DTO reservasDeServiciosDTO)
         {
-            RESERVAS_DE_SERVICIOS reserva = new()
-            {
-                //Id_Reserva_Servicio = reservasDeServiciosDTO.Id_Reserva_Servicio,
-                //ID_RESERVA = reservasDeServiciosDTO.Id_Reserva,
-                ID_CLIENTE = reservasDeServiciosDTO.Id_Cliente,
-                ID_SERVICIO = reservasDeServiciosDTO.Id_Servicio,
-            };
 
-            return reserva;
+            //Comprobar que el ID del cliente y del servicio existen
+            RESERVAS_DE_SERVICIOS reserva = this._context.Reservas_De_Servicios
+                .FirstOrDefault(col => col.ID_CLIENTE == reservasDeServiciosDTO.Id_Cliente && col.ID_SERVICIO == reservasDeServiciosDTO.Id_Servicio);
+
+            if(reserva != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public async Task<string> DeleteReservasDeServiciosById(int id)

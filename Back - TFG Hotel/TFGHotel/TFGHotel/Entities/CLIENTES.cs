@@ -7,7 +7,7 @@
         public string APELLIDOS { get; set; }
         public string USERNAME { get; set; }
         public string DNI { get; set; }
-        public int EDAD { get; set; }
+        //public int EDAD { get; set; }
         public string EMAIL { get; set; }
     }
 }

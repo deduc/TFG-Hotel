@@ -36,7 +36,7 @@ namespace TFGHotel.Context
                 .HasKey(columna => new { columna.ID_CLIENTE });
 
             modelBuilder.Entity<RESERVAS_DE_HABITACIONES>()
-                .HasKey(columna => new { columna.ID_RESERVA });
+                .HasKey(columna => new { columna.ID_RESERVA_HABITACION });
 
             modelBuilder.Entity<RESERVAS_DE_SERVICIOS>()
                 //.HasKey(columna => new { columna.Id_Reserva, columna.Id_Cliente, columna.Id_Servicio });

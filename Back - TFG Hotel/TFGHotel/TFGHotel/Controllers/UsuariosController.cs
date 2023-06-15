@@ -17,16 +17,14 @@ namespace TFGHotel.Controllers
     [Route("api/usuarios")]
     public class UsuariosController: Controller
     {
-        private readonly IUsuariosService _usuariosService;
-        private string responseText;
+        private IUsuariosService _usuariosService;
 
         public UsuariosController(IUsuariosService usuariosService)
         {
             _usuariosService = usuariosService;
         }
 
-        // --- GET ---
-        // decoradores de mi endpoint GetUsersFromDatabase
+        // decorador de metodo. La API recibe una consulta en modo GET
         [HttpGet]
         [Route("listar-usuarios")]
         public List<UsuariosDTO> GetUsers()
@@ -34,39 +32,38 @@ namespace TFGHotel.Controllers
             var resultado = _usuariosService.GetUsuarios();
             return resultado;
         }
-        // --- FIN GET ---
 
-
-        // --- POST ---
-        // decorador de metodo para hacer una consulta a la API en modo POST
+        // decorador de metodo. La API recibe una consulta en modo POST
         [HttpPost]
         [Route("crear-nuevo-usuario")]
-        public List<string> Post(UsuariosDTO usuarioDTO)
+        public ActionResult<List<string>> AddNewUser(UsuariosDTO usuarioDTO)
         {
             var errorsList = _usuariosService.AddNewUser(usuarioDTO);
-            int errorsNumber = errorsList.Count;
+            
+            if(errorsList.Count == 0)
+            {
+                errorsList.Add("Usuario insertado con éxito");
+                return Ok(Json(errorsList));
+            }
 
-            return errorsList;
+            return BadRequest(Json(errorsList));
         }
-        // --- FIN POST ---
 
 
-        // --- METODOS DELETE ---
-        // Decorador para eliminar usuarios filtrando por ID en la url
-        [HttpDelete("eliminar-usuario/{id:int}")]
+        // decorador de metodo. La API recibe una consulta en modo POST para eliminar usuarios, filtrando por ID en el cuerpo de la petición.
+        [HttpDelete("eliminar-usuario")]
         public ActionResult DeleteUserById(int idUsuarioABorrar)
         {
-            this.responseText = "ERROR: El ID introducido no es válido";
+            string returnValue = "ERROR: El ID introducido no es válido";
 
             if (_usuariosService.DeleteUserById(idUsuarioABorrar))
             {
-                this.responseText = "Usuario borrado con éxito.";
-                return Ok(Json(responseText));
+                returnValue = "Usuario borrado con éxito.";
+                return Ok(Json(returnValue));
             }
 
-            return BadRequest(Json(responseText));
+            return BadRequest(Json(returnValue));
         }
-        // --- FIN METODOS DELETE ---
 
 
 

@@ -1,0 +1,31 @@
+front
+    pages/ login y register
+        recuperar contraseña
+
+    pages/registrar-usuario
+        el ts ha de indicar al usuario, con cajitas, si los datos están bien puestos o no,
+        O TAMBIEN con ticks verdes en algun punto del input. Ahi habria que cambiar la estructura de un
+	supuesto div contenedor del input, ns, hazlo como creas conveniente o deja que te dé perezanium xdd
+    
+    meter panel de administrador
+
+    pages habitaciones
+        clicar en el boton ver habitacion y que te lleve a una pagina con la habitacion y sus caracteristicas
+        front y back: hacer un servicio que se conecte con la base de datos y recupere las imágenes, titulos y textos de cada card
+
+    pages actividades
+        necesitas ser un usuario de la web para reservar una entrada de la actividad, ponerlo con un ng-template
+
+
+
+back
+    pages actividades
+        backend: mostrar cuántas entradas quedan
+    
+    pages habitaciones
+        back: hacer un [HttpGet] que devuelva los campos titulo, descripcion eimagen, de la tabla habitaciones
+
+
+base de datos
+    tabla usuarios:
+        añadir un campo booleano Activo o no

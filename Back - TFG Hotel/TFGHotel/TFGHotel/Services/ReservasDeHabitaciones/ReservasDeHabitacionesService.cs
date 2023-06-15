@@ -44,7 +44,7 @@ namespace TFGHotel.Services.Reservas
             return reservasList
                 .Select(s => new RESERVAS_DE_HABITACIONES()
                 {
-                    ID_RESERVA = s.ID_RESERVA,
+                    ID_RESERVA_HABITACION = s.ID_RESERVA_HABITACION,
                     ID_HABITACION = s.ID_HABITACION,
                     ID_CLIENTE = s.ID_CLIENTE,
                     FECHA_INICIO = s.FECHA_INICIO,
@@ -71,8 +71,7 @@ namespace TFGHotel.Services.Reservas
                 ID_HABITACION = reservaDTO.Id_Habitacion,
                 FECHA_INICIO = reservaDTO.Fecha_Inicio,
                 FECHA_FIN = reservaDTO.Fecha_Fin,
-                RESERVA_ACTIVA = 1,
-                PRECIO_TOTAL = 1
+                RESERVA_ACTIVA = 1
             };
 
             return reserva;
