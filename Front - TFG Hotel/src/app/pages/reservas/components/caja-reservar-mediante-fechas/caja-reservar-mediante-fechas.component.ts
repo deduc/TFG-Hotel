@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ReservasService } from '../../reservas.service';
 import { FechaInicioFinInterface } from '../../../../core/interfaces/fecha-inicio-fin.interface';
 
@@ -8,6 +8,7 @@ import { FechaInicioFinInterface } from '../../../../core/interfaces/fecha-inici
   styleUrls: ['./caja-reservar-mediante-fechas.component.css']
 })
 export class CajaReservarMedianteFechasComponent {
+    @Output() fechas = new EventEmitter();
     public reservasService:ReservasService;
     public errorFormulario: number = 0;
     public fechaHoy: Date = new Date();
@@ -25,7 +26,7 @@ export class CajaReservarMedianteFechasComponent {
         this.fechaHoy.setSeconds(0);
         this.fechaHoy.setMilliseconds(0);
     }
-    
+
     public enviarFormulario(): void{
         if( (this.objFechas.fechaInicio != null) && (this.objFechas.fechaFin != null) ){
             let fechaInicio: Date = new Date(this.objFechas.fechaInicio);
@@ -50,7 +51,7 @@ export class CajaReservarMedianteFechasComponent {
             if(fechaInicio >= this.fechaHoy){
                 if(fechaInicio <= fechaFin){
                     this.errorFormulario = 1;
-                    
+                    this.emitirObjFechas(this.objFechas);
                     // Envío al servicio las fechas del formulario que ha rellenado el usuario
                     this.reservasService.setObjFechasData(this.objFechas);
                 }
@@ -67,6 +68,10 @@ export class CajaReservarMedianteFechasComponent {
         }
 
         // fin metodo
+    }
+
+    public emitirObjFechas ( fechas: FechaInicioFinInterface){
+        this.fechas.emit(fechas);
     }
 
     public cerrarCaja(){

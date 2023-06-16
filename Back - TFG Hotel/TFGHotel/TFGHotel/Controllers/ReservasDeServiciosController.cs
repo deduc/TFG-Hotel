@@ -28,7 +28,6 @@ namespace TFGHotel.Controllers
         public async Task<ActionResult<string>> AddNewReservasDeServicios(ReservasDeServicios_DTO reservasDeServiciosDTO)
         {
             string returnValue;
-            bool semaforo;
 
             returnValue = await this._reservasDeServiciosService.AddNewReservasDeServicios(reservasDeServiciosDTO);
 

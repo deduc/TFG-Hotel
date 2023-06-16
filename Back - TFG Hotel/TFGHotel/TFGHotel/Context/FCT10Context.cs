@@ -17,7 +17,8 @@ namespace TFGHotel.Context
         public DbSet<RESERVAS_DE_HABITACIONES> Reservas_De_Habitaciones { get; set; }
         public DbSet<RESERVAS_DE_SERVICIOS> Reservas_De_Servicios { get; set; }
         public DbSet<TIPOS_DE_HABITACIONES> Tipos_De_Habitaciones { get; set; }
-        public DbSet<DATOS_DE_HABITACIONES_DISPONIBLES> Datos_De_Habitaciones_Disponibles{ get; set; }
+        public DbSet<DATOS_DE_HABITACIONES_DISPONIBLES> Datos_De_Habitaciones_Disponibles { get; set; }
+        public DbSet<HABITACIONES> Habitaciones { get; set; }
 
 
         public FCT10Context(DbContextOptions options) : base(options) { }
@@ -47,7 +48,16 @@ namespace TFGHotel.Context
 
             modelBuilder.Entity<DATOS_DE_HABITACIONES_DISPONIBLES>()
                 .HasKey(columna => new { columna.id_tipo_de_habitacion });
+
+            modelBuilder.Entity<HABITACIONES>()
+                .HasKey(columna => new { columna.ID_HABITACION });
+
+            // fin metodo OnModelCreating
         }
+
+        // fin clase
     }
+
+    // fin namespace
 }
 

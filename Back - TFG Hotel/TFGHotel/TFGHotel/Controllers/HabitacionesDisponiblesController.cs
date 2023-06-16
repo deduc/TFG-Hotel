@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TFGHotel.ClasesAuxiliares;
 using TFGHotel.DTO;
-using TFGHotel.Entities;
 using TFGHotel.Services.HabitacionesDisponibles;
 
 namespace TFGHotel.Controllers
@@ -10,21 +10,20 @@ namespace TFGHotel.Controllers
     public class HabitacionesDisponiblesController
     {
         private readonly IHabitacionesDisponiblesService _habitacionesDisponiblesService;
+
         public HabitacionesDisponiblesController(IHabitacionesDisponiblesService habitacionesDisponiblesService)
         {
             this._habitacionesDisponiblesService = habitacionesDisponiblesService;
         }
 
         [HttpPost]
-        [Route("listar-habitaciones-disponibles-entre-fechas")]
-        public List<DatosYCantidadDeHabitacionesDisponiblesEntreFechas> GetHabitacionesDisponiblesEntreFechas(FechaInicioFinDTO objFechasDto)
+        [Route("obtener-id-tipo-habitacion-y-cantidad")]
+        public List<HabitacionesIdYCantidadDisponible> GetHabitacionesDisponiblesEntreFechas(FechaInicioFinDTO objFechasDto)
         {
-            List<DatosYCantidadDeHabitacionesDisponiblesEntreFechas> habitacionesDisponibles;
 
-            habitacionesDisponibles = this._habitacionesDisponiblesService.GetHabitacionesDisponiblesEntreFechas(objFechasDto);
-
-            return habitacionesDisponibles;
+            return this._habitacionesDisponiblesService.GetHabitacionesDisponiblesEntreFechas(objFechasDto);
         }
+
 
         // fin clase
     }

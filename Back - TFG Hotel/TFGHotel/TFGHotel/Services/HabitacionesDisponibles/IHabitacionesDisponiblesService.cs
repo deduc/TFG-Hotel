@@ -1,12 +1,13 @@
-﻿using TFGHotel.DTO;
+﻿using TFGHotel.ClasesAuxiliares;
+using TFGHotel.DTO;
 using TFGHotel.Entities;
 
 namespace TFGHotel.Services.HabitacionesDisponibles
 {
     public interface IHabitacionesDisponiblesService
     {
-        List<RESERVAS_DE_HABITACIONES> GetHabitacionesDisponiblesEntreFechas(FechaInicioFinDTO objFechasDto);
-        List<int> GetIdHabitacionesDisponibles(FechaInicioFinDTO objFechas);
-        List<DatosYCantidadDeHabitacionesDisponiblesEntreFechas> GetDatosDeHabitacionesByIdList(List<int> listaIdsHabitaciones);
+        List<HabitacionesIdYCantidadDisponible> GetHabitacionesDisponiblesEntreFechas(FechaInicioFinDTO objFechasDto);
+        List<int> GetIDsHabitacionesDisponibles(FechaInicioFinDTO objFechasDto);
+        List<HabitacionesIdYCantidadDisponible> obtenerIdTipoHabitacionYCantidad(List<int> idHabitacionesDisponibles);
     }
 }

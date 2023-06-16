@@ -1,4 +1,5 @@
-﻿using TFGHotel.Context;
+﻿using TFGHotel.ClasesAuxiliares;
+using TFGHotel.Context;
 using TFGHotel.DTO;
 using TFGHotel.Entities;
 
@@ -13,73 +14,51 @@ namespace TFGHotel.Services.HabitacionesDisponibles
             _context = context;
         }
 
-        public List<DatosYCantidadDeHabitacionesDisponiblesEntreFechas> GetHabitacionesDisponiblesEntreFechas(FechaInicioFinDTO objFechasDto)
+        public List<HabitacionesIdYCantidadDisponible> GetHabitacionesDisponiblesEntreFechas(FechaInicioFinDTO objFechasDto)
         {
-            List<DatosYCantidadDeHabitacionesDisponiblesEntreFechas> datosYCantidadDeHabitacionesDisponibles = new List<DatosYCantidadDeHabitacionesDisponiblesEntreFechas> { };
-            List<int> listaIdsHabitaciones;
+            List<int> idHabitacionesDisponibles;
+            List<HabitacionesIdYCantidadDisponible> habitacionesIdYCantidadDisponible;
 
-            listaIdsHabitaciones = this.GetIdHabitacionesDisponibles(objFechasDto);
-            datosYCantidadDeHabitacionesDisponibles = this.GetDatosDeHabitacionesByIdList(listaIdsHabitaciones);
 
-            return datosYCantidadDeHabitacionesDisponibles;
+            idHabitacionesDisponibles = this.GetIDsHabitacionesDisponibles(objFechasDto);
+            habitacionesIdYCantidadDisponible = this.obtenerIdTipoHabitacionYCantidad(idHabitacionesDisponibles);
+
+            return habitacionesIdYCantidadDisponible;
         }
 
-        // Método que devuelve una lista de IDs de habitaciones disponibles entre las fechas obtenidas a partir de un objeto que contiene 2 fechas.
-        public List<int> GetIdHabitacionesDisponibles(FechaInicioFinDTO objFechas)
+        public List<int> GetIDsHabitacionesDisponibles(FechaInicioFinDTO objFechasDto)
         {
-            List<int> idHabitaciones = new List<int>();
+            DateTime today = DateTime.Today;
+            DateTime fechaInicio = objFechasDto.FechaInicio;
+            DateTime fechaFin = objFechasDto.FechaFin;
 
-            idHabitaciones = _context.Reservas_De_Habitaciones
-                // no quiero obtener las habiaciones que cumplan con lo siguiente:
-                .Where(x => ! _context.Reservas_De_Habitaciones
-                    .Where(r => (r.FECHA_INICIO <= objFechas.FechaInicio && r.FECHA_FIN >= objFechas.FechaInicio) )
-                    .Select(r => r.ID_HABITACION)
-                    .Contains(x.ID_HABITACION))
-                .Select(x => x.ID_HABITACION)
+            return _context.Reservas_De_Habitaciones
+                .Where(x => (
+                        fechaFin < x.FECHA_INICIO
+                    ||  fechaInicio > x.FECHA_FIN
+                    &&  fechaInicio < x.FECHA_INICIO
+                ))
+                .Select(s => s.ID_HABITACION)
                 .ToList();
-
-            return idHabitaciones;
-
-            // fin metodo
         }
 
-        // TODO: MEJORA ESTO JJAJAJAJAJJAJA
-        public List<DatosYCantidadDeHabitacionesDisponiblesEntreFechas> GetDatosDeHabitacionesByIdList(List<int> listaIdsHabitaciones)
+        public List<HabitacionesIdYCantidadDisponible> obtenerIdTipoHabitacionYCantidad(List<int> idHabitacionesDisponibles)
         {
-            DateTime FECHA_INICIO_RESERVA = new DateTime(2024, 6, 2);
-            DateTime FECHA_FIN_RESERVA = new DateTime(2024, 6, 4);
-            List<int> habitacionIDs = new List<int> { 1, 2, 9, 18, 20 };
+            List<HabitacionesIdYCantidadDisponible> r = new List<HabitacionesIdYCantidadDisponible>();
 
-            var habitacionesDisponibles = _context.Habitaciones
-                .Where(habitacion => habitacionIDs.Contains(habitacion.ID_HABITACION))
-                .Join(_context.TiposDeHabitaciones,
-                      habitacion => habitacion.ID_TIPO_DE_HABITACION,
-                      tipoHabitacion => tipoHabitacion.ID_TIPO_DE_HABITACION,
-                      (habitacion, tipoHabitacion) => new { Habitacion = habitacion, TipoHabitacion = tipoHabitacion })
-                .GroupBy(x => new
-                {
-                    x.Habitacion.ID_TIPO_DE_HABITACION,
-                    x.TipoHabitacion.CATEGORIA,
-                    x.TipoHabitacion.PRECIO,
-                    x.TipoHabitacion.DESCRIPCION,
-                    x.TipoHabitacion.IMG_HABITACION_BASE_64,
-                    x.TipoHabitacion.TAMAÑO,
-                    x.TipoHabitacion.ENLACE_URL
-                })
-                .Select(g => new IdHabitacionYCantidad
-                {
-                    ID_TIPO_DE_HABITACION = g.Key.ID_TIPO_DE_HABITACION,
-                    CANTIDAD_DE_HABITACIONES_DISPONIBLES = g.Count(),
-                    CATEGORIA = g.Key.CATEGORIA,
-                    PRECIO = g.Key.PRECIO,
-                    DESCRIPCION = g.Key.DESCRIPCION,
-                    IMG_HABITACION_BASE_64 = g.Key.IMG_HABITACION_BASE_64,
-                    TAMAÑO = g.Key.TAMAÑO,
-                    ENLACE_URL = g.Key.ENLACE_URL
-                })
-                .ToList();
 
+            r = _context.Habitaciones
+                .Where(x => idHabitacionesDisponibles.Contains(x.ID_HABITACION))
+                .GroupBy(i => i.ID_TIPO_DE_HABITACION)
+                        .Select(g => new HabitacionesIdYCantidadDisponible
+                        {
+                            ID_TIPO_DE_HABITACION = g.Key,
+                            CantidadDisponible = g.Count()
+                        })
+                        .OrderBy(x => x.ID_TIPO_DE_HABITACION).ToList();
+            return r;
         }
+
 
         // fin clase
     }

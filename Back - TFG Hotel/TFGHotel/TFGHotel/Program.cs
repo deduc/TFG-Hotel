@@ -17,7 +17,7 @@ builder.Services.AddSwaggerGen();
 
 
 // ---------------------------------------------------------------------------------
-// ! Importante:    aqui indico con qué tablas de la base de datos va a trabajar mi WEB API
+// ! Importante:    aqui indico con qué servicios van a trabajar los controladores de mi WEB API
 builder.Services.AddScoped<IUsuariosService, UsuariosService>();
 builder.Services.AddScoped<IClientesService, ClientesService>();
 builder.Services.AddScoped<IReservasDeHabitacionesService, ReservasDeHabitacionesService>();

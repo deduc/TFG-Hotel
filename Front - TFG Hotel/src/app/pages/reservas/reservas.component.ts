@@ -4,6 +4,8 @@ import { FechaInicioFinInterface } from 'src/app/core/interfaces/fecha-inicio-fi
 import { CardHabitacionInterface } from 'src/app/core/interfaces/card-habitacion.interface';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
+import { API_LINK, API_LINK_HABITACIONES_DISPONIBLES, API_POST_OBTENER_ID_TIPO_HABITACION_Y_CANTIDAD } from 'src/app/core/constantes';
+import { HabitacionesIdYCantidadDisponible } from '../../core/interfaces/habitaciones-id-y-cantidad-disponible';
 
 
 
@@ -68,6 +70,24 @@ export class ReservasComponent {
         );
     }
 
+    public buscarHabitaciones(fechas: FechaInicioFinInterface){
+        console.log("Objeto fechas emitido y recibido en reservas.component.ts", fechas, "procedo a traer datos de la API.");
+        
+        const url: string = `${API_LINK}/${API_LINK_HABITACIONES_DISPONIBLES}/${API_POST_OBTENER_ID_TIPO_HABITACION_Y_CANTIDAD}`;
+        const body: FechaInicioFinInterface = this.objFechas;
 
+        this.httpClient
+        .post<HabitacionesIdYCantidadDisponible>(url, body)
+        .subscribe(
+            resp => {
+                alert("MIRA LA CONSOLA");
+                console.log("EL ENDPOINT 'https://localhost:7149/api/habitaciones-disponibles/obtener-id-tipo-habitacion-y-cantidad' FUNCIONA, TRAE TIPO DE HABITACION Y CANTIDAD DE HABITACIONES DISPONIBLES");
+                
+                console.log(resp);
+            }
+        );
+        
+
+    }
     // fin clase
 }

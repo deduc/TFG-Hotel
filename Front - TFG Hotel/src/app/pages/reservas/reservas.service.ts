@@ -32,10 +32,6 @@ export class ReservasService {
 
     constructor(backendService: BackendService) { 
         this._backendService = backendService;
-
-        // TODO:    HAZ ESTE METODO EN EL BACK
-        // !!   Cuando se cargue el componente, cargar la lista de las habitaciones que están disponibles hoy
-        // this.listaTiposDeHabitaciones = this._backendService.obtenerHabitacionesDisponibles();
     }
 
 
@@ -62,14 +58,7 @@ export class ReservasService {
         
         // Envío el objFechas a los atributos de otras clases que estén suscritas a este atributo.
         this.objFechas.next(objFechas);
-        console.log("Objeto fechas recibido:" + this.objFechas);
-        
-        this.setListaHabitacionesDisponiblesEntreFechas(objFechas);
     }
 
-    public setListaHabitacionesDisponiblesEntreFechas(objFechas: FechaInicioFinInterface){
-        // TODO: obtener de la API las habitaciones no reservadas entre fecha inicio y fecha fin
-        this._backendService.obtenerListaHabitacionesDisponiblesEntreFechas(objFechas);
-
-    }
+    // fin clase
 }

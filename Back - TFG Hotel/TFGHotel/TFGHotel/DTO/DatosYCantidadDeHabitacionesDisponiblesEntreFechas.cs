@@ -2,13 +2,13 @@
 {
     public class DatosYCantidadDeHabitacionesDisponiblesEntreFechas
     {
-        public int ID_TIPO_DE_HABITACION { get; set; }
-        public int CANTIDAD_DE_HABITACIONES_DISPONIBLES { get; set; }
-        public string CATEGORIA { get; set; }
-        public int PRECIO { get; set; }
-        public string DESCRIPCION { get; set; }
-        public string IMG_HABITACION_BASE_64 { get; set; }
-        public int TAMAÑO { get; set; }
-        public string ENLACE_URL { get; set; }
+        public int Id_Tipo_De_Habitacion { get; set; }
+        public int Cantidad_De_Habitaciones_Disponibles { get; set; }
+        public string Categoria { get; set; }
+        public int Precio { get; set; }
+        public string Descripcion { get; set; }
+        public string Img_Habitacion_Base_64 { get; set; }
+        public int Tamaño { get; set; }
+        public string Enlace_Url { get; set; }
     }
 }
