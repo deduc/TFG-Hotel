@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TFGHotel.ClasesAuxiliares;
 using TFGHotel.DTO;
+using TFGHotel.Entities;
 using TFGHotel.Services.HabitacionesDisponibles;
 
 namespace TFGHotel.Controllers
@@ -17,8 +18,8 @@ namespace TFGHotel.Controllers
         }
 
         [HttpPost]
-        [Route("obtener-id-tipo-habitacion-y-cantidad")]
-        public List<DatosYCantidadDeHabitaciones> GetHabitacionesDisponiblesEntreFechas(FechaInicioFinDTO objFechasDto)
+        [Route("obtener-habitaciones-disponibles-entre-fechas")]
+        public List<DatosYCantidadDeHabitacionesDisponiblesEntreFechasDTO> GetHabitacionesDisponiblesEntreFechas(FechaInicioFinDTO objFechasDto)
         {
             if(objFechasDto.FechaInicio <= objFechasDto.FechaFin)
             {

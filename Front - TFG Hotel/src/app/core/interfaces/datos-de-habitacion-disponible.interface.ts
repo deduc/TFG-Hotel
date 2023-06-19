@@ -1,10 +1,10 @@
-export interface DATOS_DE_HABITACIONES_DISPONIBLES{
+export interface DatosDeHabitacionesDisponibles{
     id_tipo_de_habitacion: number,
-    habitaciones_disponibles: number,
+    cantidad_de_habitaciones_disponibles: number,
     categoria: string,
     precio: number,
     descripcion: string,
     img_habitacion_base_64: string,
     tamaño: number,
-    enlace_url?: string,
+    enlace_url: string,
 }

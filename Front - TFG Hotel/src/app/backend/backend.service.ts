@@ -13,7 +13,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { CardHabitacionInterface } from '../core/interfaces/card-habitacion.interface';
 import { FechaInicioFinInterface } from '../core/interfaces/fecha-inicio-fin.interface';
 import { UserLoggedInterface } from '../core/interfaces/user-logged.interface';
-import { DATOS_DE_HABITACIONES_DISPONIBLES } from '../core/interfaces/datos-de-habitacion-disponible.interface';
+import { DatosDeHabitacionesDisponibles } from '../core/interfaces/datos-de-habitacion-disponible.interface';
 
 
 @Injectable({ providedIn: 'root' })
@@ -223,7 +223,7 @@ export class BackendService {
         return listaHabitaciones;
     }
 
-    public obtenerTiposDeHabitaciones(): DATOS_DE_HABITACIONES_DISPONIBLES[] | void {
+    public obtenerTiposDeHabitaciones(): DatosDeHabitacionesDisponibles[] | void {
         const baseApiUrl = `${API_LINK}/${API_LINK_TIPOS_DE_HABITACIONES}`;
         const tiposHabitacionesUrl = `${baseApiUrl}/${API_GET_TIPOS_DE_HABITACIONES}`;
       
@@ -241,7 +241,7 @@ export class BackendService {
     }
     
 
-    public obtenerHabitacionById(idHabitacion: number): DATOS_DE_HABITACIONES_DISPONIBLES | any {
+    public obtenerHabitacionById(idHabitacion: number): DatosDeHabitacionesDisponibles | any {
         const baseApiUrl = `${API_LINK}/${API_LINK_TIPOS_DE_HABITACIONES}`;
         const habitacionFiltradaURL = `${baseApiUrl}/${API_GET_HABITACIONES_BY_ID}/${idHabitacion}`;
 
@@ -250,7 +250,7 @@ export class BackendService {
         }
 
         this.httpClient
-            .post<DATOS_DE_HABITACIONES_DISPONIBLES>(habitacionFiltradaURL, apiBody)
+            .post<DatosDeHabitacionesDisponibles>(habitacionFiltradaURL, apiBody)
             .subscribe(
                 (resp) => {
                     return resp;

@@ -2,12 +2,12 @@
 
 namespace TFGHotel.DTO
 {
-    public class TipoDeHabitacionDTO
+    public class DatosYCantidadDeHabitacionesDisponiblesEntreFechasDTO
     {
         [JsonPropertyName("id_tipo_de_habitacion")]
         public int id_tipo_de_habitacion { get; set; }
-        [JsonPropertyName("habitaciones_disponibles")]
-        public int? habitaciones_disponibles { get; set; }
+        [JsonPropertyName("cantidad_de_habitaciones_disponibles")]
+        public int habitaciones_disponibles { get; set; }
         [JsonPropertyName("categoria")]
         public string categoria { get; set; }
         [JsonPropertyName("precio")]

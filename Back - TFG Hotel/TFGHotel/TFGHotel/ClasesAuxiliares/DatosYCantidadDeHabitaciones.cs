@@ -1,4 +1,6 @@
-﻿namespace TFGHotel.ClasesAuxiliares
+﻿using System.Text.Json.Serialization;
+
+namespace TFGHotel.ClasesAuxiliares
 {
     public class DatosYCantidadDeHabitaciones
     {

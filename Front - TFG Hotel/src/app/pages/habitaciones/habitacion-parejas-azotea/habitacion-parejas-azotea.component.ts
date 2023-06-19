@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { BackendService } from 'src/app/backend/backend.service';
-import { DATOS_DE_HABITACIONES_DISPONIBLES } from 'src/app/core/interfaces/datos-de-habitacion-disponible.interface';
+import { DatosDeHabitacionesDisponibles } from 'src/app/core/interfaces/datos-de-habitacion-disponible.interface';
 import { ReservasService } from '../../reservas/reservas.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -11,7 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./habitacion-parejas-azotea.component.css']
 })
 export class HabitacionParejasAzoteaComponent {
-    public datosHabitacion: DATOS_DE_HABITACIONES_DISPONIBLES;
+    public datosHabitacion: DatosDeHabitacionesDisponibles;
 
     constructor(
         private httpClient: HttpClient,
@@ -29,7 +29,7 @@ export class HabitacionParejasAzoteaComponent {
             debugger
          });
         this.httpClient
-        .post<DATOS_DE_HABITACIONES_DISPONIBLES>(apiLink, apiBody)
+        .post<DatosDeHabitacionesDisponibles>(apiLink, apiBody)
         .subscribe(
             (resp) => {
                 this.datosHabitacion = resp;

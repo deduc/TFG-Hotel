@@ -8,6 +8,5 @@
         public DateTime FECHA_INICIO { get; set; }
         public DateTime FECHA_FIN { get; set; }
         public int RESERVA_ACTIVA { get; set; }
-        //public decimal PRECIO_TOTAL { get; set; }
     }
 }

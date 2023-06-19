@@ -17,14 +17,14 @@
             </div>
             <div class="row">
                 <p>
-                    Quedan <b>{{ datosHabitacion.habitaciones_disponibles }}</b> habitaciones disponibles.
+                    Quedan <b>{{ datosHabitacion.cantidad_de_habitaciones_disponibles }}</b> habitaciones disponibles.
                 </p>
                 <p>
                     {{ datosHabitacion.descripcion }}
                 </p>
             </div>
             <div class="row">
-                <div *ngIf="datosHabitacion.habitaciones_disponibles > 0; else noHayMasHabitaciones">
+                <div *ngIf="datosHabitacion.cantidad_de_habitaciones_disponibles > 0; else noHayMasHabitaciones">
                     <div class="btn btn-primary col-6">Reservar</div>
                 </div>
                 

@@ -10,11 +10,6 @@
     {{ objFechas.fechaFin }}
 </div> -->
 
-<h1>
-    TODO: CONECTAR EL FRONT CON LA API, OBTENER LAS HABITACIONES COMO EN /habitaciones Y MOSTRAR TOS LOS DATOS DE LOS OBJETOS DEL ARRAY
-</h1>
-
-
 <main class="py-5 bg-light d-flex justify-content-center">
     <div class="row container-fluid" *ngIf="listaTiposDeHabitaciones">
     
@@ -23,18 +18,18 @@
             <!-- * este codigo es para una sola tarjeta -->
             <div class="card p-2 my-3">
                 <img class="card-imagen" [src]="item.img_habitacion_base_64" [id]="item.categoria" alt="IMAGEN CARD">
-                
+
                 <h1 class="card-title mt-2 text-center">{{ item.categoria }}</h1>
                 
                 <div class="card-body">
                     <p class="card-text">{{ item.descripcion }}</p>
                 </div>
+                
+                <p *ngIf="item.cantidad_de_habitaciones_disponibles">
+                    Habitaciones disponibles restantes: <b>{{ item.cantidad_de_habitaciones_disponibles }}</b>
+                </p>
 
-                <!-- <div class="card-body" *ngIf="item.habitaciones_disponibles">
-                    <p class="card-text">Quedan {{ item.habitaciones_disponibles }} habitaciones disponibles.</p>
-                </div> -->
-
-                <a  type="button" class="btn btn-light" [routerLink]="item.enlace_url">
+                <a  type="button" class="btn btn-light" [routerLink]="item.enlace_url" routerLinkActive="router-link-active">
                     Ver
                 </a>
                 
@@ -50,4 +45,9 @@
     
         <!-- fin div.row -->
     </div>
+    
 </main>
+
+<div class="row bg-light" *ngIf="listaTiposDeHabitaciones.length == 0">
+    <p class="col-12 text-center">No hay habitaciones disponibles para las fechas seleccionadas.</p>
+</div>

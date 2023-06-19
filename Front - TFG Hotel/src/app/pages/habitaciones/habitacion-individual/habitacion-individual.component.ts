@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CardHabitacionInterface } from '../../../core/interfaces/card-habitacion.interface';
 import { HabitacionesService } from '../habitaciones.service';
-import { DATOS_DE_HABITACIONES_DISPONIBLES } from 'src/app/core/interfaces/datos-de-habitacion-disponible.interface';
+import { DatosDeHabitacionesDisponibles } from 'src/app/core/interfaces/datos-de-habitacion-disponible.interface';
 import { BackendService } from '../../../backend/backend.service';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -15,7 +15,7 @@ import { ReservasService } from '../../reservas/reservas.service';
     styleUrls: ['./habitacion-individual.component.css']
 })
 export class HabitacionIndividualComponent{
-    public datosHabitacion: DATOS_DE_HABITACIONES_DISPONIBLES;
+    public datosHabitacion: DatosDeHabitacionesDisponibles;
 
     constructor(
         private httpClient: HttpClient,
@@ -29,9 +29,10 @@ export class HabitacionIndividualComponent{
         }
 
         this.httpClient
-        .post<DATOS_DE_HABITACIONES_DISPONIBLES>(apiLink, apiBody)
+        .post<DatosDeHabitacionesDisponibles>(apiLink, apiBody)
         .subscribe(
             (resp) => {
+                console.log(resp);
                 this.datosHabitacion = resp;
             }
         );

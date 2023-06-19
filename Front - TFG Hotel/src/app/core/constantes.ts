@@ -20,7 +20,7 @@ export const API_GET_TIPOS_DE_HABITACIONES: string = "listar-tipos-de-habitacion
 export const API_GET_HABITACIONES_BY_ID: string = "listar-habitacion-por-id";
 
 export const API_LINK_HABITACIONES_DISPONIBLES: string = "habitaciones-disponibles";
-export const API_POST_OBTENER_ID_TIPO_HABITACION_Y_CANTIDAD: string = "obtener-id-tipo-habitacion-y-cantidad";
+export const API_POST_OBTENER_HABITACIONES_DISPONIBLES_ENTRE_FECHAS: string = "obtener-habitaciones-disponibles-entre-fechas";
 
 export const SESSION_STORAGE_USER_LOGGED: string = "user_logged";
 export const SESSION_STORAGE_USER_REGISTERED: string = "user_registered";

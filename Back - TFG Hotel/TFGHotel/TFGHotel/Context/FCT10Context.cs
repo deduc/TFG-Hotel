@@ -44,10 +44,10 @@ namespace TFGHotel.Context
                 .HasKey(columna => new { columna.ID_RESERVA_SERVICIO });
 
             modelBuilder.Entity<TIPOS_DE_HABITACIONES>()
-                .HasKey(columna => new { columna.id_tipo_de_habitacion });
+                .HasKey(columna => new { columna.ID_TIPO_DE_HABITACION });
 
             modelBuilder.Entity<DATOS_DE_HABITACIONES_DISPONIBLES>()
-                .HasKey(columna => new { columna.id_tipo_de_habitacion });
+                .HasKey(columna => new { columna.ID_TIPO_DE_HABITACION });
 
             modelBuilder.Entity<HABITACIONES>()
                 .HasKey(columna => new { columna.ID_HABITACION });

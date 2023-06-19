@@ -20,12 +20,12 @@ namespace TFGHotel.Services.Habitaciones
             List<TipoDeHabitacionDTO> returnValue = tiposDeHabitacionesList
                 .Select(s => new TipoDeHabitacionDTO
                 {
-                    CATEGORIA= s.categoria,
-                    DESCRIPCION = s.descripcion,
-                    IMG_HABITACION_BASE_64 = s.img_habitacion_base_64,
-                    TAMAÑO = s.tamaño,
-                    PRECIO = s.precio,
-                    ENLACE_URL = s.Enlace_Url
+                    categoria= s.CATEGORIA,
+                    descripcion = s.DESCRIPCION,
+                    img_habitacion_base_64 = s.IMG_HABITACION_BASE_64,
+                    tamaño = s.TAMAÑO,
+                    precio = s.PRECIO,
+                    enlace_url = s.ENLACE_URL
                 })
                 .ToList();
 
@@ -37,16 +37,25 @@ namespace TFGHotel.Services.Habitaciones
             return this._context.Datos_De_Habitaciones_Disponibles.ToList();
         }
 
-        public DATOS_DE_HABITACIONES_DISPONIBLES GetHabitacionById(int id)
+        public DatosDeHabitacionesDisponiblesDTO GetHabitacionById(int id)
         {
-            var habitacion = _context.Datos_De_Habitaciones_Disponibles.FirstOrDefault(s => s.id_tipo_de_habitacion == id);
+            var datos = _context.Datos_De_Habitaciones_Disponibles.FirstOrDefault(s => s.ID_TIPO_DE_HABITACION == id);
             
-            if (habitacion != null) {
-                return habitacion;
+            if (datos != null) {
+                return new DatosDeHabitacionesDisponiblesDTO()
+                {
+                    id_tipo_de_habitacion = datos.ID_TIPO_DE_HABITACION,
+                    habitaciones_disponibles = datos.HABITACIONES_DISPONIBLES,
+                    categoria = datos.CATEGORIA ,
+                    precio = datos.PRECIO ,
+                    descripcion = datos.DESCRIPCION ,
+                    img_habitacion_base_64 = datos.IMG_HABITACION_BASE_64 ,
+                    tamaño = datos.TAMAÑO ,
+                };
             }
             else
             {
-                return new DATOS_DE_HABITACIONES_DISPONIBLES() { };
+                return new DatosDeHabitacionesDisponiblesDTO() { };
             }
         }
 

@@ -2,13 +2,12 @@
 {
     public class DATOS_DE_HABITACIONES_DISPONIBLES
     {
-        public int id_tipo_de_habitacion{ get; set; }
-        public int habitaciones_disponibles{ get; set; }
-        public string categoria { get; set; }
-        public decimal precio { get; set; }
-        public string descripcion { get; set; }
-        public string img_habitacion_base_64{ get; set; }
-        public int tamaño { get; set; }
-
+        public int ID_TIPO_DE_HABITACION{ get; set; }
+        public int HABITACIONES_DISPONIBLES{ get; set; }
+        public string CATEGORIA { get; set; }
+        public decimal PRECIO { get; set; }
+        public string DESCRIPCION { get; set; }
+        public string IMG_HABITACION_BASE_64{ get; set; }
+        public int TAMAÑO { get; set; }
     }
 }

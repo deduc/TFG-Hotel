@@ -14,19 +14,19 @@ const routes: Routes = [
         path: '', component: HabitacionesComponent
     },
     {
-        path: 'habitacion-individual', component: HabitacionIndividualComponent
+        path: 'habitaciones/habitacion-individual', component: HabitacionIndividualComponent
     },
     {
-        path: 'habitacion-ejecutiva', component: HabitacionEjecutivosComponent
+        path: 'habitaciones/habitacion-ejecutiva', component: HabitacionEjecutivosComponent
     },
     {
-        path: 'habitacion-para-parejas', component: HabitacionParejasComponent
+        path: 'habitaciones/habitacion-para-parejas', component: HabitacionParejasComponent
     },
     {
-        path: 'habitacion-para-parejas-en-azotea', component: HabitacionParejasAzoteaComponent
+        path: 'habitaciones/habitacion-para-parejas-en-azotea', component: HabitacionParejasAzoteaComponent
     },
     {
-        path: 'habitacion-de-lujo', component: HabitacionLujoComponent
+        path: 'habitaciones/habitacion-de-lujo', component: HabitacionLujoComponent
     },
     {
         path: '**', redirectTo: 'home'

@@ -6,6 +6,6 @@ namespace TFGHotel.Services.HabitacionesDisponibles
 {
     public interface IHabitacionesDisponiblesService
     {
-        List<DatosYCantidadDeHabitaciones> GetHabitacionesDisponiblesEntreFechas(FechaInicioFinDTO objFechasDto);
+        List<DatosYCantidadDeHabitacionesDisponiblesEntreFechasDTO> GetHabitacionesDisponiblesEntreFechas(FechaInicioFinDTO objFechasDto);
     }
 }
