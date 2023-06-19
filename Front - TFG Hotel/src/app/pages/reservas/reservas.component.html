@@ -1,6 +1,6 @@
 <section class="mt-5">
     <pages-reservas-caja-reservar-mediante-fechas 
-        (fechas)="buscarHabitaciones($event)">
+        (fechas)="buscarHabitacionesEntreFechas($event)">
     </pages-reservas-caja-reservar-mediante-fechas>
 </section>
 
@@ -16,19 +16,23 @@
 
 
 <main class="py-5 bg-light d-flex justify-content-center">
-    <div class="row container-fluid" *ngIf="listaTiposDeHabitaciones.length != 0">
+    <div class="row container-fluid" *ngIf="listaTiposDeHabitaciones">
     
         <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let item of listaTiposDeHabitaciones">
 
             <!-- * este codigo es para una sola tarjeta -->
             <div class="card p-2 my-3">
-                <img class="card-imagen" [src]="item.imgHabitacionBase64" [id]="item.imgID" alt="IMAGEN CARD">
+                <img class="card-imagen" [src]="item.img_habitacion_base_64" [id]="item.categoria" alt="IMAGEN CARD">
                 
                 <h1 class="card-title mt-2 text-center">{{ item.categoria }}</h1>
                 
                 <div class="card-body">
                     <p class="card-text">{{ item.descripcion }}</p>
                 </div>
+
+                <!-- <div class="card-body" *ngIf="item.habitaciones_disponibles">
+                    <p class="card-text">Quedan {{ item.habitaciones_disponibles }} habitaciones disponibles.</p>
+                </div> -->
 
                 <a  type="button" class="btn btn-light" [routerLink]="item.enlace_url">
                     Ver

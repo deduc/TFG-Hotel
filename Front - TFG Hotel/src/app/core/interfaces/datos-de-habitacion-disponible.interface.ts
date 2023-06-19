@@ -5,5 +5,6 @@ export interface DATOS_DE_HABITACIONES_DISPONIBLES{
     precio: number,
     descripcion: string,
     img_habitacion_base_64: string,
-    tamaño: number
+    tamaño: number,
+    enlace_url?: string,
 }

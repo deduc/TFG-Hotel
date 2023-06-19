@@ -1,9 +1,9 @@
-﻿namespace TFGHotel.DTO
+﻿namespace TFGHotel.ClasesAuxiliares
 {
-    public class TipoDeHabitacionDTO
+    public class DatosYCantidadDeHabitaciones
     {
         public int ID_TIPO_DE_HABITACION { get; set; }
-        public int? CANTIDAD_DISPONIBLE { get; set; }
+        public int ? CANTIDAD_DISPONIBLE { get; set; }
         public string CATEGORIA { get; set; }
         public decimal PRECIO { get; set; }
         public string DESCRIPCION { get; set; }

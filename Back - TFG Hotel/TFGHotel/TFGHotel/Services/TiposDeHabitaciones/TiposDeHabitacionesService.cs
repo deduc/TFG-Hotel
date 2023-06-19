@@ -20,12 +20,12 @@ namespace TFGHotel.Services.Habitaciones
             List<TipoDeHabitacionDTO> returnValue = tiposDeHabitacionesList
                 .Select(s => new TipoDeHabitacionDTO
                 {
-                    Categoria= s.categoria,
-                    Descripcion = s.descripcion,
-                    imgHabitacionBase64 = s.img_habitacion_base_64,
-                    Tamaño = s.tamaño,
-                    Precio = s.precio,
-                    enlace_url = s.Enlace_Url
+                    CATEGORIA= s.categoria,
+                    DESCRIPCION = s.descripcion,
+                    IMG_HABITACION_BASE_64 = s.img_habitacion_base_64,
+                    TAMAÑO = s.tamaño,
+                    PRECIO = s.precio,
+                    ENLACE_URL = s.Enlace_Url
                 })
                 .ToList();
 

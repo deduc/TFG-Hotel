@@ -18,10 +18,16 @@ namespace TFGHotel.Controllers
 
         [HttpPost]
         [Route("obtener-id-tipo-habitacion-y-cantidad")]
-        public List<HabitacionesIdYCantidadDisponible> GetHabitacionesDisponiblesEntreFechas(FechaInicioFinDTO objFechasDto)
+        public List<DatosYCantidadDeHabitaciones> GetHabitacionesDisponiblesEntreFechas(FechaInicioFinDTO objFechasDto)
         {
-
-            return this._habitacionesDisponiblesService.GetHabitacionesDisponiblesEntreFechas(objFechasDto);
+            if(objFechasDto.FechaInicio <= objFechasDto.FechaFin)
+            {
+                return this._habitacionesDisponiblesService.GetHabitacionesDisponiblesEntreFechas(objFechasDto);
+            }
+            else
+            {
+                throw new Exception("ERROR: FechaInicio no puede ser mayor a FechaFin");
+            }
         }
 
 

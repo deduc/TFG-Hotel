@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { API_LINK, API_LINK_HABITACIONES_DISPONIBLES, API_POST_OBTENER_ID_TIPO_HABITACION_Y_CANTIDAD } from 'src/app/core/constantes';
 import { HabitacionesIdYCantidadDisponible } from '../../core/interfaces/habitaciones-id-y-cantidad-disponible';
+import { DATOS_DE_HABITACIONES_DISPONIBLES } from 'src/app/core/interfaces/datos-de-habitacion-disponible.interface';
 
 
 
@@ -18,7 +19,7 @@ export class ReservasComponent {
     /** Objeto que almacena las fecha de inicio y fin del formulario */
     public objFechas: FechaInicioFinInterface;
     /** Lista de las habitaciones disponibles. Es variable. */
-    public listaTiposDeHabitaciones: CardHabitacionInterface[] | any;
+    public listaTiposDeHabitaciones: DATOS_DE_HABITACIONES_DISPONIBLES[];
 
 
     public constructor
@@ -36,9 +37,6 @@ export class ReservasComponent {
         
         this.suscribirObjFechas();
         this.obtenerListaHabitaciones();
-        
-        console.log(this.listaTiposDeHabitaciones);
-        // this.listaHabitacionesDisponibles = null;
     }
 
     /**
@@ -55,35 +53,39 @@ export class ReservasComponent {
      * el valor de objFechas que emita ReservasService se asignará en
      * this.objFechas
      */
-    private obtenerListaHabitaciones(){
-        this._reservasService.listaTiposDeHabitaciones
-        .subscribe(lista => this.listaTiposDeHabitaciones = lista);
-
+    private obtenerListaHabitaciones(): void {
         const apiUrl: string = "https://localhost:7149/api/tipos-de-habitaciones/listar-tipos-de-habitaciones";
+        const body = "";
+        
         this.httpClient
-        .get(apiUrl)
+        .get<DATOS_DE_HABITACIONES_DISPONIBLES[]>(apiUrl)
         .subscribe(
-            (resp) => {
+            async resp => {
                 console.log(resp);
-                this.listaTiposDeHabitaciones = resp;
+                this.listaTiposDeHabitaciones = await resp;
             }
         );
     }
+    
+      
 
-    public buscarHabitaciones(fechas: FechaInicioFinInterface){
+    public buscarHabitacionesEntreFechas(fechas: FechaInicioFinInterface): void{
         console.log("Objeto fechas emitido y recibido en reservas.component.ts", fechas, "procedo a traer datos de la API.");
         
         const url: string = `${API_LINK}/${API_LINK_HABITACIONES_DISPONIBLES}/${API_POST_OBTENER_ID_TIPO_HABITACION_Y_CANTIDAD}`;
         const body: FechaInicioFinInterface = this.objFechas;
 
         this.httpClient
-        .post<HabitacionesIdYCantidadDisponible>(url, body)
+        .get<DATOS_DE_HABITACIONES_DISPONIBLES[]>(url)
         .subscribe(
             resp => {
                 alert("MIRA LA CONSOLA");
                 console.log("EL ENDPOINT 'https://localhost:7149/api/habitaciones-disponibles/obtener-id-tipo-habitacion-y-cantidad' FUNCIONA, TRAE TIPO DE HABITACION Y CANTIDAD DE HABITACIONES DISPONIBLES");
                 
                 console.log(resp);
+
+                this.listaTiposDeHabitaciones = [];
+                this.listaTiposDeHabitaciones = resp;
             }
         );
         

@@ -70,7 +70,7 @@ export class CajaReservarMedianteFechasComponent {
         // fin metodo
     }
 
-    public emitirObjFechas ( fechas: FechaInicioFinInterface){
+    public emitirObjFechas (fechas: FechaInicioFinInterface){
         this.fechas.emit(fechas);
     }
 
