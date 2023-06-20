@@ -1,0 +1,62 @@
+<div class="container py-5">
+    <div class="contenedor-perfil row pb-5">
+        <div class="row">
+            <div class="col-lg-4 d-flex justify-content-center align-items-center">
+                <!-- <img class="img-perfil" src="/src/assets/images/pages-actividades/actividades-1.jpg" alt="IMAGEN DE PERFIL"> -->
+                <img class="img-perfil" src="https://picsum.photos/id/1025/600/400" alt="img perfil">
+            </div>
+            <div class="col-lg-8">
+                <div class="row">
+                    <h1 class="bg-light">
+                        {{ datosUsuario.USERNAME }}
+                    </h1>
+                </div>
+                
+                <div class="row">
+                    <ul class="list-group col-lg-12 bg-light p-2 contenedor-datos-usuario">
+                        <div class="col-lg-4">
+                            <li class="list-group-item">
+                                Correo electrónico
+                            </li>
+                            <li class="list-group-item">
+                                DNI
+                            </li>
+
+                            <li class="list-group-item">
+                                Nombre
+                            </li>
+                            <li class="list-group-item">
+                                Apellidos
+
+                        </div>
+                        <div class="col-lg-8">
+                            <li class="list-group-item">
+                                {{ datosUsuario.EMAIL }}
+                            </li>
+                            <li class="list-group-item">
+                                {{ datosUsuario.DNI }}
+                            </li>
+
+                            <li class="list-group-item">
+                                {{ datosUsuario.NOMBRE }}
+                            </li>
+                            <li class="list-group-item">
+                                {{ datosUsuario.APELLIDOS }}
+                            </li>
+                        </div>
+                    </ul>
+                </div>
+
+                <div class="row py-5 contenedor-botones">
+                    <div class="btn btn-outline-primary col-lg-5">Cambiar contraseña</div>
+                    <div class="btn btn-outline-primary col-lg-5">Cambiar dirección de correo electrónico</div>
+                    <div class="btn btn-outline-primary col-lg-5">Modificar contraseña</div>
+                    <div class="btn btn-outline-primary col-lg-5">Modificar contraseña</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="contenedor-reservas-habitaciones row">1</div>
+    <div class="contenedor-reservas-servicios row">1</div>
+</div>

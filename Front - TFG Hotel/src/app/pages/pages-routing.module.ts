@@ -1,15 +1,15 @@
-import { NgModule, Component } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+
+import { AuthGuard } from '../core/guards/auth.guard';
 // mis componentes
 import { PagesComponent } from './pages.component';
 import { HomeComponent } from './home/home.component';
 import { ReservasComponent } from './reservas/reservas.component';
-import { HabitacionesComponent } from './habitaciones/habitaciones.component';
 import { ActividadesComponent } from './actividades/actividades.component';
-import { AuthGuard } from '../core/guards/auth.guard';
 import { NuestroForoComponent } from './TODO-nuestro-foro/nuestro-foro.component';
-import { UserPanelComponent } from './user-panel/user-panel.component';
+import { UserPageComponent } from './user-page/user-page.component';
 
 
 //  localhost:4200/heroes/''
@@ -49,7 +49,7 @@ const routes: Routes = [
                 canMatch: [AuthGuard]
             },
             {
-                path: 'mi-perfil', component: UserPanelComponent,
+                path: 'mi-perfil', component: UserPageComponent,
                 canActivate: [AuthGuard],
                 canMatch: [AuthGuard]
             },

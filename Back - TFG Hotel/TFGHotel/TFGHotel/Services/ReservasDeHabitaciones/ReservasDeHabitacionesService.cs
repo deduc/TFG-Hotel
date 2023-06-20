@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using TFGHotel.Context;
 using TFGHotel.DTO;
 using TFGHotel.Entities;
-
+using TFGHotel.Services.Clientes;
 
 namespace TFGHotel.Services.Reservas
 {
@@ -12,7 +12,10 @@ namespace TFGHotel.Services.Reservas
         public FCT10Context _context { get; set; }
         
         // constructor
-        public ReservasDeHabitacionesService(FCT10Context context)
+        public ReservasDeHabitacionesService
+            (
+                FCT10Context context
+            )
         {
             _context = context;
         }
@@ -58,8 +61,8 @@ namespace TFGHotel.Services.Reservas
         public void AddNewReserva(ReservasDeHabitacionesDTO reservaDTO)
         {
             RESERVAS_DE_HABITACIONES reserva = this.CreateRESERVAObjectByDTO(reservaDTO);
-
             _context.Reservas_De_Habitaciones.Add(reserva);
+
             _context.SaveChanges();
         }
 
@@ -163,5 +166,57 @@ namespace TFGHotel.Services.Reservas
         }
 
 
+        public bool DoCheckIfReservaDeHabitacionWasAdded(ReservasDeHabitacionesDTO reserva)
+        {
+            RESERVAS_DE_HABITACIONES objReserva = _context.Reservas_De_Habitaciones
+                .Where(x => x.ID_CLIENTE == reserva.Id_Cliente && x.ID_HABITACION == reserva.Id_Habitacion && x.FECHA_INICIO == reserva.Fecha_Inicio && x.FECHA_FIN == reserva.Fecha_Fin)
+                .FirstOrDefault();
+
+            if(objReserva != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public HABITACIONES GetHabitacionDataByIdTipoHabitacion(int idTipoHabitacion)
+        {
+            return _context.Habitaciones
+                .Where(x => x.ID_HABITACION == idTipoHabitacion)
+                .FirstOrDefault();
+        }
+
+        public bool ModificarCampoDisponible(HABITACIONES habitacion, int valorCampoDisponible)
+        {
+            habitacion.DISPONIBLE = 0;
+            _context.SaveChanges();
+
+            return false;
+        }
+
+        public ReservasDeHabitacionesDTO DoBuildReservasDeHabitacionesDTOByDatosCliente
+        (
+            CLIENTES datosCliente, 
+            HABITACIONES datosHabitacion, 
+            FechaInicioFinDTO objFechas
+        )
+        {
+            return new ReservasDeHabitacionesDTO
+            {
+                Id_Cliente = datosCliente.ID_CLIENTE,
+                Id_Habitacion = datosHabitacion.ID_HABITACION,
+                Fecha_Inicio = objFechas.FechaInicio,
+                Fecha_Fin = objFechas.FechaFin,
+            };
+
+        }
+
+
+
+
+        // fin clase
     }
 }

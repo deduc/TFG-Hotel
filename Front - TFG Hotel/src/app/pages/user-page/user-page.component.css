@@ -1,0 +1,21 @@
+.img-perfil{
+    width: 20rem;
+    height: 20rem;
+    
+    background-color: lightgray;
+    border-radius: 100%;
+}
+
+.contenedor-datos-usuario{
+    display: flex;
+    flex-direction: row;
+}
+
+.contenedor-botones{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+    gap: 3rem;
+}

@@ -17,7 +17,6 @@ import { HabitacionesComponent } from './habitaciones/habitaciones.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { UserRegisterComponent } from './user-register/user-register.component';
 import { BackendService } from '../backend/backend.service';
-import { UserPanelModule } from './user-panel/user-panel.module';
 
 
 
@@ -38,7 +37,6 @@ import { UserPanelModule } from './user-panel/user-panel.module';
         PagesRoutingModule,
         SharedModule,
         ReservasModule,
-        UserPanelModule,
     ],
     exports: [
         // componentes globales para la app

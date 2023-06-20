@@ -82,7 +82,7 @@ namespace TFGHotel.Controllers
         }
 
         [HttpPost]
-        [Route("obtener-datos-de-usuario")]
+        [Route("obtener-datos-de-usuario-by-username")]
         public UsuariosDTO GetUserData(UserEmailObjectDTO userEmail)
         {
             return _usuariosService.GetUserData(userEmail);

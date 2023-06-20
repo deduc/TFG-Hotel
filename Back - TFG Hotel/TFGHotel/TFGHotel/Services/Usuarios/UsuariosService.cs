@@ -174,6 +174,24 @@ namespace TFGHotel.Services.Usuarios
             
         }
 
+        public USUARIOS GetUserDataByUsername(string username)
+        {
+            Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAaaaaa\n\n\n" + "AAAAAAAAAAAAAAAAAAAAAAaaaaa\n\n\n");
+            USUARIOS usuario = _context.Usuarios
+                .FirstOrDefault(u => u.USERNAME == username);
+
+            Console.WriteLine(usuario.USERNAME);
+
+            if (usuario != null)
+            {
+                return usuario;
+            }
+            else
+            {
+                throw new Exception("ERROR: Usuario " + username + " no encontrado.");
+            }
+        }
+
         // fin clase
     }
 

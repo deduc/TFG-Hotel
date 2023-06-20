@@ -1,30 +1,18 @@
 import { Component, OnInit } from "@angular/core";
 
-@Component({
-    selector: 'app-user-panel',
-    templateUrl: 'user-panel.component.html',
-})
-export class UserPanelComponent implements OnInit {
-    constructor() { }
-
-    ngOnInit() { }
-}
-
-/*
-import { Component, OnInit } from '@angular/core';
 import { UserLoggedInterface } from 'src/app/core/interfaces/user-logged.interface';
-import { BackendService } from '../../../../backend/backend.service';
 import { HttpClient } from '@angular/common/http';
 import { UsuariosDTO } from 'src/app/core/interfaces/UsuariosDTO.interface';
 import { UserEmailObjectDTO } from 'src/app/core/interfaces/UserEmailObjectDTO.interface';
+import { BackendService } from "src/app/backend/backend.service";
+
 
 @Component({
-    selector: 'user-profile',
-    templateUrl: 'user-profile.component.html',
-    styleUrls: ['user-profile.component.css']
+  selector: 'app-user-page',
+  templateUrl: './user-page.component.html',
+  styleUrls: ['./user-page.component.css']
 })
-
-export class UserProfileComponent implements OnInit {
+export class UserPageComponent {
     public userLogged: UserLoggedInterface;
     public datosUsuario: UsuariosDTO;
     
@@ -46,6 +34,8 @@ export class UserProfileComponent implements OnInit {
 
     ngOnInit() { 
         this.obtenerDatosUsuario();
+        this.obtenerReservasDeHabitaciones();
+        this.obtenerReservasDeServicios();
     }
 
     private obtenerDatosUsuario(){
@@ -61,5 +51,26 @@ export class UserProfileComponent implements OnInit {
             }
         )
     }
+
+    public obtenerReservasDeHabitaciones(){
+        // TODO: HACER ESTO UNA VEZ EL USUARIO PUEDA HACER RESERVAS
+        // const apiUrl: string = "";
+        // const body: { USERNAME: string = this.datosUsuario.USERNAME}
+        
+        // this.httpClient
+        // .get<>(apiUrl)
+        // .subscribe();
+    }
+
+    public obtenerReservasDeServicios(){
+        // TODO: HACER ESTO UNA VEZ EL USUARIO PUEDA HACER RESERVAS
+        // const apiUrl: string = "";
+        // const body: { USERNAME: string = this.datosUsuario.USERNAME}
+        
+        // this.httpClient
+        // .get<>(apiUrl)
+        // .subscribe();
+    }
+
+
 }
-*/
