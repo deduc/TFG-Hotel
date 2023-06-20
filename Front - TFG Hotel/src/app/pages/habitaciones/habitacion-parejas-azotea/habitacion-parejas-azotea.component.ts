@@ -17,7 +17,7 @@ export class HabitacionParejasAzoteaComponent implements OnInit {
         precio: 0,
         tamano: 0
     };
-    private idHabitacion = 3;
+    private idHabitacion = 4;
 
     private urlApi: string = "https://localhost:7149/api/tipos-de-habitaciones/listar-habitacion-por-id";
     private body = {IdHabitacion: this.idHabitacion};

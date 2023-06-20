@@ -11,7 +11,6 @@ import { ReservasService } from './reservas.service';
 // mis modulos
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule } from '@angular/forms';
-import { ReservasRoutingModule } from './reservas-routing.module';
 
 
 @NgModule({
@@ -23,7 +22,6 @@ import { ReservasRoutingModule } from './reservas-routing.module';
         CommonModule,
         FormsModule,
         SharedModule,
-        ReservasRoutingModule,
     ],
     exports: [],
     providers: [

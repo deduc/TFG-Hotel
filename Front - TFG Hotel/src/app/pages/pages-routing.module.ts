@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 // mis componentes
@@ -9,6 +9,7 @@ import { HabitacionesComponent } from './habitaciones/habitaciones.component';
 import { ActividadesComponent } from './actividades/actividades.component';
 import { AuthGuard } from '../core/guards/auth.guard';
 import { NuestroForoComponent } from './TODO-nuestro-foro/nuestro-foro.component';
+import { UserPanelComponent } from './user-panel/user-panel.component';
 
 
 //  localhost:4200/heroes/''
@@ -44,6 +45,11 @@ const routes: Routes = [
             },
             {
                 path: 'foro', component: NuestroForoComponent,
+                canActivate: [AuthGuard],
+                canMatch: [AuthGuard]
+            },
+            {
+                path: 'mi-perfil', component: UserPanelComponent,
                 canActivate: [AuthGuard],
                 canMatch: [AuthGuard]
             },

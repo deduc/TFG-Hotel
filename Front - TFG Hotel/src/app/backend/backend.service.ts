@@ -14,6 +14,7 @@ import { CardHabitacionInterface } from '../core/interfaces/card-habitacion.inte
 import { FechaInicioFinInterface } from '../core/interfaces/fecha-inicio-fin.interface';
 import { UserLoggedInterface } from '../core/interfaces/user-logged.interface';
 import { DatosDeHabitacionesDisponibles } from '../core/interfaces/datos-de-habitacion-disponible.interface';
+import { Router } from '@angular/router';
 
 
 @Injectable({ providedIn: 'root' })
@@ -21,7 +22,8 @@ export class BackendService {
 
     constructor
     (
-        private httpClient: HttpClient
+        private httpClient: HttpClient,
+        private router: Router,
     ) { }
 
     /**
@@ -107,32 +109,6 @@ export class BackendService {
 
     }
 
-    public async loginUsuariooo(datosLoginUsuario: UserLoggedInterface): Promise<any> {
-        let url: string = `${API_LINK}/${API_LINK_USUARIOS}/${API_LOGIN_USUARIOS}`;
-
-        /**
-         * ! { observe: 'response' } es para obtener una respuesta completa de la peticion http. 
-         * ! Lo uso para conseguir el status code de la peticion http y verificar si los datos son correctos
-         */
-        this.httpClient
-        .post(url, datosLoginUsuario)
-        .subscribe(
-            async (response: HttpResponse<any>) => {
-                if (response.status >= 200 && response.status < 400) {
-                    console.log("BackendService", response);
-
-                    return await response.body;
-
-                } else {
-                    console.log("MAL");
-                    console.error('uno' + response);
-                    return false;
-                }
-            }
-        );
-        return false;
-    }
-
     public loginTest(userLoggedObject: UserLoggedInterface): Observable<any>{
         const url = `${API_LINK}/${API_LINK_USUARIOS}/${API_LOGIN_USUARIOS}`
 
@@ -166,6 +142,9 @@ export class BackendService {
              * retornando así un Observable<boolean>
              */
             let observableBooleanValue: Observable<boolean> = this.httpClient.post<boolean>(url, userLoggedObject);
+            
+            console.log("Usuario loggeado");
+            
             return observableBooleanValue;
         }
         else{
@@ -176,18 +155,37 @@ export class BackendService {
         // fin metodo
     }
 
-    private comprobarLoginCorrecto(userLoggedObject): boolean{
+    public comprobarSiLoginCorrecto(objUser: UserLoggedInterface): boolean{
         const url = `${API_LINK}/${API_LINK_USUARIOS}/${API_COMPROBAR_SI_LOGIN_CORRECTO}`
 
         const body = {
-            Email: userLoggedObject.Email,
-            Password: userLoggedObject.Password
+            Email: objUser.Email,
+            Password: objUser.Password
         }
 
-        // let a:any = this.httpClient.post<boolean>(url, body);
-        // console.log("------------------");
-        // console.log(a);
-        // console.log("------------------");
+        this.httpClient
+        .post<boolean>(url, body)
+        .subscribe(
+            (res => {
+                if(res){
+                    console.log("Login correcto.");
+                    
+                    return true;
+                }
+                else{
+                    console.log("Login incorrecto.");
+
+                    sessionStorage.removeItem("user_logged");
+                    
+                    this.router.navigate(['./home'])
+                    
+                    return false;
+                }
+                
+            })
+        );
+
+        sessionStorage.removeItem("user_logged");
         
         return false;
     }

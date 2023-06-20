@@ -81,5 +81,14 @@ namespace TFGHotel.Controllers
             return _usuariosService.ComprobarSiLoginCorrecto(datosLogin);
         }
 
+        [HttpPost]
+        [Route("obtener-datos-de-usuario")]
+        public UsuariosDTO GetUserData(UserEmailObjectDTO userEmail)
+        {
+            return _usuariosService.GetUserData(userEmail);
+        }
+
+
+        // fin clase
     }
 }

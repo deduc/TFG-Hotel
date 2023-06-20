@@ -11,5 +11,8 @@ namespace TFGHotel.Services.Usuarios
         UsuarioLoginDTO LoginUsuario(UsuarioLoginDTO usuario);
 
         Boolean ComprobarSiLoginCorrecto(UsuarioLoginDTO datosLogin);
+
+
+        UsuariosDTO GetUserData(UserEmailObjectDTO userEmailObj);
     }
 }

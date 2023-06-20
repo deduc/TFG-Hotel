@@ -40,19 +40,21 @@ namespace TFGHotel.Services.Habitaciones
         public DatosHabitacionDisponibleDTO GetHabitacionById(int id)
         {
 
-            var datos = _context.Datos_De_Habitaciones_Disponibles.FirstOrDefault(s => s.ID_TIPO_DE_HABITACION == id);
+            List<DATOS_DE_HABITACIONES_DISPONIBLES> datos = _context.Datos_De_Habitaciones_Disponibles
+                .Where(s => s.ID_TIPO_DE_HABITACION == id)
+                .ToList();
             
-            if (datos != null) 
+            if (datos.Count == 1) 
             {
                 return new DatosHabitacionDisponibleDTO()
                 {
-                    idtipodehabitacion = datos.ID_TIPO_DE_HABITACION,
-                    habitacionesdisponibles = datos.HABITACIONES_DISPONIBLES,
-                    categoria= datos.CATEGORIA ,
-                    precio = datos.PRECIO ,
-                    descripcion = datos.DESCRIPCION ,
-                    imghabitacionbase64 = datos.IMG_HABITACION_BASE_64 ,
-                    tamano = datos.TAMAÑO
+                    idtipodehabitacion = datos[0].ID_TIPO_DE_HABITACION,
+                    habitacionesdisponibles = datos[0].HABITACIONES_DISPONIBLES,
+                    categoria= datos[0].CATEGORIA ,
+                    precio = datos[0].PRECIO ,
+                    descripcion = datos[0].DESCRIPCION ,
+                    imghabitacionbase64 = datos[0].IMG_HABITACION_BASE_64 ,
+                    tamano = datos[0].TAMAÑO
                 };
             }
             else

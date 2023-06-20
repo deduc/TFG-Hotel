@@ -29,15 +29,15 @@ namespace TFGHotel.Services.Usuarios
              */
             return usuarios.Select(resultadoSelect => new UsuariosDTO()
             {
-                Nombre = resultadoSelect.NOMBRE,
-                Apellidos = resultadoSelect.APELLIDOS,
-                Username = resultadoSelect.USERNAME
+                NOMBRE = resultadoSelect.NOMBRE,
+                APELLIDOS = resultadoSelect.APELLIDOS,
+                USERNAME = resultadoSelect.USERNAME
             }).ToList();
         }
 
         public List<string> AddNewUser(UsuariosDTO usuarioDTO)
         {
-            var errorsList = this.CheckIfUniqueValues(usuarioDTO.Username, usuarioDTO.Email, usuarioDTO.Dni);
+            var errorsList = this.CheckIfUniqueValues(usuarioDTO.USERNAME, usuarioDTO.EMAIL, usuarioDTO.DNI);
             int errorsNumber = errorsList.Count;
             
             if (errorsNumber == 0)
@@ -80,12 +80,12 @@ namespace TFGHotel.Services.Usuarios
             USUARIOS usuario = new()
             {
                 ID_USUARIO = 0,
-                USERNAME = usuarioDTO.Username,
-                EMAIL = usuarioDTO.Email,
-                DNI = usuarioDTO.Dni,
-                NOMBRE = usuarioDTO.Nombre,
-                APELLIDOS = usuarioDTO.Apellidos,
-                PASS = usuarioDTO.Password,
+                USERNAME = usuarioDTO.USERNAME,
+                EMAIL = usuarioDTO.EMAIL,
+                DNI = usuarioDTO.DNI,
+                NOMBRE = usuarioDTO.NOMBRE,
+                APELLIDOS = usuarioDTO.APELLIDOS,
+                PASS = usuarioDTO.PASSWORD,
                 FOTO_DE_PERFIL_BASE_64 = "NULL_VALUE",
                 ADMINISTRADOR = false,
                 USUARIO_ACTIVO = true,
@@ -150,6 +150,35 @@ namespace TFGHotel.Services.Usuarios
             }
 
             return false;
+        }
+
+        public UsuariosDTO GetUserData(UserEmailObjectDTO userEmailObj)
+        {
+            USUARIOS u = _context.Usuarios
+                .FirstOrDefault(x => x.EMAIL == userEmailObj.Email);
+
+            if(u != null)
+            {
+                var usuarioRetorno = new UsuariosDTO
+                {
+                    ID_USUARIO = u.ID_USUARIO,
+                    USERNAME = u.USERNAME,
+                    EMAIL = u.EMAIL,
+                    DNI = u.DNI,
+                    PASSWORD = u.PASS,
+                    NOMBRE = u.NOMBRE,
+                    APELLIDOS = u.APELLIDOS,
+                    FOTO_DE_PERFIL_BASE_64 = u.FOTO_DE_PERFIL_BASE_64
+                };
+                
+                return usuarioRetorno;
+            }
+            else
+            {
+                throw new Exception("ERROR: No existe un usuario con ese correo electrónico");
+            }
+
+            
         }
 
         // fin clase

@@ -53,11 +53,12 @@
                 </li>
             </ul>
 
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-lg-5"  *ngIf="isUserLogged; else userNotLogged">
-                <li class="px-lg-2">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-lg-5"  *ngIf="isUserLogged; else userNotLogged"
+                [routerLink]="['/mi-perfil']" routerLinkActive="router-link-active" >
+                <li class="px-lg-2 boton-username">
                     <div class="circle-border contenedor-icono-usuario button enlace-home col-md-12 col-sm-12
-                    d-sm-flex justify-content-sm-center
-                    d-md-flex justify-content-md-center">
+                        d-sm-flex justify-content-sm-center
+                        d-md-flex justify-content-md-center">
                         <mat-icon>person</mat-icon>
                     </div>
                 </li>

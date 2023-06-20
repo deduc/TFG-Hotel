@@ -57,4 +57,11 @@ export class NavbarComponent {
         window.location.reload();
         this.route.navigate(['./home']);
     }
+
+    public desplegarPanelUsuario(){
+        let botonPanelUsuario = document.getElementById("div_desplegable_panel_de_usuario");
+        console.log(1234);
+        
+        botonPanelUsuario.style.display = "none";
+    }
 }
