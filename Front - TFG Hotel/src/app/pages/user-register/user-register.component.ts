@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BackendService } from 'src/app/backend/backend.service';
 import { API_LINK, API_LINK_USUARIOS, API_POST_USUARIOS } from 'src/app/core/constantes';
+import { UserRegisterDTOInterface } from 'src/app/core/interfaces/UserRegisterDTO.interface';
 import { UserRegisterFormInterface } from 'src/app/core/interfaces/user-register-form.interface';
 
 
@@ -12,16 +13,16 @@ import { UserRegisterFormInterface } from 'src/app/core/interfaces/user-register
   styleUrls: ['./user-register.component.css']
 })
 export class UserRegisterComponent implements OnInit{
-    public datosRegistroUsuario: UserRegisterFormInterface =
-    {
-        nombre: "",
-        apellidos: "",
-        username: "",
-        dni: "",
-        email: "",
-        password: "",
-        repeatedPassword: ""
+    public datosRegistroUsuario: UserRegisterFormInterface = {
+        nombre: "ivan",
+        apellidos: "gomez",
+        username: "deduc",
+        dni: "12312312A",
+        email: "deduc@deduc.es",
+        password: "deduc@deduc.esdeduc@deduc.es",
+        repeatedPassword: "deduc@deduc.esdeduc@deduc.es"
     }
+;
     public listaErrores: string[] = [];
     public formularioRegistroCompletado: boolean = false;
 
@@ -30,29 +31,7 @@ export class UserRegisterComponent implements OnInit{
         private httpClient: HttpClient,
         private router: Router,
 
-    ){
-        this.datosRegistroUsuario =
-        {
-            nombre: "",
-            apellidos: "",
-            username: "",
-            dni: "",
-            email: "",
-            password: "",
-            repeatedPassword: ""
-        }
-
-        this.datosRegistroUsuario =
-        {
-            nombre: "ivan",
-            apellidos: "gomez",
-            username: "deduc",
-            dni: "12312312A",
-            email: "deduc@deduc.es",
-            password: "deduc@deduc.esdeduc@deduc.es",
-            repeatedPassword: "deduc@deduc.esdeduc@deduc.es"
-        }
-    }
+    ){}
 
     ngOnInit(): void {
         if (sessionStorage.getItem('user_logged')) {
@@ -75,7 +54,10 @@ export class UserRegisterComponent implements OnInit{
 
     private registrarUsuario(): void{
         let url: string = `${API_LINK}/${API_LINK_USUARIOS}/${API_POST_USUARIOS}`;
-        let user = this.datosRegistroUsuario;
+        
+        let user: UserRegisterDTOInterface = this.crearUsuarioRegisterDTO();
+        
+        console.log(user);
 
         this.httpClient
         .post(url, user)
@@ -99,6 +81,19 @@ export class UserRegisterComponent implements OnInit{
 
 
         // fin metodo
+    }
+
+    private crearUsuarioRegisterDTO(){
+        return {
+            ID_USUARIO: 0,
+            USERNAME: this.datosRegistroUsuario.username,
+            EMAIL: this.datosRegistroUsuario.email,
+            DNI: this.datosRegistroUsuario.dni,
+            PASSWORD: this.datosRegistroUsuario.password,
+            NOMBRE: this.datosRegistroUsuario.nombre,
+            APELLIDOS: this.datosRegistroUsuario.apellidos,
+            FOTO_DE_PERFIL_BASE_64: ""
+        }
     }
 
     private bloqueComprobaciones(): boolean {

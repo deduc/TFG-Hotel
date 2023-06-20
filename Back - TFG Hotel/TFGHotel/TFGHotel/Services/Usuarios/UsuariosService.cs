@@ -42,7 +42,19 @@ namespace TFGHotel.Services.Usuarios
             
             if (errorsNumber == 0)
             {
-                USUARIOS usuario = this.CreateUSUARIOObject(usuarioDTO);
+                USUARIOS usuario = new()
+                {
+                    ID_USUARIO = 0,
+                    USERNAME = usuarioDTO.USERNAME,
+                    EMAIL = usuarioDTO.EMAIL,
+                    DNI = usuarioDTO.DNI,
+                    NOMBRE = usuarioDTO.NOMBRE,
+                    APELLIDOS = usuarioDTO.APELLIDOS,
+                    PASS = usuarioDTO.PASSWORD,
+                    FOTO_DE_PERFIL_BASE_64 = "NULL_VALUE",
+                    ADMINISTRADOR = false,
+                    USUARIO_ACTIVO = true,
+                };
 
                 _context.Usuarios.Add(usuario);
                 _context.SaveChanges();
@@ -73,25 +85,6 @@ namespace TFGHotel.Services.Usuarios
             };
 
             return errorList;
-        }
-
-        public USUARIOS CreateUSUARIOObject(UsuariosDTO usuarioDTO)
-        {
-            USUARIOS usuario = new()
-            {
-                ID_USUARIO = 0,
-                USERNAME = usuarioDTO.USERNAME,
-                EMAIL = usuarioDTO.EMAIL,
-                DNI = usuarioDTO.DNI,
-                NOMBRE = usuarioDTO.NOMBRE,
-                APELLIDOS = usuarioDTO.APELLIDOS,
-                PASS = usuarioDTO.PASSWORD,
-                FOTO_DE_PERFIL_BASE_64 = "NULL_VALUE",
-                ADMINISTRADOR = false,
-                USUARIO_ACTIVO = true,
-            };
-
-            return usuario;
         }
 
         // -- DELETE --
