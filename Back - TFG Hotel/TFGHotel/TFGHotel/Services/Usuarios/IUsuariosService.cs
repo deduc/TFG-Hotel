@@ -12,7 +12,7 @@ namespace TFGHotel.Services.Usuarios
 
         Boolean ComprobarSiLoginCorrecto(UsuarioLoginDTO datosLogin);
 
-        UsuariosDTO GetUserData(UserEmailObjectDTO userEmailObj);
+        UsuariosDTO GetUserDataWithEmail(string userEmail);
 
         USUARIOS GetUserDataByUsername(string username);
     }

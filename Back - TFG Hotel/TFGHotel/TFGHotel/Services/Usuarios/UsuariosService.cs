@@ -145,10 +145,10 @@ namespace TFGHotel.Services.Usuarios
             return false;
         }
 
-        public UsuariosDTO GetUserData(UserEmailObjectDTO userEmailObj)
+        public UsuariosDTO GetUserDataWithEmail(string userEmail)
         {
             USUARIOS u = _context.Usuarios
-                .FirstOrDefault(x => x.EMAIL == userEmailObj.Email);
+                .FirstOrDefault(x => x.EMAIL == userEmail);
 
             if(u != null)
             {
