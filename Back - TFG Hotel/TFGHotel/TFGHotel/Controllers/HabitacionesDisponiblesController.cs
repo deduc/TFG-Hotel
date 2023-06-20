@@ -31,6 +31,23 @@ namespace TFGHotel.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("obtener-datos-de-habitacion-disponible-entre-fechas")]
+        public DatosYCantidadDeHabitacionesDisponiblesEntreFechasDTO GetDatosDeHabitacionDisponibleEntreFechas(MezclaDeObjetoFechasYObjetoIdTipoHabitacion objFechasIdHabitacion)
+        {
+            FechaInicioFinDTO objFechas = objFechasIdHabitacion.objFechasDto;
+            int idTipoHabitacion = objFechasIdHabitacion.idTipoHabitacion.IdHabitacion;
+            
+            Console.WriteLine("Recibido el objeto");
+            Console.WriteLine(objFechasIdHabitacion.objFechasDto.FechaInicio);
+            Console.WriteLine(objFechasIdHabitacion.objFechasDto.FechaFin);
+            Console.WriteLine(objFechasIdHabitacion.idTipoHabitacion.IdHabitacion);
+            
+            List <DatosYCantidadDeHabitacionesDisponiblesEntreFechasDTO> listaHabitacionesDisponibles = this._habitacionesDisponiblesService.GetHabitacionesDisponiblesEntreFechas(objFechas);
+
+            return this._habitacionesDisponiblesService.FiltrarHabitacionPorTipoDeHabitacion(listaHabitacionesDisponibles, idTipoHabitacion);
+        }
+
 
         // fin clase
     }

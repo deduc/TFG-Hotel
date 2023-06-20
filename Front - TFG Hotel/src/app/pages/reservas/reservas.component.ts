@@ -17,6 +17,11 @@ export class ReservasComponent {
     /** Lista de las habitaciones disponibles. Es variable. */
     public listaTiposDeHabitaciones: DatosDeHabitacionesDisponibles[] = [];
 
+    /** Atributo que sirve para evaluar si el usuario ha buscado en algun momento habitaciones */
+    public fechasBuscadas: boolean = false;
+    /** Atributo que sirve para evaluar si el usuario ha encontrado habitaciones disponibles */
+    public fechasEncontradas: boolean = false;
+
 
     public constructor
     (
@@ -34,7 +39,7 @@ export class ReservasComponent {
         };
         
         this.suscribirObjFechas();
-        this.obtenerListaHabitaciones();
+        // this.obtenerListaHabitaciones();
     }
 
     /**
@@ -51,25 +56,38 @@ export class ReservasComponent {
      * el valor de objFechas que emita ReservasService se asignará en
      * this.objFechas
      */
-    private async obtenerListaHabitaciones(): Promise<void> {
-        const apiUrl: string = "https://localhost:7149/api/tipos-de-habitaciones/listar-tipos-de-habitaciones";
+    // private async obtenerListaHabitaciones(): Promise<void> {
+    //     const apiUrl: string = "https://localhost:7149/api/tipos-de-habitaciones/listar-tipos-de-habitaciones";
         
-        this.httpClient
-        .get<DatosDeHabitacionesDisponibles[]>(apiUrl)
-        .subscribe(
-            async resp => {
-                this.listaTiposDeHabitaciones = [];
-                this.listaTiposDeHabitaciones = await resp;
+    //     this.httpClient
+    //     .get<DatosDeHabitacionesDisponibles[]>(apiUrl)
+    //     .subscribe(
+    //         async resp => {
+    //             this.listaTiposDeHabitaciones = [];
+    //             this.listaTiposDeHabitaciones = await resp;
                 
-                await console.log("Lista de habitaciones:", this.listaTiposDeHabitaciones);
-            }
-        );
-    }
+    //             await console.log("Lista de habitaciones:", this.listaTiposDeHabitaciones);
+
+    //             this.fechasBuscadas = true;
+
+    //             if(this.listaTiposDeHabitaciones.length > 0){
+    //                 this.fechasEncontradas = true;
+    //             }
+    //         }
+    //     );
+    // }
     
       
 
     public buscarHabitacionesEntreFechas(fechas: FechaInicioFinInterface): void{
         console.log("Objeto fechas emitido y recibido en reservas.component.ts", fechas, "procedo a traer datos de la API.");
+        // this.formatearObjFechas();
+        
+        
+        sessionStorage.setItem(
+            "obj-fechas", 
+            JSON.stringify(this.objFechas)
+        );
         
         const url: string = "https://localhost:7149/api/habitaciones-disponibles/obtener-habitaciones-disponibles-entre-fechas";
         const body: FechaInicioFinInterface = this.objFechas;
@@ -87,5 +105,18 @@ export class ReservasComponent {
         
         // fin metodo
     }
+
+    private formatearObjFechas(){
+        this.objFechas.fechaInicio.setHours(0);
+        this.objFechas.fechaInicio.setMinutes(0);
+        this.objFechas.fechaInicio.setSeconds(0);
+        this.objFechas.fechaInicio.setMilliseconds(0);
+        
+        this.objFechas.fechaFin.setHours(0);
+        this.objFechas.fechaFin.setMinutes(0);
+        this.objFechas.fechaFin.setSeconds(0);
+        this.objFechas.fechaFin.setMilliseconds(0);
+    }
+
     // fin clase
 }

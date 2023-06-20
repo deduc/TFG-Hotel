@@ -37,26 +37,29 @@ namespace TFGHotel.Services.Habitaciones
             return this._context.Datos_De_Habitaciones_Disponibles.ToList();
         }
 
-        public DatosDeHabitacionesDisponiblesDTO GetHabitacionById(int id)
+        public DatosHabitacionDisponibleDTO GetHabitacionById(int id)
         {
+
             var datos = _context.Datos_De_Habitaciones_Disponibles.FirstOrDefault(s => s.ID_TIPO_DE_HABITACION == id);
             
-            if (datos != null) {
-                return new DatosDeHabitacionesDisponiblesDTO()
+            if (datos != null) 
+            {
+                return new DatosHabitacionDisponibleDTO()
                 {
-                    id_tipo_de_habitacion = datos.ID_TIPO_DE_HABITACION,
-                    habitaciones_disponibles = datos.HABITACIONES_DISPONIBLES,
-                    categoria = datos.CATEGORIA ,
+                    idtipodehabitacion = datos.ID_TIPO_DE_HABITACION,
+                    habitacionesdisponibles = datos.HABITACIONES_DISPONIBLES,
+                    categoria= datos.CATEGORIA ,
                     precio = datos.PRECIO ,
                     descripcion = datos.DESCRIPCION ,
-                    img_habitacion_base_64 = datos.IMG_HABITACION_BASE_64 ,
-                    tamaño = datos.TAMAÑO ,
+                    imghabitacionbase64 = datos.IMG_HABITACION_BASE_64 ,
+                    tamano = datos.TAMAÑO
                 };
             }
             else
             {
-                return new DatosDeHabitacionesDisponiblesDTO() { };
+                return new DatosHabitacionDisponibleDTO() { };
             }
+            // fin metodo
         }
 
         // fin clase

@@ -33,17 +33,6 @@ export class UserRegisterComponent implements OnInit{
     ){
         this.datosRegistroUsuario =
         {
-            nombre: "aaaa",
-            apellidos: "aaaa",
-            username: "aaaa",
-            dni: "11111111A",
-            email: "aaaa@aaaa.aaa",
-            password: "1234567812345678",
-            repeatedPassword: "1234567812345678"
-        }
-
-        this.datosRegistroUsuario =
-        {
             nombre: "",
             apellidos: "",
             username: "",
@@ -51,6 +40,17 @@ export class UserRegisterComponent implements OnInit{
             email: "",
             password: "",
             repeatedPassword: ""
+        }
+
+        this.datosRegistroUsuario =
+        {
+            nombre: "ivan",
+            apellidos: "gomez",
+            username: "deduc",
+            dni: "12312312A",
+            email: "deduc@deduc.es",
+            password: "deduc@deduc.esdeduc@deduc.es",
+            repeatedPassword: "deduc@deduc.esdeduc@deduc.es"
         }
     }
 
@@ -78,27 +78,24 @@ export class UserRegisterComponent implements OnInit{
         let user = this.datosRegistroUsuario;
 
         this.httpClient
-            .post(url, user)
-            .subscribe(
-                // * mi api, en este caso, devuelve un array de strings
-                (response: string[]) => {
-                    // Se consigue registrar un usuario 
-                    if (response.length == 0) {
-                        this.formularioRegistroCompletado = true;
-                        this.guardarEmailPasswordEnSessionStorage(user.email, user.password);
-                        this.vaciarFormularioRegistro();
-                        sessionStorage.removeItem("tmp");
-                    }
-                    // No se consigue registrar un usuario y muestro los errores
-                    else {
-                        this.mostrarErrores(response);
-                    }
-
-                    // fin subscribe
+        .post(url, user)
+        .subscribe(
+            // * mi api, en este caso, devuelve un array de strings
+            (response: string[]) => {
+                // Se consigue registrar un usuario 
+                if (response.length == 0) {
+                    this.completarRegistro(this.datosRegistroUsuario);
+                }
+                // No se consigue registrar un usuario y muestro los errores
+                else {
+                    this.mostrarErrores(response);
                 }
 
-                // fin llamada http
-            );
+                // fin subscribe
+            }
+
+            // fin llamada http
+        );
 
 
         // fin metodo
@@ -159,6 +156,13 @@ export class UserRegisterComponent implements OnInit{
         return valorRetorno;
 
         // fin metodo bloqueComprobaciones
+    }
+
+    public completarRegistro(user: UserRegisterFormInterface){
+        this.formularioRegistroCompletado = true;
+        this.guardarEmailPasswordEnSessionStorage(user.email, user.password);
+        this.vaciarFormularioRegistro();
+        sessionStorage.removeItem("tmp");
     }
 
     private mostrarErrores(listaErrores: string[]): void{

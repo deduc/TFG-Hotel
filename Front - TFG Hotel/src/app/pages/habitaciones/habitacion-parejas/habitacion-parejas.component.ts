@@ -1,35 +1,42 @@
+import { Component, OnInit } from '@angular/core';
+import { DatosDeHabitacionDisponibleDTO } from '../../../core/interfaces/DatosDeHabitacionesDisponiblesDTO.interface';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { BackendService } from 'src/app/backend/backend.service';
-import { DatosDeHabitacionesDisponibles } from 'src/app/core/interfaces/datos-de-habitacion-disponible.interface';
-import { ReservasService } from '../../reservas/reservas.service';
 
 @Component({
   selector: 'app-habitacion-parejas',
   templateUrl: './habitacion-parejas.component.html',
   styleUrls: ['./habitacion-parejas.component.css']
 })
-export class HabitacionParejasComponent {
-        public datosHabitacion: DatosDeHabitacionesDisponibles;
+export class HabitacionParejasComponent implements OnInit {
+    public datosHabitacion: DatosDeHabitacionDisponibleDTO = {
+        idtipodehabitacion: 0,
+        habitacionesdisponibles: 0,
+        categoria: "",
+        descripcion: "",
+        imghabitacionbase64: "",
+        precio: 0,
+        tamano: 0
+    };
+    private idHabitacion = 3;
 
+    private urlApi: string = "https://localhost:7149/api/tipos-de-habitaciones/listar-habitacion-por-id";
+    private body = {IdHabitacion: this.idHabitacion};
+
+    
     constructor(
-        private httpClient: HttpClient,
-        private _backendService: BackendService,
-        private _reservasService: ReservasService,
-    )
-    {
-        let apiLink: string = "https://localhost:7149/api/tipos-de-habitaciones/listar-habitacion-por-id?id=3";
-        let apiBody = {
-            id: 3
-        }
+        private httpClient: HttpClient
+    ){
+        
+    }
 
+    ngOnInit(): void {
         this.httpClient
-        .post<DatosDeHabitacionesDisponibles>(apiLink, apiBody)
+        .post<DatosDeHabitacionDisponibleDTO>(this.urlApi, this.body)
         .subscribe(
-            (resp) => {
-                this.datosHabitacion = resp;
+            (response) => {
+                this.datosHabitacion = response;
+                console.log(this.datosHabitacion);
             }
         );
     }
-
 }

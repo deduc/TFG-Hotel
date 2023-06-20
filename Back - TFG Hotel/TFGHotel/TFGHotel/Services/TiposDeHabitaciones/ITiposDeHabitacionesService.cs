@@ -9,7 +9,7 @@ namespace TFGHotel.Services.Habitaciones
         List<TipoDeHabitacionDTO> GetTiposDeHabitaciones();
         List<DATOS_DE_HABITACIONES_DISPONIBLES> GetDatosDeHabitacionesDisponibles();
 
-        DatosDeHabitacionesDisponiblesDTO GetHabitacionById(int id);
+        DatosHabitacionDisponibleDTO GetHabitacionById(int id);
 
     }
 }

@@ -59,62 +59,46 @@ namespace TFGHotel.Services.HabitacionesDisponibles
             }
             ).ToList();
 
-
-
-            //// Comienzo esta select desde la tabla Habitaciones
-            //List<DatosDeHabitacionesDisponiblesDTO> habitacionesDisponibles = _context.Habitaciones
-            //    // Hago left join en el sql para obtener datos de la tabla Tipos_de_habitaciones
-            //    .GroupJoin(
-            //        _context.Tipos_De_Habitaciones,
-            //        h => h.ID_TIPO_DE_HABITACION,
-            //        t => t.ID_TIPO_DE_HABITACION,
-            //        (h, tipoHabitacionJoin) => new { Habitacion = h, TipoHabitacionJoin = tipoHabitacionJoin }
-            //     )
-            //    // Select de elementos de las 2 tablas que nipu de cómo funciona
-            //    .SelectMany(
-            //        x => x.TipoHabitacionJoin.DefaultIfEmpty(),
-            //        (x, t) => new { x.Habitacion, TipoHabitacion = t }
-            //    )
-            //    // Equivalente al operador NOT IN (listaNumeros) de sql server
-            //    .Where(x => !_context.Reservas_De_Habitaciones
-            //    .Any(r =>
-            //        r.ID_HABITACION == x.Habitacion.ID_HABITACION 
-            //        &&                    (
-            //            fechaFin < r.FECHA_INICIO 
-            //            || fechaInicio > r.FECHA_FIN
-            //        ) 
-            //        &&
-            //            fechaInicio < fechaFin
-            //        )
-            //    )
-            //    .Where(x => fechaInicio < fechaFin)
-            //    // Agrupo los datos de salida 
-            //    .GroupBy(x => new
-            //        {
-            //            x.Habitacion.ID_TIPO_DE_HABITACION,
-            //            x.TipoHabitacion.CATEGORIA,
-            //            x.TipoHabitacion.PRECIO,
-            //            x.TipoHabitacion.DESCRIPCION,
-            //            x.TipoHabitacion.IMG_HABITACION_BASE_64,
-            //            x.TipoHabitacion.TAMAÑO,
-            //            x.TipoHabitacion.ENLACE_URL
-            //        }
-            //    )
-            //    // Select de los datos de salida agrupados
-            //    .Select(g => new DatosDeHabitacionesDisponiblesDTO
-            //    {
-            //            id_tipo_de_habitacion = g.Key.ID_TIPO_DE_HABITACION,
-            //            habitaciones_disponibles = g.Count(),
-            //            categoria = g.Key.CATEGORIA,
-            //            precio = g.Key.PRECIO,
-            //            descripcion = g.Key.DESCRIPCION,
-            //            img_habitacion_base_64 = g.Key.IMG_HABITACION_BASE_64,
-            //            tamaño = g.Key.TAMAÑO,
-            //        }
-            //    )
-            //    .ToList();
-
             return habitacionesDisponibles;
+
+        }
+
+        public DatosYCantidadDeHabitacionesDisponiblesEntreFechasDTO FiltrarHabitacionPorTipoDeHabitacion(List<DatosYCantidadDeHabitacionesDisponiblesEntreFechasDTO> listaHabitaciones, int idTipoHabitacion)
+        {
+            int idFiltrar = idTipoHabitacion;
+            List<DatosYCantidadDeHabitacionesDisponiblesEntreFechasDTO> resultadosFiltrados;
+
+
+            resultadosFiltrados = listaHabitaciones
+            .Where(d => d.id_tipo_de_habitacion == idFiltrar)
+            .ToList();
+
+            Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            Console.WriteLine(resultadosFiltrados.Count);
+            Console.WriteLine(resultadosFiltrados[0].id_tipo_de_habitacion);
+            Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+
+            if (resultadosFiltrados.Count == 1)
+            {
+                return resultadosFiltrados[0];
+            }
+            else
+            {
+                // Retorno un objeto vacío
+                return new DatosYCantidadDeHabitacionesDisponiblesEntreFechasDTO
+                { 
+                    id_tipo_de_habitacion = 0, 
+                    habitaciones_disponibles = 0, 
+                    categoria = "", 
+                    descripcion = "", 
+                    enlace_url = "", 
+                    img_habitacion_base_64 = "", 
+                    precio = 0, 
+                    tamaño = 0 
+                };
+            }
+
+            // fin metodo
 
         }
 

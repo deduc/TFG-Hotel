@@ -25,9 +25,9 @@
                     <p class="card-text">{{ item.descripcion }}</p>
                 </div>
                 
-                <p *ngIf="item.cantidad_de_habitaciones_disponibles">
-                    Habitaciones disponibles restantes: <b>{{ item.cantidad_de_habitaciones_disponibles }}</b>
-                </p>
+                <div class="card-body" *ngIf="item.cantidad_de_habitaciones_disponibles">
+                    <p class="card-text">Habitaciones disponibles restantes: <b>{{ item.cantidad_de_habitaciones_disponibles }}</b></p>
+                </div>
 
                 <a  type="button" class="btn btn-light" [routerLink]="item.enlace_url" routerLinkActive="router-link-active">
                     Ver
@@ -48,6 +48,6 @@
     
 </main>
 
-<div class="row bg-light" *ngIf="listaTiposDeHabitaciones.length == 0">
+<div class="row bg-light" *ngIf="fechasBuscadas == true && fechasEncontradas == false">
     <p class="col-12 text-center">No hay habitaciones disponibles para las fechas seleccionadas.</p>
 </div>

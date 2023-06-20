@@ -35,9 +35,9 @@ namespace TFGHotel.Controllers
 
         [HttpPost]
         [Route("listar-habitacion-por-id")]
-        public DatosDeHabitacionesDisponiblesDTO GetHabitacionById(int id)
+        public DatosHabitacionDisponibleDTO GetHabitacionById(IdTipoHabitacionDTO idTipoHabitacion)
         {
-            return this._tiposDeHabitacionesService.GetHabitacionById(id);
+            return this._tiposDeHabitacionesService.GetHabitacionById(idTipoHabitacion.IdHabitacion);
         }
 
         //fin clase

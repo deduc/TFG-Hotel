@@ -36,17 +36,16 @@ namespace TFGHotel.Controllers
         // decorador de metodo. La API recibe una consulta en modo POST
         [HttpPost]
         [Route("crear-nuevo-usuario")]
-        public ActionResult<List<string>> AddNewUser(UsuariosDTO usuarioDTO)
+        public List<string> AddNewUser(UsuariosDTO usuarioDTO)
         {
             var errorsList = _usuariosService.AddNewUser(usuarioDTO);
             
             if(errorsList.Count == 0)
             {
-                errorsList.Add("Usuario insertado con éxito");
-                return Ok(Json(errorsList));
+                return errorsList;
             }
 
-            return BadRequest(Json(errorsList));
+            return errorsList;
         }
 
 

@@ -1,45 +1,40 @@
+import { Component, OnInit } from '@angular/core';
+import { DatosDeHabitacionDisponibleDTO } from '../../../core/interfaces/DatosDeHabitacionesDisponiblesDTO.interface';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { BackendService } from 'src/app/backend/backend.service';
-import { DatosDeHabitacionesDisponibles } from 'src/app/core/interfaces/datos-de-habitacion-disponible.interface';
-import { ReservasService } from '../../reservas/reservas.service';
-
 
 @Component({
   selector: 'app-habitacion-lujo',
   templateUrl: './habitacion-lujo.component.html',
   styleUrls: ['./habitacion-lujo.component.css']
 })
-export class HabitacionLujoComponent {
-    public datosHabitacion: DatosDeHabitacionesDisponibles;
+export class HabitacionLujoComponent implements OnInit {
+    public datosHabitacion: DatosDeHabitacionDisponibleDTO = {
+        idtipodehabitacion: 0,
+        habitacionesdisponibles: 0,
+        categoria: "",
+        descripcion: "",
+        imghabitacionbase64: "",
+        precio: 0,
+        tamano: 0
+    };
+    private IdHabitacion = 5;
+    
+    private urlApi: string = "https://localhost:7149/api/tipos-de-habitaciones/listar-habitacion-por-id";
+    private body = {IdHabitacion: this.IdHabitacion};
 
     constructor(
-        private httpClient: HttpClient,
-        private _backendService: BackendService,
-        private _reservasService: ReservasService,
-    )
-    {
-        let apiLink: string = "https://localhost:7149/api/tipos-de-habitaciones/listar-habitacion-por-id?id=5";
-        let apiBody = {
-            id: 5
-        }
+        private httpClient: HttpClient
+    ){
+        
+    }
 
+    ngOnInit(): void {
         this.httpClient
-        .post<DatosDeHabitacionesDisponibles>(apiLink, apiBody)
+        .post<DatosDeHabitacionDisponibleDTO>(this.urlApi, this.body)
         .subscribe(
-            (resp) => {
-                if(resp.id_tipo_de_habitacion == 0){
-                    let apiLink2: string = "https://localhost:7149/api/tipos-de-habitaciones/listar-habitacion-por-id?id=5";
-                    let apiBody2 = {
-                        id: 5
-                    }
-                    this.httpClient
-                    .post<DatosDeHabitacionesDisponibles>(apiLink2, apiBody2)
-                    .subscribe()
-                }
-                else{
-                    this.datosHabitacion = resp;
-                }
+            (response) => {
+                this.datosHabitacion = response;
+                console.log(this.datosHabitacion);
             }
         );
     }

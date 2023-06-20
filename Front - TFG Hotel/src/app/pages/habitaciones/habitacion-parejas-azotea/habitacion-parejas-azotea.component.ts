@@ -1,38 +1,40 @@
+import { Component, OnInit } from '@angular/core';
+import { DatosDeHabitacionDisponibleDTO } from '../../../core/interfaces/DatosDeHabitacionesDisponiblesDTO.interface';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { BackendService } from 'src/app/backend/backend.service';
-import { DatosDeHabitacionesDisponibles } from 'src/app/core/interfaces/datos-de-habitacion-disponible.interface';
-import { ReservasService } from '../../reservas/reservas.service';
-import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-habitacion-parejas-azotea',
   templateUrl: './habitacion-parejas-azotea.component.html',
   styleUrls: ['./habitacion-parejas-azotea.component.css']
 })
-export class HabitacionParejasAzoteaComponent {
-    public datosHabitacion: DatosDeHabitacionesDisponibles;
+export class HabitacionParejasAzoteaComponent implements OnInit {
+    public datosHabitacion: DatosDeHabitacionDisponibleDTO = {
+        idtipodehabitacion: 0,
+        habitacionesdisponibles: 0,
+        categoria: "",
+        descripcion: "",
+        imghabitacionbase64: "",
+        precio: 0,
+        tamano: 0
+    };
+    private idHabitacion = 3;
+
+    private urlApi: string = "https://localhost:7149/api/tipos-de-habitaciones/listar-habitacion-por-id";
+    private body = {IdHabitacion: this.idHabitacion};
 
     constructor(
-        private httpClient: HttpClient,
-        private _backendService: BackendService,
-        private _reservasService: ReservasService,
-        public _route: ActivatedRoute
-    )
-    {
-        let apiLink: string = "https://localhost:7149/api/tipos-de-habitaciones/listar-habitacion-por-id?id=4";
-        let apiBody = {
-            id: 4
-        }
-        this._route.params.subscribe(params => {
-            let idHab =params['idHabitacion'];
-            debugger
-         });
+        private httpClient: HttpClient
+    ){
+        
+    }
+
+    ngOnInit(): void {
         this.httpClient
-        .post<DatosDeHabitacionesDisponibles>(apiLink, apiBody)
+        .post<DatosDeHabitacionDisponibleDTO>(this.urlApi, this.body)
         .subscribe(
-            (resp) => {
-                this.datosHabitacion = resp;
+            (response) => {
+                this.datosHabitacion = response;
+                console.log(this.datosHabitacion);
             }
         );
     }

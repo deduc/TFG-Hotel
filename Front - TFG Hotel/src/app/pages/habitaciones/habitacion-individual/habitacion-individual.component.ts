@@ -1,42 +1,86 @@
 import { Component, OnInit } from '@angular/core';
-import { CardHabitacionInterface } from '../../../core/interfaces/card-habitacion.interface';
-import { HabitacionesService } from '../habitaciones.service';
-import { DatosDeHabitacionesDisponibles } from 'src/app/core/interfaces/datos-de-habitacion-disponible.interface';
-import { BackendService } from '../../../backend/backend.service';
+import { DatosDeHabitacionDisponibleDTO } from '../../../core/interfaces/DatosDeHabitacionesDisponiblesDTO.interface';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { API_GET_HABITACIONES_BY_ID, API_GET_TIPOS_DE_HABITACIONES, API_LINK, API_LINK_TIPOS_DE_HABITACIONES } from 'src/app/core/constantes';
-import { ReservasService } from '../../reservas/reservas.service';
-
+import { FechaInicioFinInterface } from 'src/app/core/interfaces/fecha-inicio-fin.interface';
+import { MezclaDeObjetoFechasYObjetoIdTipoHabitacion } from 'src/app/core/interfaces/MezclaDeObjetoFechasYObjetoIdTipoHabitacion.interface';
+import { FechaInicioFinDTO } from 'src/app/core/interfaces/FechaInicioFinDTO.interface';
+import { IdTipoHabitacionDTO } from 'src/app/core/interfaces/IdTipoHabitacionDTO.interface';
+import { DatosYCantidadDeHabitacionesDisponiblesEntreFechasDTO } from 'src/app/core/interfaces/DatosYCantidadDeHabitacionesDisponiblesEntreFechasDTO.interface';
 
 @Component({
-    selector: 'app-habitacion-individual',
-    templateUrl: './habitacion-individual.component.html',
-    styleUrls: ['./habitacion-individual.component.css']
+  selector: 'app-habitacion-individual',
+  templateUrl: './habitacion-individual.component.html',
+  styleUrls: ['./habitacion-individual.component.css']
 })
-export class HabitacionIndividualComponent{
-    public datosHabitacion: DatosDeHabitacionesDisponibles;
+export class HabitacionIndividualComponent implements OnInit {
+    public datosHabitacion: DatosYCantidadDeHabitacionesDisponiblesEntreFechasDTO = {
+        id_tipo_de_habitacion: 0,
+        habitaciones_disponibles: 0,
+        categoria: "",
+        descripcion: "",
+        img_habitacion_base_64: "",
+        precio: 0,
+        tamaño: 0,
+        enlace_url: ""
+    };
+    private idHabitacion: number = 1;
+    private objFechas: FechaInicioFinInterface;
+    private objFechasKey: string = "obj-fechas";
+
+    // private urlApi: string = "https://localhost:7149/api/tipos-de-habitaciones/listar-habitacion-por-id";
+    private urlApi: string = "https://localhost:7149/api/habitaciones-disponibles/obtener-datos-de-habitacion-disponible-entre-fechas";
+
 
     constructor(
-        private httpClient: HttpClient,
-        private _backendService: BackendService,
-        private _reservasService: ReservasService,
-    )
-    {
-        let apiLink: string = "https://localhost:7149/api/tipos-de-habitaciones/listar-habitacion-por-id?id=1";
-        let apiBody = {
-            id: 1
+        private httpClient: HttpClient
+    ){
+        if(sessionStorage.getItem(this.objFechasKey)){
+            console.log("Hay objeto fechas, procedo a buscar las habitaciones disponibles entre la fecha de inicio y fin.");
+            this.objFechas = JSON.parse(
+                sessionStorage.getItem(this.objFechasKey)
+            );
         }
+    }
+
+    ngOnInit(): void {
+        const body: MezclaDeObjetoFechasYObjetoIdTipoHabitacion = this.crearBodyLlamadaHttp();
 
         this.httpClient
-        .post<DatosDeHabitacionesDisponibles>(apiLink, apiBody)
+        .post<DatosYCantidadDeHabitacionesDisponiblesEntreFechasDTO>(this.urlApi, body)
         .subscribe(
-            (resp) => {
-                console.log(resp);
-                this.datosHabitacion = resp;
+            (response) => {
+                console.log(response);
+                console.log("azaaaaaaaaaaaaaaa");
+                
+                
+                this.datosHabitacion = response;
+                console.log(this.datosHabitacion);
+                
             }
         );
     }
 
-    // fin constructor
+    private crearBodyLlamadaHttp(): MezclaDeObjetoFechasYObjetoIdTipoHabitacion {
+        // Creo objeto que almacena fechas y equivale a un objetoDTO de la API
+        const objFechas: FechaInicioFinDTO = {
+            FechaInicio: this.objFechas.fechaInicio,
+            FechaFin: this.objFechas.fechaFin
+        }
+        
+        // Creo un objeto que almacena un ID y equivale a un objetoDTO de la API
+        const objIdTipoHabitacionDTO: IdTipoHabitacionDTO = {
+            idTipoHabitacion: this.idHabitacion
+        }
+        
+        /**
+         * Creo un objeto que contiene los 2 objetos anteriores y equivale a un objetoDTO de la API,
+         * y será el cuerpo|body de la peticion http
+         */
+        const body: MezclaDeObjetoFechasYObjetoIdTipoHabitacion = {
+            objFechasDto: objFechas,
+            idTipoHabitacion: objIdTipoHabitacionDTO
+        }
+
+        return body;
+    }
 }
