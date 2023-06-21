@@ -9,11 +9,9 @@ namespace TFGHotel.Services.Usuarios
         public List<string> AddNewUser(UsuariosDTO usuarioDTO);
         bool DeleteUserById(int idUsuarioABorrar);
         UsuarioLoginDTO LoginUsuario(UsuarioLoginDTO usuario);
-
         Boolean ComprobarSiLoginCorrecto(UsuarioLoginDTO datosLogin);
-
-        UsuariosDTO GetUserDataWithEmail(string userEmail);
-
+        USUARIOS GetUserDataByEmail(string email);
         USUARIOS GetUserDataByUsername(string username);
+        bool DoCheckIfUserExists(string username);
     }
 }

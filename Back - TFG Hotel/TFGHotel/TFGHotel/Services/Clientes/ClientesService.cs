@@ -29,23 +29,23 @@ namespace TFGHotel.Services.Clientes
             return _context.Clientes
                 .Where(x => x.USERNAME == username)
                 .FirstOrDefault();
+
         }
 
         public string AddNewCliente(CLIENTES objCliente)
         {
-            // Si returnValue.length == 0, cliente añadido con éxito
             string returnValue = "";
             bool semaforo;
 
             _context.Clientes.Add(objCliente);
             _context.SaveChanges();
-
             
             // Comprobar si el cliente ha sido añadido con éxito en la tabla
             semaforo = this.DoCheckIfClienteExists(objCliente.USERNAME);
-            if (!semaforo)
+            if (semaforo == false)
             {
                 returnValue = "ERROR: Error desconocido, no se ha podido añadir el cliente.";
+                
                 return returnValue;
             }
 
@@ -73,6 +73,20 @@ namespace TFGHotel.Services.Clientes
                 .Where(x => x.USERNAME == username)
                 .First();
         }
+
+        public CLIENTES CreateObjectCLIENTESByUSUARIOSObject(USUARIOS datosUsuario)
+        {
+            return new CLIENTES()
+            {
+                ID_CLIENTE = 0,
+                USERNAME = datosUsuario.USERNAME,
+                EMAIL = datosUsuario.EMAIL,
+                DNI = datosUsuario.DNI,
+                NOMBRE = datosUsuario.NOMBRE,
+                APELLIDOS = datosUsuario.APELLIDOS,
+            };
+        }
+
 
 
         // fin clase

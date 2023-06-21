@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using TFGHotel.DTO;
 using TFGHotel.Entities;
 using TFGHotel.Services.Clientes;
+using TFGHotel.Services.Habitaciones;
 using TFGHotel.Services.Reservas;
 using TFGHotel.Services.Usuarios;
 
@@ -20,20 +21,23 @@ namespace TFGHotel.Controllers
         private readonly IReservasDeHabitacionesService _reservasService;
         private readonly IClientesService _clientesService;
         private readonly IUsuariosService _usuariosService;
+        private readonly ITiposDeHabitacionesService _tiposDeHabitacionService;
 
 
         public ReservasDeHabitacionesController
             (
             IReservasDeHabitacionesService reservasService,
             IClientesService clientesService,
-            IUsuariosService usuariosService
+            IUsuariosService usuariosService,
+            ITiposDeHabitacionesService tiposDeHabitacionService
             )
         {
             _reservasService = reservasService;
             _clientesService = clientesService;
             _usuariosService = usuariosService;
-
+            _tiposDeHabitacionService = tiposDeHabitacionService;
         }
+
 
         [HttpGet]
         [Route("listar-reservas")]
@@ -93,6 +97,9 @@ namespace TFGHotel.Controllers
             // Obtengo los valores del objeto recibido por parametros
             string username = objUsernameTipoHabitacionFechasDTO.Username;
             int idTipoHabitacion = objUsernameTipoHabitacionFechasDTO.idTipoHabitacion;
+            bool semaforo;
+            bool usuarioExiste;
+            bool tipoHabitacionExiste;
             FechaInicioFinDTO objFechas = new FechaInicioFinDTO
             {
                 FechaInicio = objUsernameTipoHabitacionFechasDTO.FechaInicio,
@@ -100,35 +107,39 @@ namespace TFGHotel.Controllers
             };
 
 
+            usuarioExiste = this.DoCheckIfUserExists(username);
+            tipoHabitacionExiste = this.DoCheckIfIdTipoHabitacionExists(idTipoHabitacion);
+
+            if (!usuarioExiste) return "ERROR: Usuario no existe";
+            if (!tipoHabitacionExiste) return "ERROR: ID de tipo de habitación no existe";
+
             // Obtengo los datos del usuario
             USUARIOS datosUsuario = _usuariosService.GetUserDataByUsername(username);
             
             // Si el usuario existe, creo un objeto CLIENTES y lo añado a la tabla CLIENTES
             if (datosUsuario != null)
             {
-                CLIENTES cliente = new CLIENTES()
+                // Si el cliente no existe, lo añado a la tabla clientes
+                if (_clientesService.DoCheckIfClienteExists(username) == false)
                 {
-                    ID_CLIENTE = 0,
-                    USERNAME = datosUsuario.USERNAME,
-                    EMAIL = datosUsuario.EMAIL,
-                    DNI = datosUsuario.DNI,
-                    NOMBRE = datosUsuario.NOMBRE,
-                    APELLIDOS = datosUsuario.APELLIDOS,
-                };
-
-                string errorsString = _clientesService.AddNewCliente(cliente);
-                if (errorsString.Length > 0) return errorsString;
+                    CLIENTES cliente = this.CreateObjectCLIENTESByUSUARIOSObject(datosUsuario);
+                    
+                    string errorsString = _clientesService.AddNewCliente(cliente);
+                    
+                    if (errorsString.Length > 0) return errorsString;
+                }
             }
             else
             {
-                return "ERROR: DatosUsuario es null";
+                return "ERROR: No se ha podido obtener los datos del usuario por un error desconocido. Puede que sea la base de datos.";
             }
 
             // Obtengo los datos del cliente asociados al username
             CLIENTES datosCliente = this._clientesService.GetDatosClienteByUsername(username);
 
             // Obtengo los datos de la habitacion que coincida con idTipoHabitacion
-            HABITACIONES     datosHabitacion = this._reservasService.GetHabitacionDataByIdTipoHabitacion(idTipoHabitacion);
+            HABITACIONES datosHabitacion = this._reservasService.GetHabitacionDataByIdTipoHabitacion(idTipoHabitacion);
+            
             // Modifico el campo DISPONIBLE=0 de la habitacion obtenida
             this._reservasService.ModificarCampoDisponible(datosHabitacion, idTipoHabitacion);
 
@@ -136,11 +147,11 @@ namespace TFGHotel.Controllers
             ReservasDeHabitacionesDTO reserva = this._reservasService.DoBuildReservasDeHabitacionesDTOByDatosCliente(
                 datosCliente, datosHabitacion, objFechas);
 
-            // Invoco el método para añadir una reserva
+            // Invoco un método de la propia clase (un endpoint) para añadir una reserva
             this.AddNewReserva(reserva);
 
             // Compruebo si la reserva ha sido añadida correctamente
-            bool semaforo = this._reservasService.DoCheckIfReservaDeHabitacionWasAdded(reserva);
+            semaforo = this._reservasService.DoCheckIfReservaDeHabitacionWasAdded(reserva);
 
             if (semaforo)
             {
@@ -151,6 +162,19 @@ namespace TFGHotel.Controllers
             return "ERROR: Algún error desconocido habrá por ahí.";
 
             // fin metodo
+        }
+
+        private bool DoCheckIfUserExists(string username) 
+        {
+            return _usuariosService.DoCheckIfUserExists(username);
+        }
+        private bool DoCheckIfIdTipoHabitacionExists(int idTipoHabitacion) 
+        {
+            return _tiposDeHabitacionService.DoCheckIfIdTipoHabitacionExists(idTipoHabitacion);
+        }
+        private CLIENTES CreateObjectCLIENTESByUSUARIOSObject(USUARIOS datosUsuario)
+        {
+            return this._clientesService.CreateObjectCLIENTESByUSUARIOSObject(datosUsuario);
         }
 
         // TODO     hacer cuando se pueda reservar habitaciones

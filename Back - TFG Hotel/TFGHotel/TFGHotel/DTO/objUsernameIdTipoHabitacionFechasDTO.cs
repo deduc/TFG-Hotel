@@ -4,16 +4,16 @@ namespace TFGHotel.DTO
 {
     public class objUsernameIdTipoHabitacionFechasDTO
     {
-        //[JsonPropertyName("Username")]
-        public string Username;
+        [JsonPropertyName("Username")]
+        public string Username { get; set; }
 
-        //[JsonPropertyName("idTipoHabitacion")]
-        public int idTipoHabitacion;
+        [JsonPropertyName("idTipoHabitacion")]
+        public int idTipoHabitacion { get; set; }
 
-        //[JsonPropertyName("FechaInicio")]
+        [JsonPropertyName("FechaInicio")]
         public DateTime FechaInicio { get; set; }
 
-        //[JsonPropertyName("FechaFin")]
+        [JsonPropertyName("FechaFin")]
         public DateTime FechaFin { get; set; }
     }
 }

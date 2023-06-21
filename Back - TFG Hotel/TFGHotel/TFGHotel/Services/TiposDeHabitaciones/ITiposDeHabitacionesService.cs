@@ -5,11 +5,9 @@ namespace TFGHotel.Services.Habitaciones
 {
     public interface ITiposDeHabitacionesService
     {
-        //List<> GetHabitacionesBetween2Dates(interfaz 2 fechas);
         List<TipoDeHabitacionDTO> GetTiposDeHabitaciones();
         List<DATOS_DE_HABITACIONES_DISPONIBLES> GetDatosDeHabitacionesDisponibles();
-
         DatosHabitacionDisponibleDTO GetHabitacionById(int id);
-
+        bool DoCheckIfIdTipoHabitacionExists(int idTipoHabitacion);
     }
 }

@@ -64,6 +64,24 @@ namespace TFGHotel.Services.Habitaciones
             // fin metodo
         }
 
+        public bool DoCheckIfIdTipoHabitacionExists(int idTipoHabitacion)
+        {
+            bool semaforo;
+
+            TIPOS_DE_HABITACIONES tipoHabitacion = _context.Tipos_De_Habitaciones
+                .Where(x => x.ID_TIPO_DE_HABITACION == idTipoHabitacion)
+                .FirstOrDefault();
+
+            if (tipoHabitacion != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         // fin clase
     }
 

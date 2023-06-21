@@ -145,42 +145,27 @@ namespace TFGHotel.Services.Usuarios
             return false;
         }
 
-        public UsuariosDTO GetUserDataWithEmail(string userEmail)
+        public USUARIOS GetUserDataByEmail(string email)
         {
-            USUARIOS u = _context.Usuarios
-                .FirstOrDefault(x => x.EMAIL == userEmail);
+            USUARIOS usuario = _context.Usuarios
+                .FirstOrDefault(x => x.EMAIL == email);
 
-            if(u != null)
+            if(usuario != null)
             {
-                var usuarioRetorno = new UsuariosDTO
-                {
-                    ID_USUARIO = u.ID_USUARIO,
-                    USERNAME = u.USERNAME,
-                    EMAIL = u.EMAIL,
-                    DNI = u.DNI,
-                    PASSWORD = u.PASS,
-                    NOMBRE = u.NOMBRE,
-                    APELLIDOS = u.APELLIDOS,
-                    FOTO_DE_PERFIL_BASE_64 = u.FOTO_DE_PERFIL_BASE_64
-                };
-                
-                return usuarioRetorno;
+                return usuario;
             }
             else
             {
                 throw new Exception("ERROR: No existe un usuario con ese correo electrónico");
             }
-
-            
         }
 
         public USUARIOS GetUserDataByUsername(string username)
         {
-            Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAaaaaa\n\n\n" + "AAAAAAAAAAAAAAAAAAAAAAaaaaa\n\n\n");
             USUARIOS usuario = _context.Usuarios
-                .FirstOrDefault(u => u.USERNAME == username);
+                .SingleOrDefault( u => u.USERNAME.ToLower() == username.ToLower() );
 
-            Console.WriteLine(usuario.USERNAME);
+
 
             if (usuario != null)
             {
@@ -189,6 +174,24 @@ namespace TFGHotel.Services.Usuarios
             else
             {
                 throw new Exception("ERROR: Usuario " + username + " no encontrado.");
+            }
+        }
+
+        public bool DoCheckIfUserExists(string username)
+        {
+            bool semaforo;
+
+            USUARIOS usuario = _context.Usuarios
+                .Where(x => x.USERNAME == username)
+                .FirstOrDefault();
+
+            if (usuario != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 

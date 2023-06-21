@@ -169,24 +169,45 @@ namespace TFGHotel.Services.Reservas
         public bool DoCheckIfReservaDeHabitacionWasAdded(ReservasDeHabitacionesDTO reserva)
         {
             RESERVAS_DE_HABITACIONES objReserva = _context.Reservas_De_Habitaciones
-                .Where(x => x.ID_CLIENTE == reserva.Id_Cliente && x.ID_HABITACION == reserva.Id_Habitacion && x.FECHA_INICIO == reserva.Fecha_Inicio && x.FECHA_FIN == reserva.Fecha_Fin)
+                .Where(x => 
+                    x.ID_CLIENTE == reserva.Id_Cliente && 
+                    x.ID_HABITACION == reserva.Id_Habitacion && 
+                    x.FECHA_INICIO == reserva.Fecha_Inicio && 
+                    x.FECHA_FIN == reserva.Fecha_Fin
+                )
                 .FirstOrDefault();
 
-            if(objReserva != null)
+            if(objReserva == null)
             {
-                return true;
+                return false;
             }
             else
             {
-                return false;
+                return true;
             }
         }
 
         public HABITACIONES GetHabitacionDataByIdTipoHabitacion(int idTipoHabitacion)
         {
-            return _context.Habitaciones
-                .Where(x => x.ID_HABITACION == idTipoHabitacion)
+            // Obtengo la primera habitación que tenga asociado idTipoHabitacion y esté disponible
+            var primeraHabitacion = _context.Habitaciones
+                .FirstOrDefault(x => x.ID_TIPO_DE_HABITACION == idTipoHabitacion && x.DISPONIBLE == 1);
+
+            if(primeraHabitacion == null)
+            {
+                return new HABITACIONES
+                {
+                    ID_TIPO_DE_HABITACION = 0,
+                    ID_HABITACION = 0,
+                    DISPONIBLE = 0
+                };
+            }
+            else
+            {
+                return _context.Habitaciones
+                .Where(x => x.ID_TIPO_DE_HABITACION == idTipoHabitacion)
                 .FirstOrDefault();
+            }
         }
 
         public bool ModificarCampoDisponible(HABITACIONES habitacion, int valorCampoDisponible)
