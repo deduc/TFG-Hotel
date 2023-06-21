@@ -119,12 +119,12 @@ export class ReservasComponent {
         this.objFechas.fechaFin.setMilliseconds(0);
     }
 
-    public lala($event): void {
+    public reservarHabitacion($event): void {
         console.log($event);
-        
+        this.openDialog();
     }
 
-    openDialog(): void {
+    private openDialog(): void {
         this.dialog.open(DialogElement);
     }
     

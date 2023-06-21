@@ -1,6 +1,6 @@
 .imagen-habitacion{
     height: 15vw;
-    width: 20vw;
+    width: 15vw;
 }
 
 .font-family-oswald{
@@ -8,8 +8,14 @@
 }
 
 .contenedor-imagenes{
+    width: auto;
+    height: auto;
+
+    padding: 1rem;
+    
     display: flex;
     flex-direction: row;
+    justify-content: center;
     gap: 1rem;
 }
 
@@ -34,11 +40,17 @@
     z-index: 100;
 }
 .texto-imagen h1{
-    font-size: 4rem;
+    font-size: 4vw;
+    /* font-size: 4rem; */
+
 }
 
 .subtitulo{
-    margin-top: 2rem;
-    margin-left: 10rem;
-    font-size: 2rem;
+    /* margin-top: 2rem;
+    margin-left: 10rem; */
+    margin-top: 2vw;
+    margin-left: 10vw;
+    font-size: 2vw;
+    /* font-size: 2rem; */
+
 }
