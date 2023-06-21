@@ -3,8 +3,42 @@
     width: 20vw;
 }
 
+.font-family-oswald{
+    font-family: "Oswald";
+}
+
 .contenedor-imagenes{
     display: flex;
     flex-direction: row;
     gap: 1rem;
+}
+
+
+.contenedor-imagen-texto{
+    position: relative;
+}
+
+.efecto-imagen{
+    filter: brightness(80%);
+}
+
+.imagen-max-width{
+    width: 100%;
+}
+
+.texto-imagen{
+    position: absolute;
+    top: 20%;
+    left: 5%;
+    
+    z-index: 100;
+}
+.texto-imagen h1{
+    font-size: 4rem;
+}
+
+.subtitulo{
+    margin-top: 2rem;
+    margin-left: 10rem;
+    font-size: 2rem;
 }

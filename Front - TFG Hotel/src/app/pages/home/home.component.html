@@ -1,14 +1,22 @@
 <pages-home-carousel></pages-home-carousel>
 
 <div class="container mt-lg-5 mt-sm-5">
-    <p class="display-2">
+    <p class="display-2 font-family-oswald">
         {{tituloHotel}}
     </p>
     <p>Dubái, Emiratos Árabes Unidos. Jumeirah Beach Road.</p>
 </div>
 
+<div class="container-fluid contenedor-imagen-texto">
+    <div class="texto-imagen text-white">
+        <h1 class="font-family-oswald">El hotel de tus sueños</h1>
+        <p class="font-family-oswald subtitulo">Lujo Estatus Poder</p>
+    </div>
+    <img class="efecto-imagen mt-5 imagen-max-width" src="../../../assets/images/exterior-1.webp" alt="imagen-transicion">
+</div>
+
 <div class="container my-5 pt-5">
-    <h1 class="text-center">Visita nuestras habitaciones</h1>
+    <h1 class="text-center">Haz click en la imagen para visitar nuestras habitaciones</h1>
     <div class="d-flex justify-content-center">
         <button class="contenedor-imagenes" id="contenedor-imagenes-habitaciones" (click)="cambiarDePagina('contenedor-imagenes-habitaciones')">
             <img class="imagen-habitacion" *ngFor="let card of listaHabitacionCards" [src]="card.imgSrc" [id]="card.imgSrc">

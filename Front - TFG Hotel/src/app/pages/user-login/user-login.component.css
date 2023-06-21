@@ -1,54 +1,52 @@
-/* * selectores */
+/* Made with love by Mutiullah Samim*/
 
-sup{
-    color: red;
-    font-size: 0.8rem;
+@import url('https://fonts.googleapis.com/css?family=Numans');
+
+html,body{
+background-color: black;
+background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
+background-size: cover;
+background-repeat: no-repeat;
+height: 99.946vh;
+min-height: fit-content;
+font-family: 'Numans', sans-serif;
+overflow-y: hidden;
 }
 
-label{
-    color: black;
-    font-size: 0.8rem;
+.container{
+height: 100%;
+align-content: center;
 }
 
+.card{
+height: 30rem;
+width: 30rem;
+margin-top: auto;
+margin-bottom: auto;
+background-color: rgba(0,0,0,0.5) !important;
+padding: 1rem;
+}
 
-.contenedor-login{
+.social_icon span:hover{
+color: white;
+cursor: pointer;
+}
+
+.input-group-prepend span{
+width: 50px;
+background-color: #007bff;
+color: black;
+border:0 !important;
+}
+
+.color-invertido{
+    filter: invert(1);
+}
+.posicion-fixed{
     position: relative;
-    z-index: 100;
+    top: 0rem;
+    left: -10rem;
 }
-
-.background-color{
-    width: 100%;
-    height: 100%;
-    
-    background: rgb(4,43,62);
-    background: linear-gradient(90deg, rgba(4,43,62,1) 11%, rgba(89,109,179,1) 40%, rgba(97,143,199,1) 54%, rgba(64,143,181,1) 71%, rgba(0,141,255,1) 100%);
-
-    position: fixed;
-    top: 0px;
-    left: 0px;
-
-    opacity: 0.3;
-    z-index: 99;
-}
-
-.enlace-login{
-    margin-top: 1rem;
-}
-
 .cursor-pointer{
     cursor: pointer;
-}
-
-.my-border-radius{
-    border-radius: 1vw;
-}
-.my-close-box-button{
-    background: none;
-    border: 1px solid white;
-    color: white;
-}
-
-.imagen{
-    min-height: 30vw;
-    height: 50vh;
 }

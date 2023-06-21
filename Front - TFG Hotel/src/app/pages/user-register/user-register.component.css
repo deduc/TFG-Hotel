@@ -74,9 +74,29 @@ label{
     box-shadow: 0px 0px 0.05rem 0.05rem black;
 }
 
+.my-posiion-fixed{
+    position: relative;
+    top: 5rem;
+    left: 5rem;
+}
+
 
 
 /* * media queries */
+
+
+/* pcs */
+@media (min-width: 993px) {
+    .margin-top-for-large-screen{
+        margin-top: 10rem;
+    }
+
+    .my-posiion-fixed{
+        position: relative;
+        top: 5rem;
+        left: 5rem;
+    }
+}
 
 /* moviles */
 @media (max-width: 768px) {
@@ -91,13 +111,26 @@ label{
     .user-register-component-container, .efecto-blur{
         height: 150vh;
     }
+
+    .my-posiion-fixed{
+        position: static;
+        
+    }
+
 }
 
 /* tablets y pantallas de ordenador */
 @media (min-width: 768px) {
     .margin-top-for-large-screen{
-        /* margin-top: 10rem; */
+        margin-top: 10rem;
     }
+
+    .my-posiion-fixed{
+        position: relative;
+        top: 5rem;
+        left: 1rem;
+    }
+    
 }
 
 
