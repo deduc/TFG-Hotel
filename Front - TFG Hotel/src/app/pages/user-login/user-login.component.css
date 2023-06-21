@@ -44,8 +44,8 @@ border:0 !important;
 }
 .posicion-fixed{
     position: relative;
-    top: 0rem;
-    left: -10rem;
+    top: 5rem;
+    left: 5rem;
 }
 .cursor-pointer{
     cursor: pointer;

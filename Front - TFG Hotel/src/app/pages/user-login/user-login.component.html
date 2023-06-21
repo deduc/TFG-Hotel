@@ -9,9 +9,9 @@
 </head>
 
 <body>
+    <shared-button-go-home class="posicion-fixed"></shared-button-go-home>
     <div class="container d-flex justify-content-center align-items-center">
         <div class="card">
-            <shared-button-go-home class="posicion-fixed"></shared-button-go-home>
             
             <div class="card-header">
                 <h1 class="text-white">Iniciar sesión</h1>
@@ -34,7 +34,7 @@
                         <input type="password" class="form-control" placeholder="Contraseña" name="Password" [(ngModel)]="userData.Password">
                     </div>
                     <div class="form-group">
-                        <button type="submit" value="Login" class="btn float-right btn-primary">Iniciar Sesión</button>
+                        <button type="submit" value="Login" class="btn float-right btn-primary" (click)="tryLoginUser()">Iniciar Sesión</button>
                     </div>
                 </form>
             </div>
@@ -54,28 +54,3 @@
         </div>
     </div>
 </body>
-
-<div class="col-sm-12 col-lg-12 mb-4 form-group">
-    <div class="form-group" *ngIf="errorLogin == 1; else errorLoginTrue">
-        <div class="bg-success p-3 text-white d-flex justify-content-between my-border-radius">
-            <span class="col-12 d-flex justify-content-center align-items-center">
-                Datos insertados correctamente. Cargando usuario...
-            </span>
-        </div>
-    </div>
-    
-    <ng-template #errorLoginTrue>
-        <div class="form-group" *ngIf="errorLogin > 1">
-            <div class="bg-danger p-3 text-white d-flex justify-content-between my-border-radius row">
-                <p class="col-10" *ngIf="errorLogin == 2">
-                    ERROR: Datos erróneos en el formulario. Comprueba que el email sea válido y la contraseña tenga 8 caracteres como mínimo.
-                </p>
-                <p class="col-10" *ngIf="errorLogin == 3">
-                    ERROR: Usuario y contraseña erróneos.
-                </p>
-
-                <button class="my-close-box-button col" (click)="cerrarCajaError()">X</button>
-            </div>
-        </div>
-    </ng-template>
-</div>

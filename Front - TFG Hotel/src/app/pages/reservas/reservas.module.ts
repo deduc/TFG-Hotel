@@ -12,6 +12,10 @@ import { ReservasService } from './reservas.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule } from '@angular/forms';
 
+// Angular material
+import { MatDialogModule } from '@angular/material/dialog';
+
+
 
 @NgModule({
     declarations: [
@@ -22,6 +26,7 @@ import { FormsModule } from '@angular/forms';
         CommonModule,
         FormsModule,
         SharedModule,
+        MatDialogModule,
     ],
     exports: [],
     providers: [

@@ -1,0 +1,20 @@
+<div class="d-flex justify-content-evenly bg-success" *ngIf="errorLogin == 1; else errorLoginTrue" 
+    style="overflow: hidden; height: 5rem; width: 30rem;">
+    <p class="col-9 d-flex align-items-center text-white" *ngIf="errorLogin == 1">
+        Datos insertados correctamente. Cargando usuario...
+    </p>
+</div>
+    
+<ng-template #errorLoginTrue class>
+    <div class="d-flex justify-content-evenly bg-danger" 
+        style="height: 5rem; width: 50rem;">
+        <p class="col-9 d-flex align-items-center text-white" *ngIf="errorLogin == 2">
+            ERROR: Datos erróneos en el formulario. Comprueba que el email sea válido y la contraseña tenga 8 caracteres como mínimo.
+        </p>
+        <p class="col-9 d-flex align-items-center text-white" *ngIf="errorLogin == 3">
+            ERROR: Usuario y contraseña erróneos.
+        </p>
+
+        <button class="btn col-1 text-white" (click)="cerrarCajaError()">X</button>
+    </div>
+</ng-template>
