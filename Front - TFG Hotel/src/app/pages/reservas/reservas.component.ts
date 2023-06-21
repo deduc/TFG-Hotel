@@ -8,7 +8,7 @@ import { FechaInicioFinInterface } from 'src/app/core/interfaces/fecha-inicio-fi
 import { DatosDeHabitacionesDisponibles } from 'src/app/core/interfaces/datos-de-habitacion-disponible.interface';
 
 // componentes especiales
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 // angular material
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -16,6 +16,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { DialogElement } from './components/dialog-element-angular-material/dialog-element-angular-material.component';
 import { BackendService } from '../../backend/backend.service';
 import { Observable } from 'rxjs';
+import { objUsernameIdTipoHabitacionFechasDTO } from 'src/app/core/interfaces/objUsernameIdTipoHabitacionFechasDTO.interface';
+import { SESSION_STORAGE_USER_LOGGED } from 'src/app/core/constantes';
+import { USUARIOS } from 'src/app/core/interfaces/USUARIOS.interface';
 
 
 
@@ -121,14 +124,47 @@ export class ReservasComponent {
 
     public reservarHabitacion($event): void {
         console.log($event);
-        this.openDialog();
+        let idTipoHabitacion: number = $event;
+
+        this.llamadaHttpReservarHabitacion(idTipoHabitacion);
     }
 
     private openDialog(): void {
         this.dialog.open(DialogElement);
     }
-    
+
+    private async llamadaHttpReservarHabitacion(idTipoHabitacion: number): Promise<void>{
+        const apiReservarHabitacion = "https://localhost:7149/api/reservas-de-habitaciones/reservar-habitacion-completa";
+        const apiGetUsernameByEmail = "https://localhost:7149/api/usuarios/obtener-datos-de-usuario-by-email";
+        
+        let v_email: string = JSON.parse(sessionStorage.getItem(SESSION_STORAGE_USER_LOGGED)).Email;
+        let bodyAux = { Email: v_email };
+        
+        const response = await this.httpClient.post<USUARIOS>(apiGetUsernameByEmail, bodyAux).toPromise();
+        let username: string = response.USERNAME;
+
+        console.log(username);
+        
+        const body: objUsernameIdTipoHabitacionFechasDTO = await {
+            Username: username,
+            idTipoHabitacion: idTipoHabitacion,
+            FechaInicio: this.objFechas.fechaInicio,
+            FechaFin: this.objFechas.fechaFin
+        }
+
+        // Hago llamada http
+        console.log("llamada http");
+        this.httpClient
+        .post<HttpErrorResponse>(apiReservarHabitacion, body)
+        .subscribe(
+            resp => {
+                if(resp.status >= 200 && resp.status <= 400){
+                    this.openDialog();
+                    console.log(resp);
+                }
+            }
+        );
+    }    
 
     // fin clase
 }
-
