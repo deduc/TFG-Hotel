@@ -16,9 +16,9 @@ namespace TFGHotel.Controllers
      */
     [ApiController]
     [Route("api/reservas-de-habitaciones")]
-    public class ReservasDeHabitacionesController: Controller
+    public class ReservasDeHabitacionesController : Controller
     {
-        private readonly IReservasDeHabitacionesService _reservasService;
+        private readonly IReservasDeHabitacionesService _reservasDeHabitacionesService;
         private readonly IClientesService _clientesService;
         private readonly IUsuariosService _usuariosService;
         private readonly ITiposDeHabitacionesService _tiposDeHabitacionService;
@@ -32,7 +32,7 @@ namespace TFGHotel.Controllers
             ITiposDeHabitacionesService tiposDeHabitacionService
             )
         {
-            _reservasService = reservasService;
+            _reservasDeHabitacionesService = reservasService;
             _clientesService = clientesService;
             _usuariosService = usuariosService;
             _tiposDeHabitacionService = tiposDeHabitacionService;
@@ -43,14 +43,14 @@ namespace TFGHotel.Controllers
         [Route("listar-reservas")]
         public List<ReservasDeHabitacionesDTO> GetReservas()
         {
-            return _reservasService.GetReservas();
+            return _reservasDeHabitacionesService.GetReservas();
         }
 
         [HttpPost]
         [Route("crear-nueva-reserva")]
         public ActionResult<string> AddNewReserva(ReservasDeHabitacionesDTO reservaDTO)
         {
-            _reservasService.AddNewReserva(reservaDTO);
+            _reservasDeHabitacionesService.AddNewReserva(reservaDTO);
             return Ok("Reserva añadida");
         }
 
@@ -58,8 +58,8 @@ namespace TFGHotel.Controllers
         [Route("borrar-reserva/{id:int}")]
         public ActionResult<string> DeleteReservaById(int id)
         {
-            var mensaje = _reservasService.DeleteReservaById(id);
-            
+            var mensaje = _reservasDeHabitacionesService.DeleteReservaById(id);
+
             return Ok(mensaje);
         }
 
@@ -67,7 +67,7 @@ namespace TFGHotel.Controllers
         [Route("actualizar-reserva/{id:int}")]
         public ActionResult<string> UpdateReservaById(int id, ReservasDeHabitacionesDTO reservaDTO)
         {
-            var mensaje = _reservasService.UpdateReservaById(id, reservaDTO);
+            var mensaje = _reservasDeHabitacionesService.UpdateReservaById(id, reservaDTO);
 
             return Ok(mensaje);
         }
@@ -76,7 +76,7 @@ namespace TFGHotel.Controllers
         [Route("deshabilitar-reserva/{id:int}")]
         public ActionResult<string> DisableReservaById(int id)
         {
-            var mensaje = _reservasService.DisableReservaById(id);
+            var mensaje = _reservasDeHabitacionesService.DisableReservaById(id);
 
             return Ok(mensaje);
         }
@@ -85,7 +85,7 @@ namespace TFGHotel.Controllers
         [Route("habilitar-reserva/{id:int}")]
         public ActionResult<string> EnableReservaById(int id)
         {
-            var mensaje = _reservasService.EnableReservaById(id);
+            var mensaje = _reservasDeHabitacionesService.EnableReservaById(id);
 
             return Ok(mensaje);
         }
@@ -115,17 +115,20 @@ namespace TFGHotel.Controllers
 
             // Obtengo los datos del usuario
             USUARIOS datosUsuario = _usuariosService.GetUserDataByUsername(username);
-            
+
             // Si el usuario existe, creo un objeto CLIENTES y lo añado a la tabla CLIENTES
             if (datosUsuario != null)
             {
-                // Si el cliente no existe, lo añado a la tabla clientes
+                /* 
+                 * Si el cliente no existe, lo añado a la tabla clientes
+                 * En caso contrario no lo añado.
+                 */
                 if (_clientesService.DoCheckIfClienteExists(username) == false)
                 {
                     CLIENTES cliente = this.CreateObjectCLIENTESByUSUARIOSObject(datosUsuario);
-                    
+
                     string errorsString = _clientesService.AddNewCliente(cliente);
-                    
+
                     if (errorsString.Length > 0) return errorsString;
                 }
             }
@@ -138,37 +141,38 @@ namespace TFGHotel.Controllers
             CLIENTES datosCliente = this._clientesService.GetDatosClienteByUsername(username);
 
             // Obtengo los datos de la habitacion que coincida con idTipoHabitacion
-            HABITACIONES datosHabitacion = this._reservasService.GetHabitacionDataByIdTipoHabitacion(idTipoHabitacion);
-            
+            HABITACIONES datosHabitacion = this._reservasDeHabitacionesService.GetHabitacionDataByIdTipoHabitacion(idTipoHabitacion);
+            if(datosHabitacion.DISPONIBLE == 0) return "ERROR 500: La base de datos ha obtenido una de forma errónea.";
+
             // Modifico el campo DISPONIBLE=0 de la habitacion obtenida
-            this._reservasService.ModificarCampoDisponible(datosHabitacion, idTipoHabitacion);
+            this._reservasDeHabitacionesService.ModificarCampoDisponible(datosHabitacion, idTipoHabitacion);
 
             // Construyo el objeto RESERVAS_DE_HABITACIONES con los datos obtenidos hasta ahora
-            ReservasDeHabitacionesDTO reserva = this._reservasService.DoBuildReservasDeHabitacionesDTOByDatosCliente(
+            ReservasDeHabitacionesDTO reservaObjDTO = this._reservasDeHabitacionesService.DoBuildReservasDeHabitacionesDTOByDatosCliente(
                 datosCliente, datosHabitacion, objFechas);
 
             // Invoco un método de la propia clase (un endpoint) para añadir una reserva
-            this.AddNewReserva(reserva);
+            this.AddNewReserva(reservaObjDTO);
 
             // Compruebo si la reserva ha sido añadida correctamente
-            semaforo = this._reservasService.DoCheckIfReservaDeHabitacionWasAdded(reserva);
+            semaforo = this._reservasDeHabitacionesService.DoCheckIfReservaDeHabitacionWasAdded(reservaObjDTO);
 
             if (semaforo)
             {
-                return "Reserva de habitación insertada con éxito sheeeeeeesh.";
+                return "Reserva de habitación insertada con éxito.";
             }
-            
-            
+
+
             return "ERROR: Algún error desconocido habrá por ahí.";
 
             // fin metodo
         }
 
-        private bool DoCheckIfUserExists(string username) 
+        private bool DoCheckIfUserExists(string username)
         {
             return _usuariosService.DoCheckIfUserExists(username);
         }
-        private bool DoCheckIfIdTipoHabitacionExists(int idTipoHabitacion) 
+        private bool DoCheckIfIdTipoHabitacionExists(int idTipoHabitacion)
         {
             return _tiposDeHabitacionService.DoCheckIfIdTipoHabitacionExists(idTipoHabitacion);
         }

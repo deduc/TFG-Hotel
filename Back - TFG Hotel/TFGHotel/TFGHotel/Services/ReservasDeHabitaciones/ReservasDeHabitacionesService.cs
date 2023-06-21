@@ -168,12 +168,12 @@ namespace TFGHotel.Services.Reservas
 
         public bool DoCheckIfReservaDeHabitacionWasAdded(ReservasDeHabitacionesDTO reserva)
         {
+            Console.WriteLine(reserva.Fecha_Inicio);
+
             RESERVAS_DE_HABITACIONES objReserva = _context.Reservas_De_Habitaciones
                 .Where(x => 
-                    x.ID_CLIENTE == reserva.Id_Cliente && 
-                    x.ID_HABITACION == reserva.Id_Habitacion && 
-                    x.FECHA_INICIO == reserva.Fecha_Inicio && 
-                    x.FECHA_FIN == reserva.Fecha_Fin
+                    x.ID_CLIENTE == reserva.Id_Cliente &&
+                    x.FECHA_INICIO == reserva.Fecha_Inicio
                 )
                 .FirstOrDefault();
 
@@ -190,23 +190,18 @@ namespace TFGHotel.Services.Reservas
         public HABITACIONES GetHabitacionDataByIdTipoHabitacion(int idTipoHabitacion)
         {
             // Obtengo la primera habitación que tenga asociado idTipoHabitacion y esté disponible
-            var primeraHabitacion = _context.Habitaciones
-                .FirstOrDefault(x => x.ID_TIPO_DE_HABITACION == idTipoHabitacion && x.DISPONIBLE == 1);
+            var habitacion = _context.Habitaciones
+                .Where(h => h.ID_TIPO_DE_HABITACION == idTipoHabitacion && h.DISPONIBLE == 1)
+                .FirstOrDefault();
 
-            if(primeraHabitacion == null)
+
+            if (habitacion == null)
             {
-                return new HABITACIONES
-                {
-                    ID_TIPO_DE_HABITACION = 0,
-                    ID_HABITACION = 0,
-                    DISPONIBLE = 0
-                };
+                throw new Exception("ERROR: No se han encontrado habitaciones disponibles para ese tipo de habitación.");
             }
             else
             {
-                return _context.Habitaciones
-                .Where(x => x.ID_TIPO_DE_HABITACION == idTipoHabitacion)
-                .FirstOrDefault();
+                return habitacion;
             }
         }
 

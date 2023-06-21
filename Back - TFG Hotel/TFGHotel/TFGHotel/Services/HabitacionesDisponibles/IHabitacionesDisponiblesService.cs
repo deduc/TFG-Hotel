@@ -1,6 +1,4 @@
-﻿using TFGHotel.ClasesAuxiliares;
-using TFGHotel.DTO;
-using TFGHotel.Entities;
+﻿using TFGHotel.DTO;
 
 namespace TFGHotel.Services.HabitacionesDisponibles
 {
