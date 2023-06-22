@@ -116,8 +116,6 @@ export class ReservasDeServiciosComponent {
             this.username = res.USERNAME;
           }
         );
-  
-        
     }
 
     private comprobarLogin() {

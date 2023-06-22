@@ -1,4 +1,4 @@
-<div class="container py-5">
+<div class="container py-5" *ngIf="datosUsuarioObj">
     <div class="contenedor-perfil row pb-5">
         <div class="row">
             <div class="col-lg-4 d-flex justify-content-center align-items-center">
@@ -8,7 +8,7 @@
             <div class="col-lg-8">
                 <div class="row">
                     <h1 class="bg-light">
-                        {{ datosUsuario.USERNAME }}
+                        {{ datosUsuarioObj.USERNAME }}
                     </h1>
                 </div>
                 
@@ -31,32 +31,33 @@
                         </div>
                         <div class="col-lg-8">
                             <li class="list-group-item">
-                                {{ datosUsuario.EMAIL }}
+                                {{ datosUsuarioObj.EMAIL }}
                             </li>
                             <li class="list-group-item">
-                                {{ datosUsuario.DNI }}
+                                {{ datosUsuarioObj.DNI }}
                             </li>
 
                             <li class="list-group-item">
-                                {{ datosUsuario.NOMBRE }}
+                                {{ datosUsuarioObj.NOMBRE }}
                             </li>
                             <li class="list-group-item">
-                                {{ datosUsuario.APELLIDOS }}
+                                {{ datosUsuarioObj.APELLIDOS }}
                             </li>
                         </div>
                     </ul>
                 </div>
 
                 <div class="row py-5 contenedor-botones">
-                    <div class="btn btn-outline-primary col-lg-5">Cambiar contraseña</div>
-                    <div class="btn btn-outline-primary col-lg-5">Cambiar dirección de correo electrónico</div>
-                    <div class="btn btn-outline-primary col-lg-5">Modificar contraseña</div>
-                    <div class="btn btn-outline-primary col-lg-5">Modificar contraseña</div>
+                    <div class="btn btn-outline-primary col-lg-5" (click)="mostrarDialogCambiarPassword()">Cambiar contraseña</div>
                 </div>
 
             </div>
         </div>
     </div>
-    <div class="contenedor-reservas-habitaciones row">1</div>
-    <div class="contenedor-reservas-servicios row">1</div>
+    <div class="contenedor-reservas-habitaciones row">
+        <app-reservas-habitaciones></app-reservas-habitaciones>
+    </div>
+    <div class="contenedor-reservas-servicios row">
+        <app-reservas-servicios></app-reservas-servicios>
+    </div>
 </div>

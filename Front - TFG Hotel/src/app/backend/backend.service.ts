@@ -143,8 +143,7 @@ export class BackendService {
              * El método .post devuelve un Observable sí o sí, y en la API, en este caso, un boolean,
              * retornando así un Observable<boolean>
              */
-            let observableBooleanValue: Observable<boolean> = this.httpClient.post<boolean>(url, userLoggedObject)
-            ;
+            let observableBooleanValue: Observable<boolean> = this.httpClient.post<boolean>(url, userLoggedObject);
             
             console.log("Usuario loggeado");
             

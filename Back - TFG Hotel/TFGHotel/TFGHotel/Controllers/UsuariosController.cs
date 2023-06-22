@@ -24,7 +24,6 @@ namespace TFGHotel.Controllers
             _usuariosService = usuariosService;
         }
 
-        // decorador de metodo. La API recibe una consulta en modo GET
         [HttpGet]
         [Route("listar-usuarios")]
         public List<UsuariosDTO> GetUsers()
@@ -33,7 +32,6 @@ namespace TFGHotel.Controllers
             return resultado;
         }
 
-        // decorador de metodo. La API recibe una consulta en modo POST
         [HttpPost]
         [Route("crear-nuevo-usuario")]
         public List<string> AddNewUser(UsuariosDTO usuarioDTO)
@@ -49,7 +47,6 @@ namespace TFGHotel.Controllers
         }
 
 
-        // decorador de metodo. La API recibe una consulta en modo POST para eliminar usuarios, filtrando por ID en el cuerpo de la petición.
         [HttpDelete("eliminar-usuario")]
         public ActionResult DeleteUserById(int idUsuarioABorrar)
         {
@@ -88,6 +85,35 @@ namespace TFGHotel.Controllers
             string email = userEmailObj.Email;
             
             return _usuariosService.GetUserDataByEmail(email);
+        }
+
+        [HttpPost]
+        [Route("cambiar-contrasena")]
+        public string DoChangeUserPassword(DoChangeUserPasswordDTO obj)
+        {
+            bool semaforo;
+            string value;
+
+
+            if (obj.NewPassword.Length < 8) return "ERROR: La contraseña no puede ser menor o igual a 8 caracteres.";
+            if (obj.OldPassword.Length < 8) return "ERROR: La contraseña antigua no puede ser menor o igual a 8 caracteres.";
+            if (obj.Username.Length == 0) return "ERROR: El campo del usuario es obligatorio, no puedes ponerlo vacío.";
+
+
+            semaforo = this._usuariosService.DoChangeUserPassword(obj);
+
+            if(semaforo == true)
+            {
+                value = "La contraseña del usuario ha sido cambiada.";
+            }
+            else
+            {
+                value = "ERROR: El usuario y/o la contraseña no coinciden.";
+            }
+
+            return value;
+
+            // fin metodo
         }
 
 

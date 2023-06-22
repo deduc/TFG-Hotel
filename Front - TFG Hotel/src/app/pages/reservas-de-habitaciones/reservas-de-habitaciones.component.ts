@@ -96,7 +96,7 @@ export class ReservasDeHabitacionesComponent {
      * 
      * * Nota: Para que las habitaciones carguen, necesito sí o sí invocar de forma asíncrona
      * * el método this.guardarObjetoEnSessionStorage para que le de tiempo a este metodo a
-     * * obtener las habitaciones de la api. No he conseguido separar el método.
+     * * obtener las habitaciones de la api. No he conseguido separarlo.
      */
     public async buscarHabitacionesEntreFechas(fechas: FechaInicioFinInterface): Promise<void> {
         console.log("Objeto fechas emitido y recibido en reservas.component.ts", fechas, "procedo a traer datos de la API.");

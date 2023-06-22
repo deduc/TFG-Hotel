@@ -13,5 +13,6 @@ namespace TFGHotel.Services.Usuarios
         USUARIOS GetUserDataByEmail(string email);
         USUARIOS GetUserDataByUsername(string username);
         bool DoCheckIfUserExists(string username);
+        bool DoChangeUserPassword(DoChangeUserPasswordDTO obj);
     }
 }

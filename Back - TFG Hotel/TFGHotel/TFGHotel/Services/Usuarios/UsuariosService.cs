@@ -195,6 +195,28 @@ namespace TFGHotel.Services.Usuarios
             }
         }
 
+        public bool DoChangeUserPassword(DoChangeUserPasswordDTO obj)
+        {
+            USUARIOS usuario = _context.Usuarios
+                .Where(x =>
+                    x.USERNAME == obj.Username &&
+                    x.PASS == obj.OldPassword
+                )
+                .FirstOrDefault();
+
+            if(usuario != null)
+            {
+                usuario.PASS = obj.NewPassword;
+                _context.SaveChanges();
+
+                return true;
+            }
+
+            return false;
+        }
+
+
+
         // fin clase
     }
 

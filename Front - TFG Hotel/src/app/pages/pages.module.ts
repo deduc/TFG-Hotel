@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 
 // * mis modulos
 import { AngularMaterialModule } from '../shared/material/material.module';
-import { CommonModule } from '@angular/common';
 // * modulo para manipular formularios
 import { FormsModule } from "@angular/forms";
 import { HomeModule } from './home/home.module';
@@ -18,6 +17,8 @@ import { BackendService } from '../backend/backend.service';
 import { ReservasDeHabitacionesModule } from './reservas-de-habitaciones/reservas-de-habitaciones.module';
 import { ReservasDeServiciosComponent } from './reservas-de-servicios/reservas-de-servicios.component';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { UserPageModule } from './user-page/user-page.module';
 
 
 
@@ -38,6 +39,7 @@ import { RouterModule } from '@angular/router';
         PagesRoutingModule,
         SharedModule,
         ReservasDeHabitacionesModule,
+        UserPageModule,
         RouterModule,
     ],
     exports: [

@@ -10,8 +10,8 @@ import { ButtonLoginComponent } from './button-login/button-login.component';
 import { ButtonRegisterComponent } from './button-register/button-register.component';
 import { AngularMaterialModule } from './material/material.module';
 import { ButtonGoHomeComponent } from './button-go-home/button-go-home.component';
-import { CommonModule } from '@angular/common';
 import { CajaReservarMedianteFechasComponent } from './caja-reservar-mediante-fechas/caja-reservar-mediante-fechas.component';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
