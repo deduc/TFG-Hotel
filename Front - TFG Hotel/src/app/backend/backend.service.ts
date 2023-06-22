@@ -130,6 +130,8 @@ export class BackendService {
         // console.log("compruebo loggin kekw");
         if (sessionStorage.getItem(SESSION_STORAGE_USER_LOGGED)) {
             // convierto a objeto los valores obtenidos en sessionStorage
+            console.log("Existen datos el sessionStorage, lo convierto a objeto");
+            
             let userLoggedObject: UserLoggedInterface = JSON.parse(
                 sessionStorage.getItem(SESSION_STORAGE_USER_LOGGED)
             );
@@ -141,7 +143,8 @@ export class BackendService {
              * El método .post devuelve un Observable sí o sí, y en la API, en este caso, un boolean,
              * retornando así un Observable<boolean>
              */
-            let observableBooleanValue: Observable<boolean> = this.httpClient.post<boolean>(url, userLoggedObject);
+            let observableBooleanValue: Observable<boolean> = this.httpClient.post<boolean>(url, userLoggedObject)
+            ;
             
             console.log("Usuario loggeado");
             

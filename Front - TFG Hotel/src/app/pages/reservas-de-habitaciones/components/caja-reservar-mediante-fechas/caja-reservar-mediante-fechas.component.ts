@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { ReservasService } from '../../reservas.service';
 import { FechaInicioFinInterface } from '../../../../core/interfaces/fecha-inicio-fin.interface';
+import { ReservasDeHabitacionesService } from '../../reservas-de-habitaciones.service';
 
 @Component({
   selector: 'pages-reservas-caja-reservar-mediante-fechas',
@@ -9,7 +9,7 @@ import { FechaInicioFinInterface } from '../../../../core/interfaces/fecha-inici
 })
 export class CajaReservarMedianteFechasComponent {
     @Output() fechas = new EventEmitter();
-    public reservasService:ReservasService;
+    public reservasService:ReservasDeHabitacionesService;
     public errorFormulario: number = 0;
     public fechaHoy: Date = new Date();
 
@@ -18,7 +18,10 @@ export class CajaReservarMedianteFechasComponent {
         fechaFin: null
     }
     
-    public constructor(reservasService:ReservasService){
+    public constructor(
+        reservasService:ReservasDeHabitacionesService
+    )
+    {
         this.reservasService = reservasService;
         
         this.fechaHoy.setHours(0);
@@ -51,21 +54,17 @@ export class CajaReservarMedianteFechasComponent {
             if(fechaInicio >= this.fechaHoy){
                 if(fechaInicio <= fechaFin){
                     this.errorFormulario = 1;
+                    
                     this.emitirObjFechas(this.objFechas);
+                    
                     // Envío al servicio las fechas del formulario que ha rellenado el usuario
                     this.reservasService.setObjFechasData(this.objFechas);
                 }
-                else{
-                    this.errorFormulario = 3;
-                }
+                else{ this.errorFormulario = 3; }
             }
-            else{
-                this.errorFormulario = 2;
-            }
+            else{ this.errorFormulario = 2; }
         }
-        else{
-            this.errorFormulario = 4;
-        }
+        else{ this.errorFormulario = 4; }
 
         // fin metodo
     }

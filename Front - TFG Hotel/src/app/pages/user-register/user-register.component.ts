@@ -14,13 +14,20 @@ import { UserRegisterFormInterface } from 'src/app/core/interfaces/user-register
 })
 export class UserRegisterComponent implements OnInit{
     public datosRegistroUsuario: UserRegisterFormInterface = {
-        nombre: "ivan",
-        apellidos: "gomez",
-        username: "deduc",
-        dni: "12312312A",
-        email: "deduc@deduc.es",
-        password: "deduc@deduc.esdeduc@deduc.es",
-        repeatedPassword: "deduc@deduc.esdeduc@deduc.es"
+        // nombre: "ivan",
+        // apellidos: "gomez",
+        // username: "deduc",
+        // dni: "12312312A",
+        // email: "deduc@deduc.es",
+        // password: "deduc@deduc.esdeduc@deduc.es",
+        // repeatedPassword: "deduc@deduc.esdeduc@deduc.es"
+        nombre: "",
+        apellidos: "",
+        username: "",
+        dni: "",
+        email: "",
+        password: "",
+        repeatedPassword: ""
     }
 ;
     public listaErrores: string[] = [];

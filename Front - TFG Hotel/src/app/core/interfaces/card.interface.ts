@@ -4,4 +4,5 @@ export interface CardInterface {
     imgSrc: string;
     imgID?: string;
     enlace?: string;
+    id_servicio?: number,
 }

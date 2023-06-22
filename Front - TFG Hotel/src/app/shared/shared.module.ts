@@ -19,7 +19,7 @@ import { CajaReservarMedianteFechasComponent } from './caja-reservar-mediante-fe
         // * Importa este módulo en caso de utilizar routing
         RouterModule,
         AngularMaterialModule,
-        CommonModule
+        CommonModule,
     ],
     declarations: [
         // declaro qué componentes importa este módulo

@@ -6,10 +6,11 @@ import { AuthGuard } from '../core/guards/auth.guard';
 // mis componentes
 import { PagesComponent } from './pages.component';
 import { HomeComponent } from './home/home.component';
-import { ReservasComponent } from './reservas/reservas.component';
-import { ActividadesComponent } from './actividades/actividades.component';
+
 import { NuestroForoComponent } from './TODO-nuestro-foro/nuestro-foro.component';
 import { UserPageComponent } from './user-page/user-page.component';
+import { ReservasDeHabitacionesComponent } from './reservas-de-habitaciones/reservas-de-habitaciones.component';
+import { ReservasDeServiciosComponent } from './reservas-de-servicios/reservas-de-servicios.component';
 
 
 //  localhost:4200/heroes/''
@@ -31,7 +32,7 @@ const routes: Routes = [
                 path: 'home', component: HomeComponent
             },
             {
-                path: 'reservas', component: ReservasComponent
+                path: 'reservas', component: ReservasDeHabitacionesComponent
             },
             {
                 path: 'habitaciones',
@@ -39,7 +40,7 @@ const routes: Routes = [
                 .then(modulo => modulo.HabitacionesModule)
             },
             {
-                path: 'actividades', component: ActividadesComponent,
+                path: 'servicios', component: ReservasDeServiciosComponent,
                 canActivate: [AuthGuard],
                 canMatch: [AuthGuard]
             },

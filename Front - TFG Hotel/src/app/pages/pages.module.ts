@@ -8,24 +8,25 @@ import { FormsModule } from "@angular/forms";
 import { HomeModule } from './home/home.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { SharedModule } from '../shared/shared.module';
-import { ReservasModule } from './reservas/reservas.module';
 
 // * mis componentes
-import { ActividadesComponent } from './actividades/actividades.component';
 import { PagesComponent } from './pages.component';
 import { HabitacionesComponent } from './habitaciones/habitaciones.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { UserRegisterComponent } from './user-register/user-register.component';
 import { BackendService } from '../backend/backend.service';
+import { ReservasDeHabitacionesModule } from './reservas-de-habitaciones/reservas-de-habitaciones.module';
+import { ReservasDeServiciosComponent } from './reservas-de-servicios/reservas-de-servicios.component';
+import { RouterModule } from '@angular/router';
 
 
 
 @NgModule({
     declarations: [
         // componentes
-        ActividadesComponent,
         HabitacionesComponent,
         PagesComponent,
+        ReservasDeServiciosComponent,
         UserLoginComponent,
         UserRegisterComponent,
     ],
@@ -36,7 +37,8 @@ import { BackendService } from '../backend/backend.service';
         HomeModule,
         PagesRoutingModule,
         SharedModule,
-        ReservasModule,
+        ReservasDeHabitacionesModule,
+        RouterModule,
     ],
     exports: [
         // componentes globales para la app

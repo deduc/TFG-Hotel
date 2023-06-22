@@ -24,13 +24,25 @@
                 <div class="card-body">
                     <p class="card-text">{{ item.descripcion }}</p>
                 </div>
+
+                <div class="card-body">
+                    <p class="card-text text-center"><b>{{ item.precio }} €</b> por noche</p>
+                </div>
+                
                 
                 <div class="card-body" *ngIf="item.cantidad_de_habitaciones_disponibles">
                     <p class="card-text">Habitaciones disponibles restantes: <b>{{ item.cantidad_de_habitaciones_disponibles }}</b></p>
                 </div>
                 
                 <!-- <button mat-button class="btn btn-primary" (click)="lala(item.id_tipo_de_habitacion)">Reservar</button> -->
-                <button mat-button class="btn btn-primary" (click)="reservarHabitacion(item.id_tipo_de_habitacion)">Reservar</button>
+                <div *ngIf="isUserLogged != false;">
+                    <button mat-button class="btn btn-primary col-12" (click)="reservarHabitacion(item.id_tipo_de_habitacion)">Reservar</button>
+                </div>
+                <div *ngIf="isUserLogged == false;" class="btn btn-primary" (click)="navigateLoginPage()">
+                    Inicia sesión para reservar
+                </div>
+                
+
                 
                 <!-- fin div.card -->
             </div>

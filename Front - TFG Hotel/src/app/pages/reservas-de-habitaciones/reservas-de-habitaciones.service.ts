@@ -11,7 +11,7 @@ import { FechaInicioFinInterface } from 'src/app/core/interfaces/fecha-inicio-fi
 
 
 @Injectable({providedIn: 'root'})
-export class ReservasService {
+export class ReservasDeHabitacionesService {
 
     public objFechas = new BehaviorSubject<FechaInicioFinInterface>(
         {fechaInicio: new Date, fechaFin: new Date}

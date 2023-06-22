@@ -64,11 +64,16 @@ export class UserLoginComponent implements OnInit {
      * el formulario de login e intenta iniciar sesion
      */
     public tryLoginUser(): void {
+        console.log(1);
+        
         if ((this.userData.Password.length >= 8) && (this.userData.Email.match(this.patronEmail))) {
-            this._backendService.loginTest(this.userData).subscribe(response => {
-                if(response.email.length > 0 && response.password.length > 0)
-                {
-                    sessionStorage.setItem(SESSION_STORAGE_USER_LOGGED, JSON.stringify(this.userData))
+
+            this._backendService.loginTest(this.userData)
+            .subscribe(response => {
+
+                if(response.email.length > 0 && response.password.length > 0) {
+                    sessionStorage.setItem(SESSION_STORAGE_USER_LOGGED, JSON.stringify(this.userData));
+                    this.guardarUsuarioEnSessionStorage(this.userData);
                     
                     this.errorLogin = 1;
                     this.openDialog(this.errorLogin);
@@ -76,18 +81,15 @@ export class UserLoginComponent implements OnInit {
                     this.disabledBotonIniciarSesion = true;
 
                     console.log("Front: Ahora sí estás loggeado.");
-                    
-                    
-                    setTimeout( () => {
-                        this.closeDialog();
-                        this.route.navigate(['./home'])
-                    }, 2000)
+
+                    this.loginCorrectoTransicion();
                 }
                 else{
                     this.errorLogin = 3;
                     this.openDialog(this.errorLogin);
                 }
-            })
+
+            });
         }
         else {
             this.errorLogin = 2;
@@ -116,6 +118,18 @@ export class UserLoginComponent implements OnInit {
 
     private closeDialog(): void {
         this.dialog.closeAll();
+    }
+
+    private loginCorrectoTransicion(): void {
+        setTimeout( () => {
+            this.closeDialog();
+            this.route.navigate(['./home'])
+        }, 2000)
+
+    }
+
+    private guardarUsuarioEnSessionStorage(userData: UserLoggedInterface): void {
+        sessionStorage.setItem(SESSION_STORAGE_USER_LOGGED, JSON.stringify(userData));
     }
 
     // fin clase
