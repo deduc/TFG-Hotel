@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TFGHotel.Entities;
 using TFGHotel.Services.Clientes;
 
 namespace TFGHotel.Controllers
@@ -26,5 +27,30 @@ namespace TFGHotel.Controllers
             var resultado = this._clientesService.GetClientes();
             return Ok(resultado);
         }
+
+        [HttpPost]
+        [Route("crear-cliente-by-user-data")]
+        public string AddNewClienteByUserData(USUARIOS datosUsuario)
+        {
+            bool semaforo;
+            string returnValue;
+            
+
+            semaforo = this._clientesService.AddNewClienteByUserData(datosUsuario);
+
+            if(semaforo != true)
+            {
+                returnValue = "ERROR: No se ha podido añadir el cliente debido a un error desconocido.";
+            }
+            else
+            {
+                returnValue = "Cliente añadido con exito.";
+            }
+            
+            
+            return returnValue;
+        }
+
+        // fin clase
     }
 }

@@ -6,7 +6,7 @@ namespace TFGHotel.Services.ReservasDeServicios
     public interface IReservasDeServicios
     {
         List<RESERVAS_DE_SERVICIOS> GetReservasDeServicios();
-        Task<string> AddNewReservasDeServicios(ReservasDeServicios_DTO reservasDeServiciosDTO);
+        string AddNewReservasDeServicios(ReservasDeServicios_DTO reservasDeServiciosDTO);
         Task<string> DeleteReservasDeServiciosById(int id);
     }
 }

@@ -14,6 +14,7 @@ namespace TFGHotel.Services.Clientes
             _context = context;
         }
 
+
         public List<ClientesDTO> GetClientes()
         {
             var clientes = _context.Clientes.ToList();
@@ -59,7 +60,10 @@ namespace TFGHotel.Services.Clientes
                 .Where(x => x.USERNAME == username)
                 .FirstOrDefault();
 
-            if(cliente != null)
+            Console.WriteLine("AAAAAAAAAAAAAAAA");
+            Console.WriteLine(username);
+
+            if (cliente != null)
             {
                 return true;
             }
@@ -87,6 +91,56 @@ namespace TFGHotel.Services.Clientes
             };
         }
 
+        public int GetIdClienteByUsername(string Username)
+        {
+            bool semaforo = this.DoCheckIfClienteExists(Username);
+
+            if(semaforo == true)
+            {
+                CLIENTES cliente = _context.Clientes
+                    .Where(x => x.USERNAME == Username)
+                    .FirstOrDefault();
+
+                if (cliente != null) return cliente.ID_CLIENTE;
+            }
+            else
+            {
+                throw new Exception("ERROR: No existe un cliente con ese username");
+            }
+
+            return 0;
+        }
+
+        public bool AddNewClienteByUserData(USUARIOS datosUsuario)
+        {
+            CLIENTES cliente;
+            int semaforoIdCliente;
+
+            cliente = new CLIENTES
+            {
+                NOMBRE = datosUsuario.NOMBRE,
+                APELLIDOS = datosUsuario.APELLIDOS,
+                USERNAME = datosUsuario.USERNAME,
+                DNI = datosUsuario.DNI,
+                EMAIL = datosUsuario.EMAIL
+            };
+
+            _context.Add(cliente);
+            _context.SaveChanges();
+
+
+            semaforoIdCliente = this.GetIdClienteByUsername(datosUsuario.USERNAME);
+
+            if(semaforoIdCliente != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
 
 
         // fin clase

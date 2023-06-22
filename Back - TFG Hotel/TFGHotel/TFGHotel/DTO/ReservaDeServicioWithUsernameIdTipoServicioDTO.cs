@@ -2,10 +2,10 @@
 
 namespace TFGHotel.DTO
 {
-    public class ReservasDeServicios_DTO
+    public class ReservaDeServicioWithUsernameIdTipoServicioDTO
     {
-        [JsonPropertyName("Id_Cliente")]
-        public int Id_Cliente{ get; set; }
+        [JsonPropertyName("Username")]
+        public string Username { get; set; }
         [JsonPropertyName("Id_Servicio")]
         public int Id_Servicio { get; set; }
     }

@@ -8,7 +8,6 @@ namespace TFGHotel.Services.ReservasDeServicios
     {
         private FCT10Context _context;
 
-        // constructor
         public ReservasDeServicios(FCT10Context context) {
             this._context = context;
         }
@@ -18,32 +17,23 @@ namespace TFGHotel.Services.ReservasDeServicios
             return this._context.Reservas_De_Servicios.ToList();
         }
 
-        public async Task<string> AddNewReservasDeServicios(ReservasDeServicios_DTO reservasDeServiciosDTO)
+        public string AddNewReservasDeServicios(ReservasDeServicios_DTO reservasDeServiciosDTO)
         {
-            /*
-             * Comprobar que el ID del cliente y del servicio existen
-             * Si existen:
-             *      crear objeto RESERVAS_DE_SERVICIOS
-             *      añadir fila de forma asincrona
-             *      guardar cambios de forma asincrona
-             * Si no:
-             *      mensaje de error
-             */
             string returnValue;
-            bool semaforo = this.ComprobarIdClienteIdServicio(reservasDeServiciosDTO);
+            bool semaforoCliente = this.CheckIfIdClienteExists(reservasDeServiciosDTO.Id_Cliente);
+            bool semaforoTipoServicio = this.CheckIfIdServicioExists(reservasDeServiciosDTO.Id_Servicio);
 
-            if(semaforo == true)
+            if(semaforoCliente == true && semaforoTipoServicio == true)
             {
                 RESERVAS_DE_SERVICIOS reserva = new()
                 {
-                    //Id_Reserva_Servicio = reservasDeServiciosDTO.Id_Reserva_Servicio,
-                    //ID_RESERVA = reservasDeServiciosDTO.Id_Reserva,
                     ID_CLIENTE = reservasDeServiciosDTO.Id_Cliente,
                     ID_SERVICIO = reservasDeServiciosDTO.Id_Servicio,
+                    RESERVA_ACTIVA = 1
                 };
 
-                await _context.Reservas_De_Servicios.AddAsync(reserva);
-                await _context.SaveChangesAsync();
+                _context.Reservas_De_Servicios.Add(reserva);
+                _context.SaveChanges();
 
                 returnValue = "Reserva de servicio creada correctamente.";
             }
@@ -53,6 +43,23 @@ namespace TFGHotel.Services.ReservasDeServicios
             }
 
             return returnValue;
+        }
+
+        public bool CheckIfIdClienteExists(int idCliente) {
+            CLIENTES cliente = _context.Clientes
+                .Where(x => x.ID_CLIENTE == idCliente)
+                .FirstOrDefault();
+
+            if (cliente != null) return true;
+            else return false;
+        }
+        public bool CheckIfIdServicioExists(int idServicio){
+            TIPOS_DE_SERVICIOS tipoServicio = _context.Tipos_De_Servicios
+                .Where(x => x.ID_SERVICIO == idServicio)
+                .FirstOrDefault();
+
+            if (tipoServicio != null) return true;
+            else return false;
         }
 
         private bool ComprobarIdClienteIdServicio(ReservasDeServicios_DTO reservasDeServiciosDTO)
@@ -90,5 +97,7 @@ namespace TFGHotel.Services.ReservasDeServicios
 
             return returnValue;
         }
+
+        // fin clase
     }
 }

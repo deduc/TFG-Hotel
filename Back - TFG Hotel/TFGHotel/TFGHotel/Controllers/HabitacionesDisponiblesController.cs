@@ -42,7 +42,7 @@ namespace TFGHotel.Controllers
             Console.WriteLine(objFechasIdHabitacion.objFechasDto.FechaFin);
             Console.WriteLine(objFechasIdHabitacion.idTipoHabitacion.IdHabitacion);
             
-            List <DatosYCantidadDeHabitacionesDisponiblesEntreFechasDTO> listaHabitacionesDisponibles = this._habitacionesDisponiblesService.GetHabitacionesDisponiblesEntreFechas(objFechas);
+            List<DatosYCantidadDeHabitacionesDisponiblesEntreFechasDTO> listaHabitacionesDisponibles = this._habitacionesDisponiblesService.GetHabitacionesDisponiblesEntreFechas(objFechas);
 
             return this._habitacionesDisponiblesService.FiltrarHabitacionPorTipoDeHabitacion(listaHabitacionesDisponibles, idTipoHabitacion);
         }
