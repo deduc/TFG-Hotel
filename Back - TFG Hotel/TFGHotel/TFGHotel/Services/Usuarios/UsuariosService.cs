@@ -51,7 +51,7 @@ namespace TFGHotel.Services.Usuarios
                     NOMBRE = usuarioDTO.NOMBRE,
                     APELLIDOS = usuarioDTO.APELLIDOS,
                     PASS = usuarioDTO.PASSWORD,
-                    FOTO_DE_PERFIL_BASE_64 = "NULL_VALUE",
+                    FOTO_DE_PERFIL_BASE_64 = "",
                     ADMINISTRADOR = false,
                     USUARIO_ACTIVO = true,
                 };
@@ -213,6 +213,26 @@ namespace TFGHotel.Services.Usuarios
             }
 
             return false;
+        }
+
+        public bool CambiarFotoPerfilUsuario(UsernameFotoPerfilBase64DTO usernameFotoPerfilObj)
+        {
+            bool returnValue;
+
+            USUARIOS usuario = _context.Usuarios
+                .Where(x => x.USERNAME == usernameFotoPerfilObj.Username)
+                .FirstOrDefault();
+
+            if(usuario != null)
+            {
+                usuario.FOTO_DE_PERFIL_BASE_64 = usernameFotoPerfilObj.FotoPerfilBase64;
+                _context.SaveChanges();
+
+                returnValue = true;
+            }
+            else returnValue = false;
+
+            return returnValue;
         }
 
 

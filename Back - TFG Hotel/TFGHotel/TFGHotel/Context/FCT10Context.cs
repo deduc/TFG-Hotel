@@ -18,8 +18,10 @@ namespace TFGHotel.Context
         public DbSet<RESERVAS_DE_SERVICIOS> Reservas_De_Servicios { get; set; }
         public DbSet<TIPOS_DE_HABITACIONES> Tipos_De_Habitaciones { get; set; }
         public DbSet<TIPOS_DE_SERVICIOS> Tipos_De_Servicios { get; set; }
-        public DbSet<DATOS_DE_HABITACIONES_DISPONIBLES> Datos_De_Habitaciones_Disponibles { get; set; }
         public DbSet<HABITACIONES> Habitaciones { get; set; }
+        public DbSet<DATOS_DE_HABITACIONES_DISPONIBLES> Datos_De_Habitaciones_Disponibles { get; set; }
+        public DbSet<DATOS_HABITACIONES_TIPOS_FECHAS> Datos_Habitaciones_Tipos_Fechas { get; set; }
+        public DbSet<DATOS_RESERVAS_DE_SERVICIOS_Y_CLIENTES> Datos_Reservas_De_Servicios_Y_Clientes { get; set; }
 
 
         public FCT10Context(DbContextOptions options) : base(options) { }
@@ -48,13 +50,19 @@ namespace TFGHotel.Context
                 .HasKey(columna => new { columna.ID_TIPO_DE_HABITACION });
 
             modelBuilder.Entity<TIPOS_DE_SERVICIOS>()
-                .HasKey(columna => new { columna.ID_SERVICIO});
-
-            modelBuilder.Entity<DATOS_DE_HABITACIONES_DISPONIBLES>()
-                .HasKey(columna => new { columna.ID_TIPO_DE_HABITACION });
+                .HasKey(columna => new { columna.ID_SERVICIO });
 
             modelBuilder.Entity<HABITACIONES>()
                 .HasKey(columna => new { columna.ID_HABITACION });
+            
+            modelBuilder.Entity<DATOS_DE_HABITACIONES_DISPONIBLES>()
+                .HasKey(columna => new { columna.ID_TIPO_DE_HABITACION });
+            
+            modelBuilder.Entity<DATOS_HABITACIONES_TIPOS_FECHAS>()
+                .HasKey(columna => new { columna.ID_HABITACION });
+
+            modelBuilder.Entity<DATOS_RESERVAS_DE_SERVICIOS_Y_CLIENTES>()
+                .HasKey(columna => new { columna.ID_RESERVA_SERVICIO });
 
             // fin metodo OnModelCreating
         }

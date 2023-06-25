@@ -98,6 +98,26 @@ namespace TFGHotel.Services.ReservasDeServicios
             return returnValue;
         }
 
+        public List<DATOS_RESERVAS_DE_SERVICIOS_Y_CLIENTES> GetReservasDeServiciosByIdCliente(int idCliente)
+        {
+            var misDatos = _context.Datos_Reservas_De_Servicios_Y_Clientes
+                .Where(x => x.ID_CLIENTE == idCliente)
+                .ToList();
+
+            return misDatos;
+        }
+
+        public void CancelarReservaDeServicio(int idReservaServicio)
+        {
+            var reserva = _context.Reservas_De_Servicios
+                .Where(x => x.ID_RESERVA_SERVICIO == idReservaServicio)
+                .FirstOrDefault();
+
+            _context.Reservas_De_Servicios
+                .Remove(reserva);
+            _context.SaveChanges();
+        }
+
         // fin clase
     }
 }

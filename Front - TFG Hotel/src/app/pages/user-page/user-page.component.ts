@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, EventEmitter, Output } from '@angular/core';
 
 import { UserLoggedInterface } from 'src/app/core/interfaces/user-logged.interface';
 import { HttpClient } from '@angular/common/http';
@@ -8,7 +8,8 @@ import { BackendService } from "src/app/backend/backend.service";
 import { CommonModule } from '@angular/common';
 import { DoChangeUserPasswordDTO } from "src/app/core/interfaces/DoChangeUserPasswordDTO.interface";
 import { MatDialog } from "@angular/material/dialog";
-import { DialogElement } from "./components/dialog-element-angular-material/dialog-element-angular-material.component";
+import { DialogElement } from "./components/dialog-cambiar-password/dialog-element-angular-material.component";
+import { DialogCambiarFotoPerfil } from "./components/dialog-cambiar-img-perfil/dialog-element-angular-material.component";
 
 
 @Component({
@@ -21,13 +22,14 @@ import { DialogElement } from "./components/dialog-element-angular-material/dial
 export class UserPageComponent {
     public userLogged: UserLoggedInterface;
     public datosUsuarioObj: UsuariosDTO;
+    public imagenPerfil: string;
     
     private userLoggedSessionStorageKey: string = "user_logged";
 
     constructor(
-        private _backendService: BackendService,
         private httpClient: HttpClient,
-        public dialog: MatDialog,
+        public dialogCambiarPassword: MatDialog,
+        public dialogCambiarFotoPerfil: MatDialog,
     ) 
     { 
         if(sessionStorage.getItem(this.userLoggedSessionStorageKey)){
@@ -41,8 +43,6 @@ export class UserPageComponent {
 
     ngOnInit() { 
         this.obtenerDatosUsuarioObj();
-        this.obtenerReservasDeHabitaciones();
-        this.obtenerReservasDeServicios();
     }
 
     private obtenerDatosUsuarioObj(){
@@ -52,53 +52,19 @@ export class UserPageComponent {
         .post<UsuariosDTO>(apiUrl, userEmail)
         .subscribe(
             async res => {
-                await console.log(res);
+                // await console.log(res);
                 this.datosUsuarioObj = await res;
+                this.imagenPerfil = await this.datosUsuarioObj.FOTO_DE_PERFIL_BASE_64;
             }
         )
     }
 
-    public obtenerReservasDeHabitaciones(){
-        // TODO: HACER ESTO UNA VEZ EL USUARIO PUEDA HACER RESERVAS
-        // const apiUrl: string = "";
-        // const body: { USERNAME: string = this.datosUsuarioObj.USERNAME}
-        
-        // this.httpClient
-        // .get<>(apiUrl)
-        // .subscribe();
-    }
-
-    public obtenerReservasDeServicios(){
-        // TODO: HACER ESTO UNA VEZ EL USUARIO PUEDA HACER RESERVAS
-        // const apiUrl: string = "";
-        // const body: { USERNAME: string = this.datosUsuarioObj.USERNAME}
-        
-        // this.httpClient
-        // .get<>(apiUrl)
-        // .subscribe();
-    }
-
-    public cambiarPassword(oldPassword: string, newPassword: string){
-        const apiUrl: string = "https://localhost:7149/api/usuarios/cambiar-contrasena";
-
-        let username = this.datosUsuarioObj.USERNAME;
-        const body: DoChangeUserPasswordDTO = {
-            Username: username,
-            OldPassword: oldPassword,
-            NewPassword: newPassword,
-        }
-
-        this.httpClient
-        .post<string>(apiUrl, body)
-        .subscribe(
-            res => {
-                
-            }
-        );
-    }
-
     public mostrarDialogCambiarPassword(){
-        this.dialog.open(DialogElement);
+        this.dialogCambiarPassword.open(DialogElement, { data: this.datosUsuarioObj });
+    }
+
+    public mostrarDialogCambiarFotoPerfil(){
+        this.dialogCambiarFotoPerfil.open(DialogCambiarFotoPerfil, { data: this.datosUsuarioObj });
     }
 
     // fin clase

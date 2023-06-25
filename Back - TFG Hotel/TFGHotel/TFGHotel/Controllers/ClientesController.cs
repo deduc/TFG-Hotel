@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TFGHotel.DTO;
 using TFGHotel.Entities;
 using TFGHotel.Services.Clientes;
 
@@ -49,6 +50,15 @@ namespace TFGHotel.Controllers
             
             
             return returnValue;
+        }
+
+        [HttpPost]
+        [Route("obtener-datos-cliente-by-username")]
+        public CLIENTES GetDatosDeClienteWithUsername(UsernameObjectDTO usernameDTO)
+        {
+            CLIENTES datosCliente = this._clientesService.GetDatosClienteByUsername(usernameDTO.Username);
+
+            return datosCliente;
         }
 
         // fin clase

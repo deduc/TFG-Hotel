@@ -2,6 +2,6 @@
 {
     public class UsernameObjectDTO
     {
-        public string Username;
+        public string Username { get; set; }
     }
 }

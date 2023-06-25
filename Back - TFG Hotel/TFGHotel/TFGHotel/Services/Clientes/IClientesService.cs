@@ -12,5 +12,7 @@ namespace TFGHotel.Services.Clientes
         bool DoCheckIfClienteExists(string username);
         CLIENTES GetDatosClienteByUsername(string username);
         CLIENTES CreateObjectCLIENTESByUSUARIOSObject(USUARIOS datosUsuario);
+
+
     }
 }

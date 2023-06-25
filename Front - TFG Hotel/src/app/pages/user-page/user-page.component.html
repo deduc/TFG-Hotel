@@ -2,62 +2,48 @@
     <div class="contenedor-perfil row pb-5">
         <div class="row">
             <div class="col-lg-4 d-flex justify-content-center align-items-center">
-                <!-- <img class="img-perfil" src="/src/assets/images/pages-actividades/actividades-1.jpg" alt="IMAGEN DE PERFIL"> -->
-                <img class="img-perfil" src="https://picsum.photos/id/1025/600/400" alt="img perfil">
+                <img *ngIf="imagenPerfil.length > 0" class="img-perfil col-lg-10" [src]="datosUsuarioObj.FOTO_DE_PERFIL_BASE_64" alt="img perfil">
+                <img *ngIf="imagenPerfil.length == 0" class="img-perfil col-lg-10" src="../../../assets/images/pages-user-page/user-profile-pic.png" alt="img perfil">
             </div>
             <div class="col-lg-8">
-                <div class="row">
+                <div class="row mid-small-gap">
                     <h1 class="bg-light">
                         {{ datosUsuarioObj.USERNAME }}
                     </h1>
                 </div>
                 
                 <div class="row">
-                    <ul class="list-group col-lg-12 bg-light p-2 contenedor-datos-usuario">
-                        <div class="col-lg-4">
-                            <li class="list-group-item">
-                                Correo electrónico
-                            </li>
-                            <li class="list-group-item">
-                                DNI
-                            </li>
-
-                            <li class="list-group-item">
-                                Nombre
-                            </li>
-                            <li class="list-group-item">
-                                Apellidos
-
-                        </div>
-                        <div class="col-lg-8">
-                            <li class="list-group-item">
-                                {{ datosUsuarioObj.EMAIL }}
-                            </li>
-                            <li class="list-group-item">
-                                {{ datosUsuarioObj.DNI }}
-                            </li>
-
-                            <li class="list-group-item">
-                                {{ datosUsuarioObj.NOMBRE }}
-                            </li>
-                            <li class="list-group-item">
-                                {{ datosUsuarioObj.APELLIDOS }}
-                            </li>
-                        </div>
-                    </ul>
+                    <div class="row">
+                        <div class="col-4 list-group-item">Correo electrónico</div>
+                        <div class="col-8 list-group-item">{{ datosUsuarioObj.EMAIL }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 list-group-item">DNI</div>
+                        <div class="col-8 list-group-item">{{ datosUsuarioObj.DNI }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 list-group-item">Nombre</div>
+                        <div class="col-8 list-group-item">{{ datosUsuarioObj.NOMBRE }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 list-group-item">Apellidos</div>
+                        <div class="col-8 list-group-item">{{ datosUsuarioObj.APELLIDOS }}</div>
+                    </div>
                 </div>
 
                 <div class="row py-5 contenedor-botones">
                     <div class="btn btn-outline-primary col-lg-5" (click)="mostrarDialogCambiarPassword()">Cambiar contraseña</div>
+                    <div class="btn btn-outline-primary col-lg-5" (click)="mostrarDialogCambiarFotoPerfil()">Cambiar foto de perfil</div>
                 </div>
 
             </div>
         </div>
     </div>
     <div class="contenedor-reservas-habitaciones row">
-        <app-reservas-habitaciones></app-reservas-habitaciones>
+        <app-reservas-habitaciones [datosUsuarioObj]="datosUsuarioObj"></app-reservas-habitaciones>
     </div>
+    <hr>
     <div class="contenedor-reservas-servicios row">
-        <app-reservas-servicios></app-reservas-servicios>
+        <app-reservas-servicios [datosUsuarioObj]="datosUsuarioObj"></app-reservas-servicios>
     </div>
 </div>

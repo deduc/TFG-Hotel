@@ -1,0 +1,5 @@
+<div class="container p-5">
+    <h1>Cambia tu foto de perfil</h1>
+    <input type="file" (change)="onImageSelected($event)">
+    <button (click)="enviarImagen()" [disabled]="!selectedImage">Enviar</button>
+</div>

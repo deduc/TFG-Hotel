@@ -89,15 +89,15 @@ namespace TFGHotel.Controllers
 
         [HttpPost]
         [Route("cambiar-contrasena")]
-        public string DoChangeUserPassword(DoChangeUserPasswordDTO obj)
+        public bool DoChangeUserPassword(DoChangeUserPasswordDTO obj)
         {
             bool semaforo;
             string value;
 
 
-            if (obj.NewPassword.Length < 8) return "ERROR: La contraseña no puede ser menor o igual a 8 caracteres.";
-            if (obj.OldPassword.Length < 8) return "ERROR: La contraseña antigua no puede ser menor o igual a 8 caracteres.";
-            if (obj.Username.Length == 0) return "ERROR: El campo del usuario es obligatorio, no puedes ponerlo vacío.";
+            //if (obj.NewPassword.Length < 8) return "ERROR: La contraseña no puede ser menor o igual a 8 caracteres.";
+            //if (obj.OldPassword.Length < 8) return "ERROR: La contraseña antigua no puede ser menor o igual a 8 caracteres.";
+            //if (obj.Username.Length == 0) return "ERROR: El campo del usuario es obligatorio, no puedes ponerlo vacío.";
 
 
             semaforo = this._usuariosService.DoChangeUserPassword(obj);
@@ -105,15 +105,24 @@ namespace TFGHotel.Controllers
             if(semaforo == true)
             {
                 value = "La contraseña del usuario ha sido cambiada.";
+                return true;
             }
             else
             {
                 value = "ERROR: El usuario y/o la contraseña no coinciden.";
             }
 
-            return value;
+            return false;
 
             // fin metodo
+        }
+
+        [HttpPost]
+        [Route("cambiar-foto-perfil")]
+        public bool CambiarFotoPerfilUsuario(UsernameFotoPerfilBase64DTO usernameFotoPerfilObj)
+        {
+
+            return _usuariosService.CambiarFotoPerfilUsuario(usernameFotoPerfilObj);
         }
 
 

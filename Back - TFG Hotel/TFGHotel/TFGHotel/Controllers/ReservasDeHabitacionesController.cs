@@ -181,15 +181,23 @@ namespace TFGHotel.Controllers
             return this._clientesService.CreateObjectCLIENTESByUSUARIOSObject(datosUsuario);
         }
 
-        // TODO     hacer cuando se pueda reservar habitaciones
-        //[HttpPost]
-        //[Route("get-reservas-de-habitaciones-by-username")]
-        //public List<> GetReservasDeHabitacionesByUsername(string username) 
-        //{
+       [HttpGet]
+       [Route("get-reservas-de-habitaciones-by-id-cliente")]
+        public List<DATOS_HABITACIONES_TIPOS_FECHAS> GetReservasDeHabitacionesByIdCliente(int idCliente)
+        {
+            var misReservas = this._reservasDeHabitacionesService.GetReservasDeHabitacionesByIdCliente(idCliente);
 
-        //}
+            return misReservas;
+        }
 
 
         // fin clase
+
+        [HttpGet]
+        [Route("cancelar-reserva-de-habitacion")]
+        public void CancelarReservaDeHabitacion(int idHabitacion)
+        {
+            this._reservasDeHabitacionesService.CancelarReservaDeHabitacion(idHabitacion);
+        }
     }
 }

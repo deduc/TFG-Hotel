@@ -14,5 +14,6 @@ namespace TFGHotel.Services.Usuarios
         USUARIOS GetUserDataByUsername(string username);
         bool DoCheckIfUserExists(string username);
         bool DoChangeUserPassword(DoChangeUserPasswordDTO obj);
+        bool CambiarFotoPerfilUsuario(UsernameFotoPerfilBase64DTO usernameFotoPerfilObj);
     }
 }

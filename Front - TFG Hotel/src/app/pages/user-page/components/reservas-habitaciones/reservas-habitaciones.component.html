@@ -1,1 +1,29 @@
-<p>reservas-habitaciones works!</p>
+<div class="container" *ngIf="misReservas">
+    <h1>Reservas de habitaciones</h1>
+    
+    <div class="table">
+        <thead>
+            <tr>
+                <th>ÍNDICE</th>
+                <th>ID HABITACION</th>
+                <th>CATEGORÍA</th>
+                <th>FECHA INICIO</th>
+                <th>FECHA FIN</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of misReservas; let indice = index">
+                <td class="text-center">{{ indice+1 }}</td>
+                <td class="text-center">{{ item.ID_HABITACION }}</td>
+                <td>{{ item.CATEGORIA }}</td>
+                <td>{{ item.FECHA_INICIO }}</td>
+                <td>{{ item.FECHA_FIN }}</td>
+                <td>
+                    <div class="btn btn-secondary" (click)="cancelarReserva(item.ID_HABITACION)">Cancelar</div>
+                </td>
+            </tr>
+        </tbody>
+    </div>
+
+</div>
+

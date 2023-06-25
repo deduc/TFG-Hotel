@@ -230,7 +230,33 @@ namespace TFGHotel.Services.Reservas
 
         }
 
+        public List<DATOS_HABITACIONES_TIPOS_FECHAS> GetReservasDeHabitacionesByIdCliente(int idCliente)
+        {
+            List<DATOS_HABITACIONES_TIPOS_FECHAS> misReservas = _context.Datos_Habitaciones_Tipos_Fechas
+                .Where(x => x.ID_CLIENTE == idCliente)
+                .ToList();
 
+            return misReservas;
+        }
+
+        public void CancelarReservaDeHabitacion(int idHabitacion)
+        {
+            var reserva = this._context.Reservas_De_Habitaciones
+                .Where(x => x.ID_HABITACION == idHabitacion)
+                .FirstOrDefault();
+
+            _context.Reservas_De_Habitaciones
+                .Remove(reserva);
+            _context.SaveChanges();
+
+
+            var habitacion = this._context.Habitaciones
+                .Find(reserva.ID_HABITACION);
+
+            habitacion.DISPONIBLE = 1;
+
+            _context.SaveChanges();
+        }
 
 
         // fin clase

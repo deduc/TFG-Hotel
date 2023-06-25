@@ -1,1 +1,25 @@
-<p>reservas-servicios works!</p>
+<div class="container" *ngIf="misReservas">
+    <h1>Reservas de servicios</h1>
+    
+    <div class="table">
+        <thead>
+            <tr>
+                <th>ÍNDICE</th>
+                <th>NOMBRE_SERVICIO</th>
+                <th>PRECIO</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of misReservas; let indice = index">
+                <td class="text-center">{{ indice+1 }}</td>
+                <td>{{ item.NOMBRE_SERVICIO }}</td>
+                <td>{{ item.PRECIO }}</td>
+                <td>
+                    <div class="btn btn-secondary" (click)="cancelarReserva(item.ID_RESERVA_SERVICIO)">Cancelar</div>
+                </td>
+            </tr>
+        </tbody>
+    </div>
+
+</div>
+

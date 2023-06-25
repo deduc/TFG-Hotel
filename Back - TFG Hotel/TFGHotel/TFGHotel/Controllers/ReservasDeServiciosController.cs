@@ -105,5 +105,24 @@ namespace TFGHotel.Controllers
 
             return returnValue;
         }
+
+        [HttpGet]
+        [Route("get-reservas-de-servicios-by-id-cliente")]
+        public List<DATOS_RESERVAS_DE_SERVICIOS_Y_CLIENTES> GetReservasDeServiciosByIdCliente(int idCliente)
+        {
+            var misReservas = this._reservasDeServiciosService.GetReservasDeServiciosByIdCliente(idCliente);
+
+            return misReservas;
+        }
+
+        [HttpGet]
+        [Route("cancelar-reserva-de-servicio")]
+        public void CancelarReservaDeServicio(int idReservaServicio)
+        {
+            this._reservasDeServiciosService.CancelarReservaDeServicio(idReservaServicio);
+        }
+
+
+        // fin clase
     }
 }

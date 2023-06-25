@@ -20,5 +20,7 @@ namespace TFGHotel.Services.Reservas
                     HABITACIONES datosHabitacion,
                     FechaInicioFinDTO objFechas);
         bool DoCheckIfReservaDeHabitacionWasAdded(ReservasDeHabitacionesDTO reserva);
+        List<DATOS_HABITACIONES_TIPOS_FECHAS> GetReservasDeHabitacionesByIdCliente(int idCliente);
+        void CancelarReservaDeHabitacion(int idHabitacion);
     }
 }
