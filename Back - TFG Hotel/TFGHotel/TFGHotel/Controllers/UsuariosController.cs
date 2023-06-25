@@ -125,6 +125,12 @@ namespace TFGHotel.Controllers
             return _usuariosService.CambiarFotoPerfilUsuario(usernameFotoPerfilObj);
         }
 
+        [HttpPost]
+        [Route("comprobar-si-usuario-administrador")]
+        public bool ComprobarSiUsuarioEsAdministradorWithEmail(UserEmailObjectDTO email)
+        {
+            return this._usuariosService.ComprobarSiUsuarioEsAdministrador(email);
+        }
 
         // fin clase
     }

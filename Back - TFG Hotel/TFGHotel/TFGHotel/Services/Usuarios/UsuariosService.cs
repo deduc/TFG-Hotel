@@ -235,6 +235,22 @@ namespace TFGHotel.Services.Usuarios
             return returnValue;
         }
 
+        public bool ComprobarSiUsuarioEsAdministrador(UserEmailObjectDTO email)
+        {
+            var usuario = _context.Usuarios
+                .Where(x => x.EMAIL == email.Email && x.ADMINISTRADOR == true)
+                .FirstOrDefault();
+
+            if(usuario != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
 
 
         // fin clase

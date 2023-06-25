@@ -88,6 +88,8 @@ INSERT INTO TIPOS_DE_SERVICIOS (NOMBRE_SERVICIO, DESCRIPCION, PRECIO) VALUES ('T
 -- INSERT INTO USUARIOS (NOMBRE, APELLIDOS, USERNAME, PASS, EMAIL, DNI) VALUES ('oscar', 'gomez calvo', '0sc4r', '935115000', 'oscar@oscar.es', '03217834H');
 -- INSERT INTO USUARIOS (NOMBRE, APELLIDOS, USERNAME, PASS, EMAIL, DNI) VALUES ('lucia', 'garcia rubia', 'pati', '09092022132', 'pati@pati.es', '03214567L');
 -- INSERT INTO USUARIOS (NOMBRE, APELLIDOS, USERNAME, PASS, EMAIL, DNI) VALUES ('cerdabeja', 'cerda abeja', 'cerdabeja', 'oinkoinkoinkoink', 'cerda@abeja.es', '00000000A');
+INSERT INTO USUARIOS (NOMBRE, APELLIDOS, USERNAME, PASS, EMAIL, DNI, ADMINISTRADOR) 
+VALUES ('admin', 'admin', 'admin', 'admin@admin.es', 'admin@admin.es', '00000000A', 1);
 
 /*
 	###########################################################

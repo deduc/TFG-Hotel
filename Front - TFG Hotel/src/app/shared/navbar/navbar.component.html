@@ -46,6 +46,12 @@
                     </a>
                 </li>
 
+                <li *ngIf="isUserAdmin;">
+                    <a  class="nav-link btn button" routerLink="/admin" routerLinkActive="active">
+                        <span class="text-capitalize">Admin</span>
+                    </a>
+                </li>
+
                 <!-- <li *ngIf="isUserLogged;">
                     <a  class="nav-link btn button" routerLink="/foro" routerLinkActive="active">
                         <span class="text-capitalize" style="color: red;">TODO: foro</span>

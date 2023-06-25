@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { TITULO_HOTEL as tituloHotel } from 'src/app/core/constantes';
+import { SESSION_STORAGE_USER_LOGGED, TITULO_HOTEL as tituloHotel } from 'src/app/core/constantes';
 import { NavbarLinksInterface } from 'src/app/core/interfaces/navbarLinks.interface';
 import { BackendService } from '../../backend/backend.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { UserLoggedInterface } from 'src/app/core/interfaces/user-logged.interface';
 
 
 @Component({
@@ -30,10 +32,12 @@ export class NavbarComponent {
     ];
 
     public isUserLogged: Observable<boolean> | boolean = false;
+    public isUserAdmin: boolean;
 
     constructor(
         private BackendService : BackendService,
-        private route: Router
+        private route: Router,
+        private http: HttpClient,
     ){
         this.comprobarSiUsuarioLogged();
     }
